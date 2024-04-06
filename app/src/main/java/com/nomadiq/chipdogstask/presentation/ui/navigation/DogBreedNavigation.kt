@@ -40,8 +40,8 @@ fun DogBreedsApp() {
     val currentDestination = currentBackStack?.destination
 
     // Change the variable to this and use Overview as a backup screen if this returns null
-    val currentScreen =
-        destinations.find { it.route == currentDestination?.route } ?: ScreenDestination.DogBreedListScreen
+//    val currentScreen =
+  //      destinations.find { it.route == currentDestination?.route } ?: ScreenDestination.DogBreedListScreen
 
     Scaffold(
 
