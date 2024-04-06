@@ -22,7 +22,7 @@ import coil.compose.AsyncImage
 import com.nomadiq.chipdogstask.R
 import com.nomadiq.chipdogstask.domain.model.DogBreedImageDetail
 import com.nomadiq.chipdogstask.presentation.ui.component.DogBreedTopAppBar
-import com.nomadiq.chipdogstask.presentation.ui.theme.ChipDogsTaskTheme
+import com.nomadiq.chipdogstask.presentation.ui.theme.FinNewsTheme
 import com.nomadiq.chipdogstask.presentation.viewmodel.DogBreedRandomImageUiState
 
 /**
@@ -38,7 +38,7 @@ fun DogBreedItemDetailScreen(
     navController: NavHostController,
     uiState: DogBreedRandomImageUiState,
 ) {
-    ChipDogsTaskTheme {
+    FinNewsTheme {
         val items = uiState.items
 
         Scaffold(
