@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.nomadiq.chipdogstask"
+    namespace = "com.nomadiq.finnews"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.nomadiq.chipdogstask"
+        applicationId = "com.nomadiq.finnews"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

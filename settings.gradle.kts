@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ChipDogsTask"
+rootProject.name = "FinNews"
 include(":app")
