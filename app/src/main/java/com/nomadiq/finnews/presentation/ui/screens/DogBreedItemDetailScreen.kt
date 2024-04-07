@@ -1,5 +1,6 @@
 package com.nomadiq.finnews.presentation.ui.screens
 
+import androidx.annotation.StringRes
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,7 +22,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.nomadiq.finnews.R
 import com.nomadiq.finnews.domain.model.DogBreedImageDetail
-import com.nomadiq.finnews.presentation.ui.component.DogBreedTopAppBar
+import com.nomadiq.finnews.presentation.ui.component.FinNewsTopAppBar
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
 import com.nomadiq.finnews.presentation.viewmodel.DogBreedRandomImageUiState
 
@@ -37,14 +38,15 @@ import com.nomadiq.finnews.presentation.viewmodel.DogBreedRandomImageUiState
 fun DogBreedItemDetailScreen(
     navController: NavHostController,
     uiState: DogBreedRandomImageUiState,
+    @StringRes title: Int = R.string.toolbar_title_default
 ) {
     FinNewsTheme {
         val items = uiState.items
 
         Scaffold(
             topBar = {
-                DogBreedTopAppBar(
-                    title = stringResource(id = R.string.toolbar_title_dogbreed_detail),
+                FinNewsTopAppBar(
+                    title = title,
                     canNavigateBack = navController.previousBackStackEntry != null,
                     navigateUp = { navController.navigateUp() }
                 )

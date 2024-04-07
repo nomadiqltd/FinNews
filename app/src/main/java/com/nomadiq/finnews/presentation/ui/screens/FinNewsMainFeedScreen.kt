@@ -1,5 +1,6 @@
 package com.nomadiq.finnews.presentation.ui.screens
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -27,29 +28,30 @@ import com.nomadiq.finnews.R
 import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.presentation.ui.component.DefaultSnackBarHost
 import com.nomadiq.finnews.presentation.ui.component.DogBreedItem
-import com.nomadiq.finnews.presentation.ui.component.DogBreedTopAppBar
+import com.nomadiq.finnews.presentation.ui.component.FinNewsTopAppBar
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
 import com.nomadiq.finnews.presentation.viewmodel.DogBreedListUiState
 
 /**
  *  @author Michael Akakpo
  *
- *  Composable representing the list of [Dog breed] items within the Lazy column
+ *  Composable representing the list of [Articles] items within the Lazy column
  *
  */
 
 @Composable
-fun DogBreedListScreen(
+fun FinNewsMainFeedScreen(
     onItemClick: (DogBreed) -> Unit = {},
     uiState: DogBreedListUiState,
     navController: NavHostController,
+    @StringRes title: Int = R.string.toolbar_title_default
 ) {
     FinNewsTheme {
         Scaffold(
             snackbarHost = { DefaultSnackBarHost(hostState = SnackbarHostState()) },
             topBar = {
-                DogBreedTopAppBar(
-                    title = stringResource(id = R.string.toolbar_title_dogbreed_list),
+                FinNewsTopAppBar(
+                    title = title,
                     canNavigateBack = navController.previousBackStackEntry != null,
                     navigateUp = { navController.navigateUp() }
                 )

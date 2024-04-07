@@ -8,7 +8,7 @@ import androidx.compose.ui.test.performClick
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nomadiq.finnews.domain.model.DogBreed
-import com.nomadiq.finnews.presentation.ui.screens.DogBreedListScreen
+import com.nomadiq.finnews.presentation.ui.screens.FinNewsMainFeedScreen
 import com.nomadiq.finnews.presentation.viewmodel.DogBreedListUiState
 import kotlinx.coroutines.test.runTest
 
@@ -51,7 +51,7 @@ class DogBreedListScreenTest {
     fun setup() {
         composeTestRule.setContent {
             navController = TestNavHostController(LocalContext.current)
-            DogBreedListScreen(
+            FinNewsMainFeedScreen(
                 onItemClick = {},
                 uiState = uiState,
                 navController,

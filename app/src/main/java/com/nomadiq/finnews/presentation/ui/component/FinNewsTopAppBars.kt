@@ -1,17 +1,20 @@
 package com.nomadiq.finnews.presentation.ui.component
 
+import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.nomadiq.finnews.R
 
 /**
@@ -21,24 +24,24 @@ import com.nomadiq.finnews.R
  *
  * Ideally to be used to be used within a specific nest of the navigation graph or "back" action could yield undesirable results.
  */
-// TODO - Could have used CenterAlignedTopToolbar for root and TopAppBar for detail screen, but just reused for demo
 
 @OptIn(ExperimentalMaterial3Api::class)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun DogBreedTopAppBar(
-    canNavigateBack: Boolean,
-    navigateUp: () -> Unit,
-    modifier: Modifier = Modifier,
-    title: String
+fun FinNewsTopAppBar(
+    canNavigateBack: Boolean = false,
+    navigateUp: () -> Unit = {},
+    @StringRes title: Int = R.string.toolbar_title_default
 ) {
-    TopAppBar(
+    CenterAlignedTopAppBar(
         title = {
-            Text(title)
+            Text(stringResource(id = title))
         },
-        colors = TopAppBarDefaults.mediumTopAppBarColors(
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer
         ),
-        modifier = modifier,
+        modifier = Modifier
+            .fillMaxWidth(),
         navigationIcon = {
             if (canNavigateBack) {
                 IconButton(onClick = navigateUp) {

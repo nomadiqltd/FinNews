@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.nomadiq.finnews.presentation.ui.navigation.FinNewsApp
+import com.nomadiq.finnews.presentation.ui.navigation.FinNewsGraph
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FinNewsTheme {
-                FinNewsApp()
+                FinNewsGraph()
             }
         }
     }
@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     FinNewsTheme {
-        FinNewsApp()
+        FinNewsGraph()
     }
 }
 
