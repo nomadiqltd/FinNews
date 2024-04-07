@@ -19,7 +19,7 @@ import com.nomadiq.finnews.presentation.viewmodel.DogBreedRandomImageViewModel
  *  @author Michael Akakpo
  *
  *  Navigation graph containing Composable and NavHost to describe
- *  relationships between screens
+ *  relationships between the screens within the app
  *
  */
 
