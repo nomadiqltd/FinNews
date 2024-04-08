@@ -9,7 +9,7 @@ import androidx.navigation.testing.TestNavHostController
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.presentation.ui.screens.FinNewsMainFeedScreen
-import com.nomadiq.finnews.presentation.viewmodel.DogBreedListUiState
+import com.nomadiq.finnews.presentation.viewmodel.FinNewsFeedListUiState
 import kotlinx.coroutines.test.runTest
 
 import org.junit.Test
@@ -32,7 +32,7 @@ class DogBreedListScreenTest {
     private lateinit var navController: TestNavHostController
 
     companion object {
-        private val uiState = DogBreedListUiState(
+        private val uiState = FinNewsFeedListUiState(
             items = listOf(
                 DogBreed("Affenpinscher"),
                 DogBreed("African"),

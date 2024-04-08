@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">ChipDogsTask</string>
     <string name="toolbar_title_text">Back</string>
-    <string name="toolbar_title_default">Top App bar Compose</string>
+
+    <!-- Toolbar Items-->
+    <string name="toolbar_title_default">FinNews</string>
+
     <string name="toolbar_title_dogbreed_list">Dog Breed</string>
     <string name="toolbar_title_dogbreed_detail">Details</string>
+
+    <!-- Channel Items -->
+    <string name="channel_item_title_default">FinNews</string>
 </resources>

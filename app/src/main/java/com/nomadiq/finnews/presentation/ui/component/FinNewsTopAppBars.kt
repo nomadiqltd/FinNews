@@ -2,6 +2,8 @@ package com.nomadiq.finnews.presentation.ui.component
 
 import android.content.res.Configuration
 import androidx.annotation.StringRes
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -22,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nomadiq.finnews.R
+import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
 import java.nio.file.WatchEvent
 
 /**
@@ -34,7 +37,6 @@ import java.nio.file.WatchEvent
 @Preview(name = "TopAppbar (light)")
 @Preview("TopAppbar (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
-
 @Composable
 private fun FinNewsToolbarTitle(
     modifier: Modifier = Modifier,
@@ -47,8 +49,9 @@ private fun FinNewsToolbarTitle(
     )
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
+@Preview(name = "TopAppbar (light)")
+@Preview("TopAppbar (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun FinNewsTopAppBar(
@@ -57,25 +60,27 @@ fun FinNewsTopAppBar(
     navigateUp: () -> Unit = {},
     @StringRes title: Int = R.string.toolbar_title_default
 ) {
-    CenterAlignedTopAppBar(
-        title = {
-            FinNewsToolbarTitle(modifier = modifier, title = title)
-        },
-        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        ),
-        modifier = modifier
-            .fillMaxWidth(),
-        navigationIcon = {
-            if (canNavigateBack) {
-                IconButton(onClick = navigateUp) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = stringResource(R.string.toolbar_title_text)
-                    )
+    FinNewsTheme {
+        CenterAlignedTopAppBar(
+            title = {
+                FinNewsToolbarTitle(modifier = modifier, title = title)
+            },
+            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                containerColor = MaterialTheme.colorScheme.surface
+            ),
+            modifier = modifier
+                .fillMaxWidth(),
+            navigationIcon = {
+                if (canNavigateBack) {
+                    IconButton(onClick = navigateUp) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(title)
+                        )
+                    }
                 }
             }
-        }
-    )
+        )
+    }
 }
 

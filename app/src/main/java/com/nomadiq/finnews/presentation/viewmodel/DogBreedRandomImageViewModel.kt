@@ -59,7 +59,7 @@ class DogBreedRandomImageViewModel @Inject constructor(
                                     DogBreedImageDetail(
                                         imageUrl = it.imageUrl
                                     )
-                                }
+                                },
                             )
                         }
                         Log.d(

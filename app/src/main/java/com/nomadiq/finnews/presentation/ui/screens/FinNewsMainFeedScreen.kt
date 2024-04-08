@@ -1,14 +1,19 @@
 package com.nomadiq.finnews.presentation.ui.screens
 
+import android.content.res.Configuration
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
@@ -21,29 +26,38 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.nomadiq.finnews.R
 import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.presentation.ui.component.DefaultSnackBarHost
 import com.nomadiq.finnews.presentation.ui.component.DogBreedItem
+import com.nomadiq.finnews.presentation.ui.component.FinNewsChannelItem
 import com.nomadiq.finnews.presentation.ui.component.FinNewsTopAppBar
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
-import com.nomadiq.finnews.presentation.viewmodel.DogBreedListUiState
+import com.nomadiq.finnews.presentation.viewmodel.FinNewsFeedListUiState
 
 /**
  *  @author Michael Akakpo
  *
- *  Composable representing the list of [Articles] items within the Lazy column
+ *  Composable representing the list of [FinNewsChannelItem] items within the Lazy column
  *
  */
 
+@Preview(name = "TopAppbar (light)")
+@Preview("TopAppbar (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun FinNewsMainFeedScreen(
+    modifier: Modifier = Modifier,
     onItemClick: (DogBreed) -> Unit = {},
-    uiState: DogBreedListUiState,
-    navController: NavHostController,
+    uiState: FinNewsFeedListUiState = FinNewsFeedListUiState(
+        items = listOf(),
+        channelItems = listOf(),
+    ),
+    navController: NavHostController = rememberNavController(),
     @StringRes title: Int = R.string.toolbar_title_default
 ) {
     FinNewsTheme {
@@ -57,30 +71,52 @@ fun FinNewsMainFeedScreen(
                 )
             }
         ) { paddingValues ->
-            val state = rememberLazyListState() //TODO - Pass state down and make stateful and stateless counterparts
+            val state =
+                rememberLazyListState()
+            val channelItems = uiState.channelItems
             val items = uiState.items
-            LazyColumn(
 
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(paddingValues),
-                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
+            Column(
+                modifier.background(Color.Blue),
+
             ) {
-                items.forEach { item ->
-                    item {
-                        DogBreedItem(item = item, onItemClick = onItemClick)
+                // Loading State
+                OnLoadingState(uiState)
+
+                // channel list
+
+                LazyRow(
+                    state = state,
+                    modifier = Modifier
+                        .wrapContentHeight()
+                        .padding(paddingValues),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    channelItems.forEach { item ->
+                        item {
+                            FinNewsChannelItem(
+                                modifier = Modifier,
+                                name = item.name,
+                                isVerified = item.isVerified
+                            )
+                        }
                     }
                 }
 
-                // Loading State
-                item {
-                    OnLoadingState(uiState)
-                }
+                Spacer(modifier = Modifier.padding(8.dp))
 
-                // Check Internet
-                item {
-                    OnNetworkErrorState(uiState)
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    items.forEach { item ->
+                        item {
+                            DogBreedItem(item = item, onItemClick = onItemClick)
+                        }
+                    }
                 }
             }
         }
@@ -88,7 +124,7 @@ fun FinNewsMainFeedScreen(
 }
 
 @Composable
-fun OnLoadingState(uiState: DogBreedListUiState) {
+fun OnLoadingState(uiState: FinNewsFeedListUiState) {
     var loading by rememberSaveable { mutableStateOf(false) }
     loading = uiState.isLoading
     if (loading) {
@@ -99,13 +135,12 @@ fun OnLoadingState(uiState: DogBreedListUiState) {
                 .background(Color.White),
         ) {
             CircularProgressIndicator()
-            // LinearProgressIndicator()
         }
     }
 }
 
 @Composable
-fun OnNetworkErrorState(uiState: DogBreedListUiState) {
+fun OnNetworkErrorState(uiState: FinNewsFeedListUiState) {
     val list by rememberSaveable { mutableStateOf(uiState.errorMessage) }
 
 
@@ -126,6 +161,6 @@ fun OnNetworkErrorState(uiState: DogBreedListUiState) {
 }
 
 @Composable
-fun DisplayEmptyErrorState(uiState: DogBreedListUiState) {
+fun DisplayEmptyErrorState(uiState: FinNewsFeedListUiState) {
     val list by rememberSaveable { mutableStateOf(uiState.items) }
 }

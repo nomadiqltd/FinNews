@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.nomadiq.finnews.domain.usecase.GetDogBreedListUseCase
 import com.nomadiq.finnews.domain.mapper.DogBreedListResult
 import com.nomadiq.finnews.domain.model.DogBreed
+import com.nomadiq.finnews.domain.model.NewsChannelItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,12 +34,29 @@ class DogBreedListViewModel @Inject constructor(
     ViewModel() {
 
     // Define UIState variable for [DogBreed] data to map to the equivalent UI Screens and components
-    private val _uiState = MutableStateFlow(DogBreedListUiState(listOf()))
-    val uiState: StateFlow<DogBreedListUiState> = _uiState.asStateFlow()
+    private val _uiState =
+        MutableStateFlow(FinNewsFeedListUiState(listOf(), channelItems = defaultChannelList()))
+    val uiState: StateFlow<FinNewsFeedListUiState> = _uiState.asStateFlow()
 
     init {
         displayDogBreedList()
     }
+
+    private fun defaultChannelList() = listOf(
+        NewsChannelItem(name = "Sky News", isVerified = true),
+        NewsChannelItem(name = "Jety"),
+        NewsChannelItem(name = "JP Morgan", isVerified = true),
+        NewsChannelItem(name = "Belaire", isVerified = true),
+        NewsChannelItem(name = "Polerats"),
+        NewsChannelItem(name = "Jordan Blogs"),
+        NewsChannelItem(name = "S&P 500", isVerified = true),
+        NewsChannelItem(name = "Guardian", isVerified = true),
+        NewsChannelItem(name = "Polestar", isVerified = true),
+        NewsChannelItem(name = "News"),
+        NewsChannelItem(name = "Skye"),
+        NewsChannelItem(name = "SMS"),
+    )
+
 
     // Function to fetch List of [DogBreed] - save success response and update uiState
     private fun displayDogBreedList() {
@@ -48,7 +66,7 @@ class DogBreedListViewModel @Inject constructor(
             getDogBreedListUseCase.invoke().collect { result ->
                 when (result) {
                     is DogBreedListResult.Data -> {
-                        delay(6000)
+                        delay(4000)
                         updateData(result)
                     }
 
@@ -70,6 +88,7 @@ class DogBreedListViewModel @Inject constructor(
         _uiState.update { currentState ->
             currentState.copy(
                 items = result.dogBreedsList.map { DogBreed(name = it.name.capitalize(it)) },
+                channelItems = defaultChannelList()
             )
         }
     }
