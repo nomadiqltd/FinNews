@@ -2,8 +2,6 @@ package com.nomadiq.finnews.presentation.ui.component
 
 import android.content.res.Configuration
 import androidx.annotation.StringRes
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -17,15 +15,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.BlendMode.Companion.Color
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nomadiq.finnews.R
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
-import java.nio.file.WatchEvent
 
 /**
  * @author Michael Akakpo
@@ -34,8 +28,8 @@ import java.nio.file.WatchEvent
  *
  */
 
-@Preview(name = "TopAppbar (light)")
-@Preview("TopAppbar (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "FinNewsToolbarTitle (light)")
+@Preview("FinNewsToolbarTitle (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun FinNewsToolbarTitle(
@@ -50,11 +44,11 @@ private fun FinNewsToolbarTitle(
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(name = "TopAppbar (light)")
-@Preview("TopAppbar (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "FinNewsTopAppBar (light)")
+@Preview("FinNewsTopAppBar (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun FinNewsTopAppBar(
+fun NewsTopAppBar(
     modifier: Modifier = Modifier,
     canNavigateBack: Boolean = false,
     navigateUp: () -> Unit = {},

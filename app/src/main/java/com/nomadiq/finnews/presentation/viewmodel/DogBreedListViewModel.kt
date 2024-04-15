@@ -4,8 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nomadiq.finnews.domain.usecase.GetDogBreedListUseCase
 import com.nomadiq.finnews.domain.mapper.DogBreedListResult
+import com.nomadiq.finnews.domain.model.ArticleFeedItem
 import com.nomadiq.finnews.domain.model.DogBreed
-import com.nomadiq.finnews.domain.model.NewsChannelItem
+import com.nomadiq.finnews.domain.model.NewsChannelFeedItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,7 +36,13 @@ class DogBreedListViewModel @Inject constructor(
 
     // Define UIState variable for [DogBreed] data to map to the equivalent UI Screens and components
     private val _uiState =
-        MutableStateFlow(FinNewsFeedListUiState(listOf(), channelItems = defaultChannelList()))
+        MutableStateFlow(
+            FinNewsFeedListUiState(
+                listOf(),
+                channelItems = defaultChannelList(),
+                articleItems = defaultArticleList()
+            )
+        )
     val uiState: StateFlow<FinNewsFeedListUiState> = _uiState.asStateFlow()
 
     init {
@@ -43,18 +50,71 @@ class DogBreedListViewModel @Inject constructor(
     }
 
     private fun defaultChannelList() = listOf(
-        NewsChannelItem(name = "Sky News", isVerified = true),
-        NewsChannelItem(name = "Jety"),
-        NewsChannelItem(name = "JP Morgan", isVerified = true),
-        NewsChannelItem(name = "Belaire", isVerified = true),
-        NewsChannelItem(name = "Polerats"),
-        NewsChannelItem(name = "Jordan Blogs"),
-        NewsChannelItem(name = "S&P 500", isVerified = true),
-        NewsChannelItem(name = "Guardian", isVerified = true),
-        NewsChannelItem(name = "Polestar", isVerified = true),
-        NewsChannelItem(name = "News"),
-        NewsChannelItem(name = "Skye"),
-        NewsChannelItem(name = "SMS"),
+        NewsChannelFeedItem(name = "Sky News", isVerified = true),
+        NewsChannelFeedItem(name = "Jety"),
+        NewsChannelFeedItem(name = "JP Morgan", isVerified = true),
+        NewsChannelFeedItem(name = "Belaire", isVerified = true),
+        NewsChannelFeedItem(name = "Polerats"),
+        NewsChannelFeedItem(name = "Jordan Blogs"),
+        NewsChannelFeedItem(name = "S&P 500", isVerified = true),
+        NewsChannelFeedItem(name = "Guardian", isVerified = true),
+        NewsChannelFeedItem(name = "Polestar", isVerified = true),
+        NewsChannelFeedItem(name = "News"),
+        NewsChannelFeedItem(name = "Skye"),
+        NewsChannelFeedItem(name = "SMS"),
+    )
+
+    private fun defaultArticleList() = listOf(
+        ArticleFeedItem(
+            title = "News",
+            subtitle = "",
+            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
+        ),
+        ArticleFeedItem(
+            title = "News",
+            subtitle = "",
+            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
+        ),
+        ArticleFeedItem(
+            title = "News",
+            subtitle = "",
+            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
+        ),
+        ArticleFeedItem(
+            title = "News",
+            subtitle = "",
+            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
+        ),
+        ArticleFeedItem(
+            title = "News",
+            subtitle = "",
+            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
+        ),
+        ArticleFeedItem(
+            title = "News",
+            subtitle = "",
+            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
+        ),
+        ArticleFeedItem(
+            title = "News",
+            subtitle = "",
+            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
+        ),
+        ArticleFeedItem(
+            title = "News",
+            subtitle = "",
+            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
+        ),
+        ArticleFeedItem(
+            title = "News",
+            subtitle = "",
+            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
+        ),
+        ArticleFeedItem(
+            title = "News",
+            subtitle = "",
+            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
+        ),
     )
 
 
@@ -88,7 +148,8 @@ class DogBreedListViewModel @Inject constructor(
         _uiState.update { currentState ->
             currentState.copy(
                 items = result.dogBreedsList.map { DogBreed(name = it.name.capitalize(it)) },
-                channelItems = defaultChannelList()
+                channelItems = defaultChannelList(),
+                articleItems = defaultArticleList()
             )
         }
     }

@@ -29,7 +29,7 @@ import com.nomadiq.finnews.domain.model.DogBreed
  * Composable to represent each [DogBreed] item in the list retrieved from the [Api].
  */
 @Composable
-fun DogBreedItem(item: DogBreed, onItemClick: (DogBreed) -> Unit) {
+fun DogBreedItemCard(item: DogBreed, onItemClick: (DogBreed) -> Unit) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = Color.Gray,

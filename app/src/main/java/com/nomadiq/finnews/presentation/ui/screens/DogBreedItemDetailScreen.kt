@@ -16,13 +16,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.nomadiq.finnews.R
 import com.nomadiq.finnews.domain.model.DogBreedImageDetail
-import com.nomadiq.finnews.presentation.ui.component.FinNewsTopAppBar
+import com.nomadiq.finnews.presentation.ui.component.NewsTopAppBar
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
 import com.nomadiq.finnews.presentation.viewmodel.DogBreedRandomImageUiState
 
@@ -45,7 +44,7 @@ fun DogBreedItemDetailScreen(
 
         Scaffold(
             topBar = {
-                FinNewsTopAppBar(
+                NewsTopAppBar(
                     title = title,
                     canNavigateBack = navController.previousBackStackEntry != null,
                     navigateUp = { navController.navigateUp() }

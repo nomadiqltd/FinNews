@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
@@ -31,23 +32,28 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.nomadiq.finnews.R
+import com.nomadiq.finnews.domain.model.ArticleFeedItem
 import com.nomadiq.finnews.domain.model.DogBreed
+import com.nomadiq.finnews.domain.model.NewsChannelFeedItem
+import com.nomadiq.finnews.presentation.ui.component.ArticleFeedItemCard
+import com.nomadiq.finnews.presentation.ui.component.ArticleFeedItemHorizontalCard
 import com.nomadiq.finnews.presentation.ui.component.DefaultSnackBarHost
-import com.nomadiq.finnews.presentation.ui.component.DogBreedItem
-import com.nomadiq.finnews.presentation.ui.component.FinNewsChannelItem
-import com.nomadiq.finnews.presentation.ui.component.FinNewsTopAppBar
+import com.nomadiq.finnews.presentation.ui.component.DogBreedItemCard
+import com.nomadiq.finnews.presentation.ui.component.FeedListHeader
+import com.nomadiq.finnews.presentation.ui.component.NewsChannelItemCard
+import com.nomadiq.finnews.presentation.ui.component.NewsTopAppBar
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
 import com.nomadiq.finnews.presentation.viewmodel.FinNewsFeedListUiState
 
 /**
  *  @author Michael Akakpo
  *
- *  Composable representing the list of [FinNewsChannelItem] items within the Lazy column
+ *  Composable representing the list of [NewsChannelFeedItem] items within the Lazy column
  *
  */
 
-@Preview(name = "TopAppbar (light)")
-@Preview("TopAppbar (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "FinNewsMainFeedScreen (light)")
+@Preview("FinNewsMainFeedScreen (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun FinNewsMainFeedScreen(
@@ -56,68 +62,158 @@ fun FinNewsMainFeedScreen(
     uiState: FinNewsFeedListUiState = FinNewsFeedListUiState(
         items = listOf(),
         channelItems = listOf(),
+        articleItems = listOf()
     ),
-    navController: NavHostController = rememberNavController(),
+    navController: NavHostController = rememberNavController(), // TODO - Refactor into NavController
     @StringRes title: Int = R.string.toolbar_title_default
+) {
+    MainFeedScaffoldState(
+        modifier = Modifier,
+        title = title,
+        navController = navController,
+        uiState = uiState,
+        onItemClick = onItemClick,
+    )
+}
+
+@Composable
+private fun MainFeedScaffoldState(
+    modifier: Modifier = Modifier,
+    title: Int,
+    navController: NavHostController,
+    uiState: FinNewsFeedListUiState,
+    onItemClick: (DogBreed) -> Unit = {},
 ) {
     FinNewsTheme {
         Scaffold(
             snackbarHost = { DefaultSnackBarHost(hostState = SnackbarHostState()) },
             topBar = {
-                FinNewsTopAppBar(
+                NewsTopAppBar(
                     title = title,
                     canNavigateBack = navController.previousBackStackEntry != null,
                     navigateUp = { navController.navigateUp() }
                 )
             }
         ) { paddingValues ->
-            val state =
-                rememberLazyListState()
-            val channelItems = uiState.channelItems
-            val items = uiState.items
+            MainScaffoldContentView(modifier, uiState, paddingValues, onItemClick)
+        }
+    }
+}
 
-            Column(
-                modifier.background(Color.Blue),
+@Composable
+private fun MainScaffoldContentView(
+    modifier: Modifier = Modifier,
+    uiState: FinNewsFeedListUiState = FinNewsFeedListUiState(
+        items = listOf(),
+        channelItems = listOf(),
+        articleItems = listOf()
+    ),
+    paddingValues: PaddingValues,
+    onItemClick: (DogBreed) -> Unit = {},
+) {
+    Column(
+        modifier = modifier
+            .padding((paddingValues))
+    ) {
+        // Loading State
+        OnLoadingState(uiState)
 
-            ) {
-                // Loading State
-                OnLoadingState(uiState)
+        // Channel Feed Header
+        FeedListHeader()
+        // Channel Feed
+        NewsChannelFeed(uiState.channelItems)
 
-                // channel list
+        Spacer(modifier = Modifier.padding(8.dp))
 
-                LazyRow(
-                    state = state,
-                    modifier = Modifier
-                        .wrapContentHeight()
-                        .padding(paddingValues),
-                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    channelItems.forEach { item ->
-                        item {
-                            FinNewsChannelItem(
-                                modifier = Modifier,
-                                name = item.name,
-                                isVerified = item.isVerified
-                            )
-                        }
-                    }
-                }
+        // Article Feed Header
+        FeedListHeader()
+        // Article Feed
+        NewsArticleFeedss(uiState.articleItems)
 
-                Spacer(modifier = Modifier.padding(8.dp))
+        // Article Feed Header
+        FeedListHeader()
+        // Article Feed
+        NewsArticleFeed(uiState.items, onItemClick)
 
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    items.forEach { item ->
-                        item {
-                            DogBreedItem(item = item, onItemClick = onItemClick)
-                        }
-                    }
-                }
+
+    }
+}
+
+
+@Preview(name = "NewsChannelFeed (light)")
+@Preview("NewsChannelFeed (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun NewsChannelFeed(
+    channelItems: List<NewsChannelFeedItem> = listOf()
+) {
+    val state: LazyListState = rememberLazyListState()
+    LazyRow(
+        state = state,
+        modifier = Modifier
+            .wrapContentHeight(),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        channelItems.forEach { item ->
+            item {
+                NewsChannelItemCard(
+                    modifier = Modifier,
+                    name = item.name,
+                    isVerified = item.isVerified
+                )
+            }
+        }
+    }
+}
+
+@Preview(name = "NewsArticleFeed (light)")
+@Preview("NewsArticleFeed (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun NewsArticleFeed(
+    items: List<DogBreed> = listOf(),
+    onItemClick: (DogBreed) -> Unit = {}
+) {
+    val state: LazyListState = rememberLazyListState()
+    LazyColumn(
+        state = state,
+        modifier = Modifier
+            .fillMaxWidth(),
+        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        items.forEach { item ->
+            item {
+                DogBreedItemCard(item = item, onItemClick = onItemClick)
+            }
+        }
+    }
+}
+
+@Preview(name = "NewsArticleFeedss (light)")
+@Preview("NewsArticleFeedss (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun NewsArticleFeedss(
+    items: List<ArticleFeedItem> = listOf(),
+    onItemClick: (ArticleFeedItem) -> Unit = {}
+) {
+    val state: LazyListState = rememberLazyListState()
+    LazyColumn(
+        state = state,
+        modifier = Modifier
+            .fillMaxWidth(),
+        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        items.forEach { item ->
+            item {
+                ArticleFeedItemHorizontalCard(
+                    title = item.title,
+                    subtitle = item.subtitle,
+                    imgUrl = item.imgUrl
+                )
             }
         }
     }
@@ -137,30 +233,4 @@ fun OnLoadingState(uiState: FinNewsFeedListUiState) {
             CircularProgressIndicator()
         }
     }
-}
-
-@Composable
-fun OnNetworkErrorState(uiState: FinNewsFeedListUiState) {
-    val list by rememberSaveable { mutableStateOf(uiState.errorMessage) }
-
-
-    // Effect running in a coroutine that displays the Snackbar on the screen
-    // If there's a change to errorMessageText, retryMessageText or snackbarHostState,
-    // the previous effect will be cancelled and a new one will start with the new values
-//    LaunchedEffect(snackbarHostState) {
-//        val snackbarResult = snackbarHostState.showSnackbar(
-//            message = "errorMessageText",
-//            actionLabel = "retryMessageText"
-//        )
-//        if (snackbarResult == SnackbarResult.ActionPerformed) {
-//         //   onRefreshPostsState()
-//        }
-//        // Once the message is displayed and dismissed, notify the ViewModel
-//      //  onErrorDismissState(errorMessage.id)
-//    }
-}
-
-@Composable
-fun DisplayEmptyErrorState(uiState: FinNewsFeedListUiState) {
-    val list by rememberSaveable { mutableStateOf(uiState.items) }
 }

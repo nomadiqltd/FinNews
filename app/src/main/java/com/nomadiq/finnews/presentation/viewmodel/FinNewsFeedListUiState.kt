@@ -1,7 +1,8 @@
 package com.nomadiq.finnews.presentation.viewmodel
 
+import com.nomadiq.finnews.domain.model.ArticleFeedItem
 import com.nomadiq.finnews.domain.model.DogBreed
-import com.nomadiq.finnews.domain.model.NewsChannelItem
+import com.nomadiq.finnews.domain.model.NewsChannelFeedItem
 
 /**
  *  @author Michael Akakpo
@@ -11,7 +12,8 @@ import com.nomadiq.finnews.domain.model.NewsChannelItem
  */
 data class FinNewsFeedListUiState(
     val items: List<DogBreed>,
-    val channelItems: List<NewsChannelItem>,
+    val articleItems: List<ArticleFeedItem>,
+    val channelItems: List<NewsChannelFeedItem>,
     val isLoading: Boolean = false,
     val errorMessage: String? = null
 ) {
