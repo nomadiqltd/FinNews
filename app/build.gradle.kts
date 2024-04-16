@@ -70,9 +70,9 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.8.2")
 
     // Compose Bom / UI
-    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    implementation("androidx.compose.ui:ui-android:1.6.3")
-    implementation("androidx.compose.ui:ui-graphics-android:1.6.3")
+    implementation(platform("androidx.compose:compose-bom:2024.04.00"))
+    implementation("androidx.compose.ui:ui-android:1.6.5")
+    implementation("androidx.compose.ui:ui-graphics-android:1.6.5")
 
     // Image Loading
     implementation("io.coil-kt:coil-compose:2.6.0")
@@ -81,7 +81,7 @@ dependencies {
     // Optional - Integration with ViewModels
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     // Optional - Integration with LiveData
-    implementation("androidx.compose.runtime:runtime-livedata:1.6.3")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.5")
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
     implementation("androidx.navigation:navigation-compose:2.7.7")
@@ -107,8 +107,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
 
     // Coroutines / Asynchronous operations / Flows
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
 
     // Kotlin - Nav Args
   //  implementation("androidx.savedstate:savedstate-ktx:1.2.1")
@@ -127,12 +127,12 @@ dependencies {
     kaptTest("com.google.dagger:hilt-compiler:2.51")
 
     // Compose preview
-    implementation("androidx.compose.ui:ui-tooling-preview-android:1.6.3")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.6.3")
+    implementation("androidx.compose.ui:ui-tooling-preview-android:1.6.5")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.6.5")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     // For Coroutines testing
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
 
     // JUnit4
@@ -171,7 +171,7 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
 
     // Testing Compose
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.04.00"))
 
     // Timber - Logging
     implementation("com.jakewharton.timber:timber:5.0.1")
