@@ -9,20 +9,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -30,42 +28,32 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import com.nomadiq.finnews.presentation.ui.theme.FinNewsShapes
+import coil.compose.rememberAsyncImagePainter
 
 
-@Preview(name = "ArticleCTAShare (light)")
-@Preview("ArticleCTAShare (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "ArticleItemShareCTA (light)")
+@Preview("ArticleItemShareCTA (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-private fun ArticleCTAShare(modifier: Modifier = Modifier) {
+private fun ArticleItemShareCTA(modifier: Modifier = Modifier) {
     Image(
         imageVector = Icons.Filled.Share,
         modifier = modifier
-            .size(size = 20.dp)
-            .background(color = Color.Green, shape = RectangleShape)
-            .border(
-                border = BorderStroke(1.dp, Color.Black),
-            ),
+            .size(size = 32.dp),
         contentDescription = "verified"
     )
 }
 
 
-@Preview(name = "ArticleCTABookmark (light)")
-@Preview("ArticleCTABookmark (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "ArticleItemBookmarkCTA (light)")
+@Preview("ArticleItemBookmarkCTA (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-private fun ArticleCTABookmark(modifier: Modifier = Modifier) {
+private fun ArticleItemBookmarkCTA(modifier: Modifier = Modifier) {
     Image(
         imageVector = Icons.Filled.FavoriteBorder,
         modifier = modifier
-            .size(size = 20.dp)
-            .background(color = Color.Green, shape = CircleShape)
-            .border(
-                border = BorderStroke(1.dp, Color.Black),
-                shape = CircleShape
-            ),
+            .size(size = 32.dp),
         contentDescription = "verified"
     )
 }
@@ -75,8 +63,8 @@ private fun ArticleCTABookmark(modifier: Modifier = Modifier) {
 @Composable
 private fun ArticleItemTime(title: String = "") {
     Text(
-        modifier = Modifier,
-        style = MaterialTheme.typography.labelSmall,
+        modifier = Modifier.padding(start = 16.dp),
+        style = MaterialTheme.typography.labelMedium,
         text = title,
     )
 }
@@ -86,15 +74,15 @@ private fun ArticleItemTime(title: String = "") {
 @Composable
 private fun ArticleItemTitle(
     modifier: Modifier = Modifier,
-    title: String = "Article title showing a \n set number of characters for display...\n wrap to second line"
+    title: String = "Article title showing a set number of characters for display.. wrap to second line"
 ) {
     Text(
-        modifier = Modifier,
+        modifier = Modifier.padding(start = 16.dp, end = 16.dp),
         softWrap = true,
         minLines = 1,
-        maxLines = 8,
+        maxLines = 3,
         overflow = TextOverflow.Ellipsis,
-        style = MaterialTheme.typography.labelMedium,
+        style = MaterialTheme.typography.labelLarge,
         text = title,
     )
 }
@@ -115,8 +103,8 @@ fun ArticleItemDateStamp(modifier: Modifier = Modifier, subtitle: String = "TODA
             modifier = Modifier.padding(start = 8.dp, end = 8.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            ArticleCTABookmark(modifier.padding(end = 8.dp))
-            ArticleCTAShare()
+            ArticleItemBookmarkCTA(modifier.padding(end = 8.dp))
+            ArticleItemShareCTA()
         }
     }
 }
@@ -129,13 +117,33 @@ fun ArticleItemDateStamp(modifier: Modifier = Modifier, subtitle: String = "TODA
 fun ArticleItemDescriptionFooter(modifier: Modifier = Modifier, title: String = "") {
     Column(
     ) {
+        ArticleItemTitle()
         Spacer(modifier = Modifier.padding(8.dp))
         ArticleItemDateStamp()
     }
 }
 
-@Preview(name = "ArticleItemCard (light)")
-@Preview("ArticleItemCard (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+
+@Composable
+private fun ArticleFeedItemImage(
+    modifier: Modifier = Modifier,
+    imgUrl: String = "https://source.unsplash.com/random/400x200?sig=1"
+) {
+    Image(
+        painter = rememberAsyncImagePainter(
+            model = imgUrl,
+        ),
+        contentDescription = "article image ",
+        modifier = modifier
+            .clip(MaterialTheme.shapes.medium)
+            .fillMaxWidth()
+            .aspectRatio(ratio = 2f / 2f)
+    )
+    Spacer(modifier = Modifier.padding(8.dp))
+}
+
+@Preview(name = "ArticleFeedItemCard (light)")
+@Preview("ArticleFeedItemCard (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun ArticleFeedItemCard(
@@ -144,85 +152,24 @@ fun ArticleFeedItemCard(
     subtitle: String = "",
     imgUrl: String = ""
 ) {
-    Column(
+    (Card(
         modifier = Modifier
-            .fillMaxSize()
-            .border(
-                border = BorderStroke(1.dp, Color.Black),
-                shape = FinNewsShapes.large
-            ),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
+            .clip(MaterialTheme.shapes.medium)
+            .fillMaxWidth()
+            .padding(8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        )
     ) {
-        ArticleFeedItemImage(modifier, imgUrl)
+        ArticleFeedItemImage(
+            modifier,
+            imgUrl = "https://source.unsplash.com/random/200x200?sig=1"
+        )
         Spacer(modifier = Modifier.padding(8.dp))
         ArticleItemDescriptionFooter()
-    }
+        Spacer(modifier = Modifier.padding(16.dp))
+    })
 }
-
-@Composable
-private fun ArticleFeedItemImage(
-    modifier: Modifier = Modifier,
-    imgUrl: String = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
-) {
-    AsyncImage(
-        model = imgUrl,
-        modifier = modifier
-            .wrapContentSize()
-            .clip(FinNewsShapes.large)
-            .border(
-                border = BorderStroke(1.dp, Color.Black),
-                shape = FinNewsShapes.large
-            ),
-        contentDescription = "verified"
-    )
-}
-
-@Preview(name = "ArticleFeedItemHorizontalCard (light)")
-@Preview("ArticleFeedItemHorizontalCard (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun ArticleFeedItemHorizontalCard(
-    modifier: Modifier = Modifier,
-    title: String = "sdsds",
-    subtitle: String = "",
-    imgUrl: String = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
-) {
-    Column {
-        Row(
-            modifier
-                .wrapContentSize()
-                .border(
-                    border = BorderStroke(1.dp, Color.Black),
-                    shape = FinNewsShapes.large
-                ),
-            verticalAlignment = Alignment.Top,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            ArticleItemTitle()
-            ArticleFeedItemImage(
-                modifier
-                    .weight(1f)
-                    .size(150.dp), imgUrl = imgUrl
-            )
-        }
-
-        Spacer(modifier = Modifier.padding(4.dp))
-
-        Column(
-            modifier = Modifier
-                .wrapContentSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            Spacer(modifier = Modifier.padding(8.dp))
-            ArticleItemDescriptionFooter()
-        }
-    }
-}
-
-
-
 
 
 

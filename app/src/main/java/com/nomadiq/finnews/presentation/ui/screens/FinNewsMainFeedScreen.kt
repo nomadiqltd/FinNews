@@ -36,7 +36,6 @@ import com.nomadiq.finnews.domain.model.ArticleFeedItem
 import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.domain.model.NewsChannelFeedItem
 import com.nomadiq.finnews.presentation.ui.component.ArticleFeedItemCard
-import com.nomadiq.finnews.presentation.ui.component.ArticleFeedItemHorizontalCard
 import com.nomadiq.finnews.presentation.ui.component.DefaultSnackBarHost
 import com.nomadiq.finnews.presentation.ui.component.DogBreedItemCard
 import com.nomadiq.finnews.presentation.ui.component.FeedListHeader
@@ -128,7 +127,7 @@ private fun MainScaffoldContentView(
         // Article Feed Header
         FeedListHeader()
         // Article Feed
-        NewsArticleFeedss(uiState.articleItems)
+        NewsArticleFeeds(uiState.articleItems)
 
         // Article Feed Header
         FeedListHeader()
@@ -191,11 +190,11 @@ private fun NewsArticleFeed(
     }
 }
 
-@Preview(name = "NewsArticleFeedss (light)")
-@Preview("NewsArticleFeedss (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "NewsArticleFeeds (light)")
+@Preview("NewsArticleFeeds (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-private fun NewsArticleFeedss(
+private fun NewsArticleFeeds(
     items: List<ArticleFeedItem> = listOf(),
     onItemClick: (ArticleFeedItem) -> Unit = {}
 ) {
@@ -209,7 +208,7 @@ private fun NewsArticleFeedss(
     ) {
         items.forEach { item ->
             item {
-                ArticleFeedItemHorizontalCard(
+                ArticleFeedItemCard(
                     title = item.title,
                     subtitle = item.subtitle,
                     imgUrl = item.imgUrl
