@@ -39,7 +39,6 @@ class DogBreedListViewModel @Inject constructor(
         MutableStateFlow(
             FinNewsFeedListUiState(
                 listOf(),
-                channelItems = defaultChannelList(),
                 articleItems = defaultArticleList()
             )
         )
@@ -48,21 +47,6 @@ class DogBreedListViewModel @Inject constructor(
     init {
         displayDogBreedList()
     }
-
-    private fun defaultChannelList() = listOf(
-        NewsChannelFeedItem(name = "Sky News", isVerified = true),
-        NewsChannelFeedItem(name = "Jety"),
-        NewsChannelFeedItem(name = "JP Morgan", isVerified = true),
-        NewsChannelFeedItem(name = "Belaire", isVerified = true),
-        NewsChannelFeedItem(name = "Polerats"),
-        NewsChannelFeedItem(name = "Jordan Blogs"),
-        NewsChannelFeedItem(name = "S&P 500", isVerified = true),
-        NewsChannelFeedItem(name = "Guardian", isVerified = true),
-        NewsChannelFeedItem(name = "Polestar", isVerified = true),
-        NewsChannelFeedItem(name = "News"),
-        NewsChannelFeedItem(name = "Skye"),
-        NewsChannelFeedItem(name = "SMS"),
-    )
 
     private fun defaultArticleList() = listOf(
         ArticleFeedItem(
@@ -148,7 +132,6 @@ class DogBreedListViewModel @Inject constructor(
         _uiState.update { currentState ->
             currentState.copy(
                 items = result.dogBreedsList.map { DogBreed(name = it.name.capitalize(it)) },
-                channelItems = defaultChannelList(),
                 articleItems = defaultArticleList()
             )
         }

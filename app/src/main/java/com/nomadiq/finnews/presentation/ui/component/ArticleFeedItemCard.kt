@@ -152,7 +152,7 @@ fun ArticleFeedItemCard(
     subtitle: String = "",
     imgUrl: String = ""
 ) {
-    (Card(
+    Card(
         modifier = Modifier
             .clip(MaterialTheme.shapes.medium)
             .fillMaxWidth()
@@ -168,7 +168,7 @@ fun ArticleFeedItemCard(
         Spacer(modifier = Modifier.padding(8.dp))
         ArticleItemDescriptionFooter()
         Spacer(modifier = Modifier.padding(16.dp))
-    })
+    }
 }
 
 
