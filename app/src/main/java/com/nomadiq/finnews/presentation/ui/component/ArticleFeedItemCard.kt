@@ -10,9 +10,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Share
@@ -21,14 +24,17 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.invalidateGroupsWithKey
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import com.nomadiq.finnews.presentation.ui.theme.FinNewsShapes
 
 
 @Preview(name = "ArticleItemShareCTA (light)")
@@ -114,30 +120,37 @@ fun ArticleItemDateStamp(modifier: Modifier = Modifier, subtitle: String = "TODA
 @Preview("ArticleItemDescriptionFooter (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun ArticleItemDescriptionFooter(modifier: Modifier = Modifier, title: String = "") {
+fun ArticleItemDescriptionFooter(
+    modifier: Modifier = Modifier,
+    title: String = "",
+    subtitle: String = "",
+    imgUrl: String = ""
+) {
     Column(
     ) {
-        ArticleItemTitle()
+        ArticleItemTitle(title = title)
         Spacer(modifier = Modifier.padding(8.dp))
-        ArticleItemDateStamp()
+        ArticleItemDateStamp(subtitle = subtitle)
     }
 }
 
-
+@Preview(name = "ArticleFeedItemImage (light)")
+@Preview("ArticleFeedItemImage (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun ArticleFeedItemImage(
     modifier: Modifier = Modifier,
-    imgUrl: String = "https://source.unsplash.com/random/400x200?sig=1"
+    imgUrl: String = "https://source.unsplash.com/random/500x500?sig=1"
 ) {
     Image(
         painter = rememberAsyncImagePainter(
             model = imgUrl,
         ),
-        contentDescription = "article image ",
+        contentDescription = "article image",
+        contentScale = ContentScale.Crop,
         modifier = modifier
-            .clip(MaterialTheme.shapes.medium)
             .fillMaxWidth()
-            .aspectRatio(ratio = 2f / 2f)
+            .aspectRatio(ratio = 3f / 2f, matchHeightConstraintsFirst = true)
     )
     Spacer(modifier = Modifier.padding(8.dp))
 }
@@ -154,19 +167,19 @@ fun ArticleFeedItemCard(
 ) {
     Card(
         modifier = Modifier
-            .clip(MaterialTheme.shapes.medium)
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(8.dp)
+            .clip(MaterialTheme.shapes.large),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant
         )
     ) {
         ArticleFeedItemImage(
             modifier,
-            imgUrl = "https://source.unsplash.com/random/200x200?sig=1"
+            imgUrl = imgUrl
         )
         Spacer(modifier = Modifier.padding(8.dp))
-        ArticleItemDescriptionFooter()
+        ArticleItemDescriptionFooter(title = title, subtitle = subtitle)
         Spacer(modifier = Modifier.padding(16.dp))
     }
 }

@@ -11,8 +11,7 @@ import com.nomadiq.finnews.domain.model.NewsChannelFeedItem
  *
  */
 data class FinNewsFeedListUiState(
-    val items: List<DogBreed>,
-    val articleItems: List<ArticleFeedItem>,
+    val items: List<ArticleFeedItem>,
     val isLoading: Boolean = false,
     val errorMessage: String? = null
 ) {

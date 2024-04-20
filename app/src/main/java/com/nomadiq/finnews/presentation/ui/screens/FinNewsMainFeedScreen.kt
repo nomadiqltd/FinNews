@@ -1,6 +1,7 @@
 package com.nomadiq.finnews.presentation.ui.screens
 
 import android.content.res.Configuration
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -54,7 +55,6 @@ fun FinNewsMainFeedScreen(
     onItemClick: (DogBreed) -> Unit = {},
     uiState: FinNewsFeedListUiState = FinNewsFeedListUiState(
         items = listOf(),
-        articleItems = listOf()
     ),
     navController: NavHostController = rememberNavController(), // TODO - Refactor into NavController
     @StringRes title: Int = R.string.toolbar_title_default
@@ -97,7 +97,6 @@ private fun MainScaffoldContentView(
     modifier: Modifier = Modifier,
     uiState: FinNewsFeedListUiState = FinNewsFeedListUiState(
         items = listOf(),
-        articleItems = listOf()
     ),
     paddingValues: PaddingValues,
     onItemClick: (DogBreed) -> Unit = {},
@@ -110,7 +109,7 @@ private fun MainScaffoldContentView(
         OnLoadingState(uiState)
 
         // Article Item Feed
-        NewsArticleFeed(uiState.articleItems)
+        NewsArticleFeed(uiState.items)
     }
 }
 

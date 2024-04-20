@@ -1,5 +1,6 @@
 package com.nomadiq.finnews.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nomadiq.finnews.domain.usecase.GetDogBreedListUseCase
@@ -38,8 +39,7 @@ class DogBreedListViewModel @Inject constructor(
     private val _uiState =
         MutableStateFlow(
             FinNewsFeedListUiState(
-                listOf(),
-                articleItems = defaultArticleList()
+                items = listOf(),
             )
         )
     val uiState: StateFlow<FinNewsFeedListUiState> = _uiState.asStateFlow()
@@ -51,22 +51,12 @@ class DogBreedListViewModel @Inject constructor(
     private fun defaultArticleList() = listOf(
         ArticleFeedItem(
             title = "News",
-            subtitle = "",
+            subtitle = "subtitle 1",
             imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
         ),
         ArticleFeedItem(
             title = "News",
-            subtitle = "",
-            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
-        ),
-        ArticleFeedItem(
-            title = "News",
-            subtitle = "",
-            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
-        ),
-        ArticleFeedItem(
-            title = "News",
-            subtitle = "",
+            subtitle = "subtitle 2",
             imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
         ),
         ArticleFeedItem(
@@ -111,14 +101,20 @@ class DogBreedListViewModel @Inject constructor(
                 when (result) {
                     is DogBreedListResult.Data -> {
                         delay(4000)
+                        Log.d(
+                            "displayDogBreedList() ",
+                            " SUCCESS ==> ${result.dogBreedsList.size} "
+                        )
                         updateData(result)
                     }
 
                     is DogBreedListResult.Error -> {
+                        Log.d("displayDogBreedList()", " ERROR ==> ${result.error} ")
                         logDogBreedListResult("Unknown error occurred")
                     }
 
                     is DogBreedListResult.NetworkError -> {
+                        Log.d("displayDogBreedList()", "NETWORK ERROR ==> Network Error")
                         logDogBreedListResult("Network error occurred")
                     }
                 }
@@ -131,8 +127,14 @@ class DogBreedListViewModel @Inject constructor(
     private fun updateData(result: DogBreedListResult.Data) {
         _uiState.update { currentState ->
             currentState.copy(
-                items = result.dogBreedsList.map { DogBreed(name = it.name.capitalize(it)) },
-                articleItems = defaultArticleList()
+                items = result.dogBreedsList.map {
+                    ArticleFeedItem(
+                        title = it.title,
+                        subtitle = it.subtitle,
+                        imgUrl = it.imgUrl,
+                        apiUrl = it.apiUrl,
+                    )
+                },
             )
         }
     }
