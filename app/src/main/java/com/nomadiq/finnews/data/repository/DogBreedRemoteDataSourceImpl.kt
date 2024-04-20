@@ -1,11 +1,13 @@
 package com.nomadiq.finnews.data.repository
 
 import android.content.Context
+import android.util.Log
 import com.nomadiq.finnews.data.api.ApiService
 import com.nomadiq.finnews.data.mapper.DogBreedListMapper
 import com.nomadiq.finnews.data.mapper.DogBreedRandomImageListMapper
 import com.nomadiq.finnews.domain.mapper.DogBreedListResult
 import com.nomadiq.finnews.data.api.ResultStatus
+import com.nomadiq.finnews.data.dto.NewsApiResponse
 import com.nomadiq.finnews.data.model.DogBreedApiResponse
 import com.nomadiq.finnews.data.model.DogBreedRandomImagesResponse
 import com.nomadiq.finnews.data.network.connectivity.ConnectivityMonitor
@@ -51,7 +53,7 @@ class DogBreedRemoteDataSourceImpl @Inject constructor(
         return dogRandomImageListMapper.map(result)
     }
 
-    private suspend fun fetchAllDogBreedResult(): ResultStatus<DogBreedApiResponse> {
+    private suspend fun fetchAllDogBreedResult(): ResultStatus<NewsApiResponse> {
         val response = apiService.fetchAllDogBreeds()
         return buildResultStatusFrom(response)
     }

@@ -1,5 +1,6 @@
 package com.nomadiq.finnews.domain.mapper
 
+import com.nomadiq.finnews.domain.model.ArticleFeedItem
 import com.nomadiq.finnews.domain.model.DogBreed
 
 /**
@@ -12,7 +13,7 @@ import com.nomadiq.finnews.domain.model.DogBreed
 
 sealed class DogBreedListResult {
     data class Data(
-        val dogBreedsList: List<DogBreed>
+        val dogBreedsList: List<ArticleFeedItem>
     ) : DogBreedListResult()
 
     data class Error(

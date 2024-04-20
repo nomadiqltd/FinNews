@@ -1,9 +1,12 @@
 package com.nomadiq.finnews.data.mapper
 
+import android.util.Log
 import com.nomadiq.finnews.data.api.ResultStatus
+import com.nomadiq.finnews.data.dto.NewsApiResponse
 import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.data.model.DogBreedApiResponse
 import com.nomadiq.finnews.domain.mapper.DogBreedListResult
+import com.nomadiq.finnews.domain.model.ArticleFeedItem
 
 
 /**
@@ -14,9 +17,9 @@ import com.nomadiq.finnews.domain.mapper.DogBreedListResult
  *
  */
 
-class DogBreedListMapper : Mapper<ResultStatus<DogBreedApiResponse>, DogBreedListResult> {
+class DogBreedListMapper : Mapper<ResultStatus<NewsApiResponse>, DogBreedListResult> {
 
-    override fun map(value: ResultStatus<DogBreedApiResponse>): DogBreedListResult {
+    override fun map(value: ResultStatus<NewsApiResponse>): DogBreedListResult {
         return when (value) {
             is ResultStatus.Success -> DogBreedListResult.Data(createDataFromResponseResult(value.result))
             is ResultStatus.Error -> DogBreedListResult.Error(value.error)
@@ -24,13 +27,20 @@ class DogBreedListMapper : Mapper<ResultStatus<DogBreedApiResponse>, DogBreedLis
         }
     }
 
-    private fun createDataFromResponseResult(data: DogBreedApiResponse): List<DogBreed> {
-        val list = mutableListOf<DogBreed>()
-        val results = data.message
-        /* TODO() - Not in the spec to deal with subbreeds. So we take the parent Breed only (keys)
-            for now as Subbreeds return 404 against random images endpoint */
+    private fun createDataFromResponseResult(data: NewsApiResponse): List<ArticleFeedItem> {
+        val list = mutableListOf<ArticleFeedItem>()
+        val results = data.response.results
         results.forEach { item ->
-            list.addAll(listOf(DogBreed(name = item.key)))
+            list.addAll(
+                listOf(
+                    ArticleFeedItem(
+                        title = item.fields.headline,
+                        subtitle = item.webPublicationDate,
+                        imgUrl = item.fields.thumbnail,
+                        apiUrl = item.apiUrl
+                    ),
+                )
+            )
         }
         return list
     }
