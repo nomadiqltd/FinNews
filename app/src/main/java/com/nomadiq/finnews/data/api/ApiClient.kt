@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit
  */
 
 class ApiClient(
-    private val context: Context? = null,
     private val connectivityMonitor: ConnectivityMonitor,
     private val okHttpClientBuilder: OkHttpClient.Builder? = null,
     private val callFactory: Call.Factory? = null,
@@ -36,8 +35,7 @@ class ApiClient(
      * */
 
     // TODO - Could hide the URL and any API Keys inside a buildConfigField
-
-    private val BASE_URL = "https://dog.ceo/api/"
+    private val BASE_URL = "https://content.guardianapis.com/"
 
     private val logger =
         HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
