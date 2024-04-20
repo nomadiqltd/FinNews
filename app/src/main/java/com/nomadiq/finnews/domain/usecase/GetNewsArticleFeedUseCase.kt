@@ -1,7 +1,7 @@
 package com.nomadiq.finnews.domain.usecase
 
 import com.nomadiq.finnews.data.network.connectivity.ConnectivityMonitor
-import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
+import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.repository.NewsArticleFeedRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -11,22 +11,22 @@ import javax.inject.Inject
 /**
  * @author Michael Akakpo
  *
- * Use case for fetching a list of [@DogBreedImageDetail] from user selecting a particular breed within presentation layer
- *
+ * Use case for loading a list of [NewsArticleFeedItem] for user to view within a list
  */
 
-class GetDogBreedRandomImageUseCase @Inject constructor(
+class GetNewsArticleFeedUseCase @Inject constructor(
     private val newsArticleFeedRepository: NewsArticleFeedRepository,
     private val connectivityMonitor: ConnectivityMonitor,
 ) {
 
-    suspend operator fun invoke(breed: String): Flow<DogBreedRandomImageResult> {
+    suspend operator fun invoke(): Flow<NewsArticleFeedListResult> {
         return if (connectivityMonitor.isConnected()) {
-            val dogBreedRandomImageResult =
-                newsArticleFeedRepository.fetchRandomImagesByDogBreed(breed = breed)
-            flow { emit(dogBreedRandomImageResult) }
+            val dogBreedListResult = newsArticleFeedRepository.fetchNewsArticleFeed()
+            flow {
+                emit(dogBreedListResult)
+            }
         } else {
-            flowOf(DogBreedRandomImageResult.NetworkError)
+            flowOf(NewsArticleFeedListResult.NetworkError)
         }
     }
 }
