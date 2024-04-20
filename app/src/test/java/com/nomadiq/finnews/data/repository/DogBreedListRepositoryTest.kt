@@ -2,7 +2,7 @@ package com.nomadiq.finnews.data.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
-import com.nomadiq.finnews.domain.mapper.DogBreedListResult
+import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
 import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.domain.model.DogBreedImageDetail
@@ -30,7 +30,7 @@ class DogBreedListRepositoryTest {
 
     private lateinit var datasource: RemoteDataSource
 
-    private lateinit var dataRepository: DogBreedRepositoryImpl
+    private lateinit var dataRepository: NewsArticleFeedRepositoryImpl
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -43,14 +43,14 @@ class DogBreedListRepositoryTest {
     fun setup() {
         MockKAnnotations.init(this)
         datasource = mockk<FakeRemoteDataSource>()
-        dataRepository = DogBreedRepositoryImpl(datasource = datasource)
+        dataRepository = NewsArticleFeedRepositoryImpl(datasource = datasource)
     }
 
     @Test
     fun `initialize then fetch dog breeds succeeded`() = runTest {
         // given
         val result =
-            DogBreedListResult.Data(
+            NewsArticleFeedListResult.Data(
                 listOf(
                     DogBreed("affenpinscher"),
                     DogBreed("african"),
@@ -60,15 +60,15 @@ class DogBreedListRepositoryTest {
 
         // when
         coEvery {
-            datasource.fetchAllDogBreeds()
+            datasource.fetchNewsArticleFeed()
         } returns (result)
 
         coEvery {
-            dataRepository.fetchAllDogBreeds()
+            dataRepository.fetchNewsArticleFeed()
         } returns (result)
 
         // then
-        assertThat(this is DogBreedListResult)
+        assertThat(this is NewsArticleFeedListResult)
     }
 
     @Test
@@ -94,6 +94,6 @@ class DogBreedListRepositoryTest {
         } returns (resultListRandomImages)
 
         // then
-        assertThat(this is DogBreedListResult)
+        assertThat(this is NewsArticleFeedListResult)
     }
 }

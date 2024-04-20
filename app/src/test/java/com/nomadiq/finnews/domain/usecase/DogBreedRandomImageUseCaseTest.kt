@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
 import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
 import com.nomadiq.finnews.domain.model.DogBreedImageDetail
-import com.nomadiq.finnews.domain.repository.DogBreedRepository
+import com.nomadiq.finnews.domain.repository.NewsArticleFeedRepository
 import io.kotest.matchers.shouldBe
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -32,7 +32,7 @@ import kotlin.test.assertTrue
 @ExperimentalCoroutinesApi
 class DogBreedRandomImageUseCaseTest {
 
-    private val dataRepository = mockk<DogBreedRepository>()
+    private val dataRepository = mockk<NewsArticleFeedRepository>()
 
     private lateinit var usecase: GetDogBreedRandomImageUseCase
 
@@ -47,7 +47,7 @@ class DogBreedRandomImageUseCaseTest {
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        usecase = GetDogBreedRandomImageUseCase(dogBreedRepository = dataRepository)
+        usecase = GetDogBreedRandomImageUseCase(newsArticleFeedRepository = dataRepository)
     }
 
     @Test

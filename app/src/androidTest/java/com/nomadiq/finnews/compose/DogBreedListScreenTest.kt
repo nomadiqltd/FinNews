@@ -7,9 +7,8 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.presentation.ui.screens.FinNewsMainFeedScreen
-import com.nomadiq.finnews.presentation.viewmodel.FinNewsFeedListUiState
+import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
 import kotlinx.coroutines.test.runTest
 
 import org.junit.Test
@@ -32,12 +31,8 @@ class DogBreedListScreenTest {
     private lateinit var navController: TestNavHostController
 
     companion object {
-        private val uiState = FinNewsFeedListUiState(
+        private val uiState = NewsArticleFeedUiState(
             items = listOf(
-                DogBreed("Affenpinscher"),
-                DogBreed("African"),
-                DogBreed("Airedal"),
-                DogBreed("Akita"),
             ),
             isLoading = false,
             errorMessage = "",
@@ -54,7 +49,7 @@ class DogBreedListScreenTest {
             FinNewsMainFeedScreen(
                 onItemClick = {},
                 uiState = uiState,
-                navController,
+                navController = navController,
             )
         }
     }

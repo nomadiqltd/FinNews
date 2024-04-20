@@ -2,9 +2,9 @@ package com.nomadiq.finnews.domain.usecase
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
-import com.nomadiq.finnews.domain.mapper.DogBreedListResult
+import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.model.DogBreed
-import com.nomadiq.finnews.domain.repository.DogBreedRepository
+import com.nomadiq.finnews.domain.repository.NewsArticleFeedRepository
 import io.kotest.matchers.shouldBe
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -37,9 +37,9 @@ class DogBreedListUseCaseTest {
         private const val UNKNOWN_ERROR = "Unknown Error occurred"
     }
 
-    private val dataRepository = mockk<DogBreedRepository>()
+    private val dataRepository = mockk<NewsArticleFeedRepository>()
 
-    private lateinit var usecase: GetDogBreedListUseCase
+    private lateinit var usecase: GetNewsArticleFeedUseCase
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -51,14 +51,14 @@ class DogBreedListUseCaseTest {
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        usecase = GetDogBreedListUseCase(dogBreedRepository = dataRepository)
+        usecase = GetNewsArticleFeedUseCase(newsArticleFeedRepository = dataRepository)
     }
 
     @Test
     fun `initialize then fetch dog breeds usecase succeeded`() = runTest {
         // given
         val result =
-            DogBreedListResult.Data(
+            NewsArticleFeedListResult.Data(
                 listOf(
                     DogBreed("affenpinscher"),
                     DogBreed("african"),
@@ -71,37 +71,37 @@ class DogBreedListUseCaseTest {
 
 
         // when
-        coEvery { dataRepository.fetchAllDogBreeds() } returns (result)
+        coEvery { dataRepository.fetchNewsArticleFeed() } returns (result)
         coEvery { usecase.invoke() } returns flow {
             emit(result)
 
             // then
             result shouldBe 6
-            assertTrue(this is DogBreedListResult)
+            assertTrue(this is NewsArticleFeedListResult)
         }
     }
 
     @Test
     fun `initialize then fetch dog breeds usecase failed Empty list`() = runTest {
         // given
-        coEvery { dataRepository.fetchAllDogBreeds() }.returns(DogBreedListResult.Empty)
+        coEvery { dataRepository.fetchNewsArticleFeed() }.returns(NewsArticleFeedListResult.Empty)
         coEvery {
             usecase.invoke().first()
-        } returns DogBreedListResult.Empty
+        } returns NewsArticleFeedListResult.Empty
 
         // then
-        assertThat(this is DogBreedListResult)
+        assertThat(this is NewsArticleFeedListResult)
     }
 
     @Test
     fun `initialize then fetch dog breeds usecase failed Error`() = runTest {
         // given
-        coEvery { dataRepository.fetchAllDogBreeds() }.returns(DogBreedListResult.Error(error = UNKNOWN_ERROR))
+        coEvery { dataRepository.fetchNewsArticleFeed() }.returns(NewsArticleFeedListResult.Error(error = UNKNOWN_ERROR))
         coEvery { usecase.invoke() } returns flow {
-            emit(DogBreedListResult.Error(error = UNKNOWN_ERROR))
+            emit(NewsArticleFeedListResult.Error(error = UNKNOWN_ERROR))
         }
 
         // then
-        assertThat(this is DogBreedListResult)
+        assertThat(this is NewsArticleFeedListResult)
     }
 }

@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.SavedStateHandle
 import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
 import com.nomadiq.finnews.domain.model.DogBreedImageDetail
-import com.nomadiq.finnews.domain.repository.DogBreedRepository
+import com.nomadiq.finnews.domain.repository.NewsArticleFeedRepository
 import com.nomadiq.finnews.domain.usecase.GetDogBreedRandomImageUseCase
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
@@ -25,7 +25,7 @@ class DogBreedRandomImageViewModelTest {
 
     private lateinit var viewModel: DogBreedRandomImageViewModel
 
-    private val dataRepository = mockk<DogBreedRepository>()
+    private val dataRepository = mockk<NewsArticleFeedRepository>()
 
     private val usecase = mockk<GetDogBreedRandomImageUseCase>()
 
