@@ -12,7 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.nomadiq.finnews.presentation.ui.screens.DogBreedItemDetailScreen
 import com.nomadiq.finnews.presentation.ui.screens.FinNewsMainFeedScreen
-import com.nomadiq.finnews.presentation.viewmodel.DogBreedListViewModel
+import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedViewModel
 import com.nomadiq.finnews.presentation.viewmodel.DogBreedRandomImageViewModel
 
 /**
@@ -39,7 +39,7 @@ fun FinNewsGraph(
         composable(
             route = ScreenDestination.DogBreedListScreen.route
         ) {
-            val viewModel = hiltViewModel<DogBreedListViewModel>()
+            val viewModel = hiltViewModel<NewsArticleFeedViewModel>()
             val uiState by viewModel.uiState.collectAsState()
             FinNewsMainFeedScreen(
                 uiState = uiState,

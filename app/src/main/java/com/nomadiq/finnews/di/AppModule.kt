@@ -4,7 +4,7 @@ import android.content.Context
 import com.nomadiq.finnews.di.NetworkModule.provideConnectivityMonitor
 import com.nomadiq.finnews.di.NetworkModule.provideDogBreedRemoteDataSource
 import com.nomadiq.finnews.di.NetworkModule.provideDogBreedRepository
-import com.nomadiq.finnews.domain.usecase.GetDogBreedListUseCase
+import com.nomadiq.finnews.domain.usecase.GetNewsArticleFeedUseCase
 import com.nomadiq.finnews.domain.usecase.GetDogBreedRandomImageUseCase
 import dagger.Module
 import dagger.Provides
@@ -22,10 +22,10 @@ object AppModule {
     fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 
     @Provides
-    fun provideGetDogBreedListUseCase(@ApplicationContext context: Context): GetDogBreedListUseCase =
-        GetDogBreedListUseCase(
+    fun provideGetDogBreedListUseCase(@ApplicationContext context: Context): GetNewsArticleFeedUseCase =
+        GetNewsArticleFeedUseCase(
             connectivityMonitor = provideConnectivityMonitor(context),
-            dogBreedRepository = provideDogBreedRepository(
+            newsArticleFeedRepository = provideDogBreedRepository(
                 dogBreedDataSource = provideDogBreedRemoteDataSource(
                     applicationContext = context,
                     connectivityMonitor = provideConnectivityMonitor(context)
@@ -37,7 +37,7 @@ object AppModule {
     fun provideGetDogBreedRandomImageUseCase(@ApplicationContext context: Context): GetDogBreedRandomImageUseCase =
         GetDogBreedRandomImageUseCase(
             connectivityMonitor = provideConnectivityMonitor(context),
-            dogBreedRepository = provideDogBreedRepository(
+            newsArticleFeedRepository = provideDogBreedRepository(
                 dogBreedDataSource = provideDogBreedRemoteDataSource(
                     applicationContext = context,
                     connectivityMonitor = provideConnectivityMonitor(context)

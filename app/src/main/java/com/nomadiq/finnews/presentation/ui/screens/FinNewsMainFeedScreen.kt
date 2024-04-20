@@ -1,7 +1,6 @@
 package com.nomadiq.finnews.presentation.ui.screens
 
 import android.content.res.Configuration
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -37,7 +36,7 @@ import com.nomadiq.finnews.presentation.ui.component.ArticleFeedItemCard
 import com.nomadiq.finnews.presentation.ui.component.DefaultSnackBarHost
 import com.nomadiq.finnews.presentation.ui.component.NewsTopAppBar
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
-import com.nomadiq.finnews.presentation.viewmodel.FinNewsFeedListUiState
+import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
 
 /**
  *  @author Michael Akakpo
@@ -53,7 +52,7 @@ import com.nomadiq.finnews.presentation.viewmodel.FinNewsFeedListUiState
 fun FinNewsMainFeedScreen(
     modifier: Modifier = Modifier,
     onItemClick: (DogBreed) -> Unit = {},
-    uiState: FinNewsFeedListUiState = FinNewsFeedListUiState(
+    uiState: NewsArticleFeedUiState = NewsArticleFeedUiState(
         items = listOf(),
     ),
     navController: NavHostController = rememberNavController(), // TODO - Refactor into NavController
@@ -73,7 +72,7 @@ private fun MainFeedScaffoldState(
     modifier: Modifier = Modifier,
     title: Int,
     navController: NavHostController,
-    uiState: FinNewsFeedListUiState,
+    uiState: NewsArticleFeedUiState,
     onItemClick: (DogBreed) -> Unit = {},
 ) {
     FinNewsTheme {
@@ -95,7 +94,7 @@ private fun MainFeedScaffoldState(
 @Composable
 private fun MainScaffoldContentView(
     modifier: Modifier = Modifier,
-    uiState: FinNewsFeedListUiState = FinNewsFeedListUiState(
+    uiState: NewsArticleFeedUiState = NewsArticleFeedUiState(
         items = listOf(),
     ),
     paddingValues: PaddingValues,
@@ -144,7 +143,7 @@ private fun NewsArticleFeed(
 }
 
 @Composable
-fun OnLoadingState(uiState: FinNewsFeedListUiState) {
+fun OnLoadingState(uiState: NewsArticleFeedUiState) {
     var loading by rememberSaveable { mutableStateOf(false) }
     loading = uiState.isLoading
     if (loading) {

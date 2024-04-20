@@ -3,11 +3,10 @@ package com.nomadiq.finnews.presentation.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nomadiq.finnews.domain.usecase.GetDogBreedListUseCase
-import com.nomadiq.finnews.domain.mapper.DogBreedListResult
+import com.nomadiq.finnews.domain.usecase.GetNewsArticleFeedUseCase
+import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.model.ArticleFeedItem
 import com.nomadiq.finnews.domain.model.DogBreed
-import com.nomadiq.finnews.domain.model.NewsChannelFeedItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +21,7 @@ import javax.inject.Inject
 /**
  * @author - Michael Akakpo
  *
- * [DogBreedListViewModel]
+ * [NewsArticleFeedViewModel]
  *
  * Defines UI State information about the list of [DogBreed]
  * retrieved from the API and make it accessible to Compose and other UI components
@@ -30,19 +29,19 @@ import javax.inject.Inject
  */
 
 @HiltViewModel
-class DogBreedListViewModel @Inject constructor(
-    private val getDogBreedListUseCase: GetDogBreedListUseCase
+class NewsArticleFeedViewModel @Inject constructor(
+    private val getNewsArticleFeedUseCase: GetNewsArticleFeedUseCase
 ) :
     ViewModel() {
 
     // Define UIState variable for [DogBreed] data to map to the equivalent UI Screens and components
     private val _uiState =
         MutableStateFlow(
-            FinNewsFeedListUiState(
+            NewsArticleFeedUiState(
                 items = listOf(),
             )
         )
-    val uiState: StateFlow<FinNewsFeedListUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<NewsArticleFeedUiState> = _uiState.asStateFlow()
 
     init {
         displayDogBreedList()
@@ -97,23 +96,23 @@ class DogBreedListViewModel @Inject constructor(
         Timber.d("displayDogBreedList: launch In")
         _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
-            getDogBreedListUseCase.invoke().collect { result ->
+            getNewsArticleFeedUseCase.invoke().collect { result ->
                 when (result) {
-                    is DogBreedListResult.Data -> {
+                    is NewsArticleFeedListResult.Data -> {
                         delay(4000)
                         Log.d(
                             "displayDogBreedList() ",
-                            " SUCCESS ==> ${result.dogBreedsList.size} "
+                            " SUCCESS ==> ${result.newsArticleFeedList.size} "
                         )
                         updateData(result)
                     }
 
-                    is DogBreedListResult.Error -> {
+                    is NewsArticleFeedListResult.Error -> {
                         Log.d("displayDogBreedList()", " ERROR ==> ${result.error} ")
                         logDogBreedListResult("Unknown error occurred")
                     }
 
-                    is DogBreedListResult.NetworkError -> {
+                    is NewsArticleFeedListResult.NetworkError -> {
                         Log.d("displayDogBreedList()", "NETWORK ERROR ==> Network Error")
                         logDogBreedListResult("Network error occurred")
                     }
@@ -124,10 +123,10 @@ class DogBreedListViewModel @Inject constructor(
         }
     }
 
-    private fun updateData(result: DogBreedListResult.Data) {
+    private fun updateData(result: NewsArticleFeedListResult.Data) {
         _uiState.update { currentState ->
             currentState.copy(
-                items = result.dogBreedsList.map {
+                items = result.newsArticleFeedList.map {
                     ArticleFeedItem(
                         title = it.title,
                         subtitle = it.subtitle,

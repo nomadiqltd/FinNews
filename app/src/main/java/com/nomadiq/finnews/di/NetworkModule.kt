@@ -4,10 +4,10 @@ import android.content.Context
 import com.nomadiq.finnews.data.api.ApiService
 import com.nomadiq.finnews.data.network.connectivity.ConnectivityMonitor
 import com.nomadiq.finnews.data.network.connectivity.ConnectivityMonitorImpl
-import com.nomadiq.finnews.data.repository.DogBreedRemoteDataSourceImpl
-import com.nomadiq.finnews.data.repository.DogBreedRepositoryImpl
+import com.nomadiq.finnews.data.repository.NewsArticleRemoteDataSourceImpl
+import com.nomadiq.finnews.data.repository.NewsArticleFeedRepositoryImpl
 import com.nomadiq.finnews.data.repository.RemoteDataSource
-import com.nomadiq.finnews.domain.repository.DogBreedRepository
+import com.nomadiq.finnews.domain.repository.NewsArticleFeedRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,7 +45,7 @@ object NetworkModule {
         @ApplicationContext applicationContext: Context,
         connectivityMonitor: ConnectivityMonitor,
     ): RemoteDataSource =
-        DogBreedRemoteDataSourceImpl(
+        NewsArticleRemoteDataSourceImpl(
             context = applicationContext,
             connectivityMonitor = connectivityMonitor,
             providedApiService = provideApiService(
@@ -57,6 +57,6 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideDogBreedRepository(dogBreedDataSource: RemoteDataSource): DogBreedRepository =
-        DogBreedRepositoryImpl(dogBreedDataSource)
+    fun provideDogBreedRepository(dogBreedDataSource: RemoteDataSource): NewsArticleFeedRepository =
+        NewsArticleFeedRepositoryImpl(dogBreedDataSource)
 }
