@@ -24,11 +24,23 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            val apiKey = "\"b77f75d9-492b-4d80-bab3-088e00fd5f7b\""
+            val baseURL = "https://content.guardianapis.com/"
+            buildConfigField("String", "BASE_URL", "\"$baseURL\"")
+            buildConfigField("String", "API_KEY", apiKey)
+        }
+
+        debug {
+            isMinifyEnabled = false
+            val apiKey = "\"b77f75d9-492b-4d80-bab3-088e00fd5f7b\""
+            val baseURL = "https://content.guardianapis.com/"
+            buildConfigField("String", "BASE_URL", "\"$baseURL\"")
+            buildConfigField("String", "API_KEY", apiKey)
         }
     }
     compileOptions {
@@ -40,6 +52,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.9"
@@ -110,9 +123,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
 
-    // Kotlin - Nav Args
-  //  implementation("androidx.savedstate:savedstate-ktx:1.2.1")
-
     // Dependency Injection (Hilt)
     implementation("com.google.dagger:hilt-android:2.51")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
@@ -175,7 +185,4 @@ dependencies {
 
     // Timber - Logging
     implementation("com.jakewharton.timber:timber:5.0.1")
-
-
-    // TODO() - Could utilise new Android versioning catalog - libs.versions.toml
 }

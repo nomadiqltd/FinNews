@@ -11,7 +11,7 @@ buildscript {
     }
 
     dependencies {
-        // other plugins...
+        // Hilt Plug-in
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.51")
     }
 }
