@@ -2,8 +2,7 @@ package com.nomadiq.finnews.data.api
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.nomadiq.finnews.data.dto.NewsApiResponse
-import com.nomadiq.finnews.data.model.DogBreedApiResponse
+import com.nomadiq.finnews.data.dto.NewsArticleFeedApiResponse
 import com.nomadiq.finnews.data.model.DogBreedRandomImagesResponse
 import com.nomadiq.finnews.data.network.connectivity.ConnectivityMonitor
 import retrofit2.Response
@@ -27,7 +26,8 @@ class ApiService(
         // logger = { it -> Timber.d(it) }
     }
 
-    private val newFeedApi: NewsFeedApi by lazy {
+    // News Feed API
+    private val newsFeedApi: NewsFeedApi by lazy {
         apiClient.createService(NewsFeedApi::class.java)
     }
 
@@ -49,11 +49,11 @@ class ApiService(
         }
     }
 
-    suspend fun fetchAllDogBreeds(): Response<NewsApiResponse> {
-        return newFeedApi.fetchAllDogBreeds()
+    suspend fun fetchNewsArticleFeed(): Response<NewsArticleFeedApiResponse> {
+        return newsFeedApi.fetchNewsArticleFeed()
     }
 
     suspend fun fetchRandomImagesByDogBreed(breed: String): Response<DogBreedRandomImagesResponse> {
-        return newFeedApi.fetchRandomImagesByDogBreed(breed)
+        return newsFeedApi.fetchRandomImagesByDogBreed(breed)
     }
 }

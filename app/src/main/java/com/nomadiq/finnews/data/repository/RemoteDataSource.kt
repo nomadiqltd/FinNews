@@ -1,6 +1,6 @@
 package com.nomadiq.finnews.data.repository
 
-import com.nomadiq.finnews.domain.mapper.DogBreedListResult
+import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
 
 
@@ -12,6 +12,6 @@ import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
  *
  */
 interface RemoteDataSource {
-    suspend fun fetchAllDogBreeds(): DogBreedListResult
+    suspend fun fetchNewsArticleFeed(): NewsArticleFeedListResult
     suspend fun fetchRandomImagesByDogBreed(breed: String): DogBreedRandomImageResult
 }

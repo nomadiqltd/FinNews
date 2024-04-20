@@ -1,6 +1,6 @@
 package com.nomadiq.finnews.data.repository
 
-import com.nomadiq.finnews.domain.mapper.DogBreedListResult
+import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
 import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.domain.model.DogBreedImageDetail
@@ -19,7 +19,7 @@ class FakeRemoteDataSource : RemoteDataSource {
         private const val requestError = "errorCode = 404, DogBreed list data not found"
 
         val result =
-            DogBreedListResult.Data(
+            NewsArticleFeedListResult.Data(
                 listOf(
                     DogBreed("affenpinscher"),
                     DogBreed("african"),
@@ -38,15 +38,15 @@ class FakeRemoteDataSource : RemoteDataSource {
             )
     }
 
-    override suspend fun fetchAllDogBreeds(): DogBreedListResult {
+    override suspend fun fetchNewsArticleFeed(): NewsArticleFeedListResult {
         return if (generateError) {
-            DogBreedListResult.Error(requestError)
+            NewsArticleFeedListResult.Error(requestError)
         } else {
             loadDogBreedListData()
         }
     }
 
-    private fun loadDogBreedListData(): DogBreedListResult {
+    private fun loadDogBreedListData(): NewsArticleFeedListResult {
         return result
     }
 

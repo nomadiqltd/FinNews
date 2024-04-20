@@ -1,6 +1,6 @@
 package com.nomadiq.finnews.data.api
 
-import android.content.Context
+import com.nomadiq.finnews.BuildConfig.*
 import com.nomadiq.finnews.data.network.NetworkConnectivityInterceptor
 import com.nomadiq.finnews.data.network.connectivity.ConnectivityMonitor
 import com.squareup.moshi.Moshi
@@ -30,12 +30,9 @@ class ApiClient(
      *  @logger - Debugging and logging request information
      *  @client - Call factory for Http calls through Retrofit
      *  @Moshi - The binding between JSON Responses and their respective object counterparts
-     *  @Retrofit - Make Http Calls to Dog Ceo Api
+     *  @Retrofit - Make Http Calls to Guardian News Api
      *
      * */
-
-    // TODO - Could hide the URL and any API Keys inside a buildConfigField
-    private val BASE_URL = "https://content.guardianapis.com/"
 
     private val logger =
         HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
