@@ -5,7 +5,7 @@ import com.google.common.truth.Truth.assertThat
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
 import com.nomadiq.finnews.domain.model.DogBreed
-import com.nomadiq.finnews.domain.model.DogBreedImageDetail
+import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -78,9 +78,9 @@ class DogBreedListRepositoryTest {
         val resultListRandomImages =
             DogBreedRandomImageResult.Data(
                 listOf(
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_251.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_4396.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-basset/n02088238_13222.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_251.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_4396.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-basset/n02088238_13222.jpg"),
                 )
             )
 

@@ -3,7 +3,7 @@ package com.nomadiq.finnews.presentation.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.SavedStateHandle
 import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
-import com.nomadiq.finnews.domain.model.DogBreedImageDetail
+import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
 import com.nomadiq.finnews.domain.repository.NewsArticleFeedRepository
 import com.nomadiq.finnews.domain.usecase.GetDogBreedRandomImageUseCase
 import io.kotest.matchers.shouldBe
@@ -47,18 +47,18 @@ class DogBreedRandomImageViewModelTest {
         val breed = BREED
         val result =
             DogBreedRandomImageResult.Data(
-                items =
+                item =
                 listOf(
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_251.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_4396.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-basset/n02088238_13222.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-blood/n02088466_7004.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-blood/n02088466_7800.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_1541.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_2464.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_716.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-walker/n02089867_1430.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-walker/n02089867_1790.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_251.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_4396.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-basset/n02088238_13222.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-blood/n02088466_7004.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-blood/n02088466_7800.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_1541.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_2464.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_716.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-walker/n02089867_1430.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-walker/n02089867_1790.jpg"),
                 )
             )
 
@@ -68,7 +68,7 @@ class DogBreedRandomImageViewModelTest {
             emit(result)
 
             // then
-            viewModel.uiState.value.items.size shouldBe 10
+            viewModel.uiState.value.item.size shouldBe 10
         }
     }
 
@@ -85,7 +85,7 @@ class DogBreedRandomImageViewModelTest {
             emit(resultEmptyList)
 
             // then
-            viewModel.uiState.value.items.size shouldBe 0
+            viewModel.uiState.value.item.size shouldBe 0
         }
     }
 
@@ -103,7 +103,7 @@ class DogBreedRandomImageViewModelTest {
             emit(result)
 
             // then
-            viewModel.uiState.value.items.size shouldBe 0
+            viewModel.uiState.value.item.size shouldBe 0
         }
     }
 }

@@ -3,7 +3,7 @@ package com.nomadiq.finnews.data.repository
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
 import com.nomadiq.finnews.domain.model.DogBreed
-import com.nomadiq.finnews.domain.model.DogBreedImageDetail
+import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
 
 /**
  *  @author Michael Akakpo
@@ -21,20 +21,14 @@ class FakeRemoteDataSource : RemoteDataSource {
         val result =
             NewsArticleFeedListResult.Data(
                 listOf(
-                    DogBreed("affenpinscher"),
-                    DogBreed("african"),
-                    DogBreed("airedal"),
+
                 )
             )
 
         // Default result set for list of random Dog images based on a particular breed
         private val resultListRandomImages =
             DogBreedRandomImageResult.Data(
-                listOf(
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_251.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_4396.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-basset/n02088238_13222.jpg"),
-                )
+                NewsArticleItemDetail()
             )
     }
 
