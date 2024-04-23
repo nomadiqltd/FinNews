@@ -5,7 +5,7 @@ import com.nomadiq.finnews.di.NetworkModule.provideConnectivityMonitor
 import com.nomadiq.finnews.di.NetworkModule.provideDogBreedRemoteDataSource
 import com.nomadiq.finnews.di.NetworkModule.provideDogBreedRepository
 import com.nomadiq.finnews.domain.usecase.GetNewsArticleFeedUseCase
-import com.nomadiq.finnews.domain.usecase.GetDogBreedRandomImageUseCase
+import com.nomadiq.finnews.domain.usecase.GetNewsArticleItemDetailUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,8 +34,8 @@ object AppModule {
         )
 
     @Provides
-    fun provideGetDogBreedRandomImageUseCase(@ApplicationContext context: Context): GetDogBreedRandomImageUseCase =
-        GetDogBreedRandomImageUseCase(
+    fun provideGetDogBreedRandomImageUseCase(@ApplicationContext context: Context): GetNewsArticleItemDetailUseCase =
+        GetNewsArticleItemDetailUseCase(
             connectivityMonitor = provideConnectivityMonitor(context),
             newsArticleFeedRepository = provideDogBreedRepository(
                 dogBreedDataSource = provideDogBreedRemoteDataSource(

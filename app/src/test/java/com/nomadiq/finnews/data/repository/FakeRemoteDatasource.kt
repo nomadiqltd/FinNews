@@ -1,8 +1,7 @@
 package com.nomadiq.finnews.data.repository
 
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
-import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
-import com.nomadiq.finnews.domain.model.DogBreed
+import com.nomadiq.finnews.domain.mapper.NewsArticleItemDetailResult
 import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
 
 /**
@@ -27,7 +26,7 @@ class FakeRemoteDataSource : RemoteDataSource {
 
         // Default result set for list of random Dog images based on a particular breed
         private val resultListRandomImages =
-            DogBreedRandomImageResult.Data(
+            NewsArticleItemDetailResult.Data(
                 NewsArticleItemDetail()
             )
     }
@@ -44,7 +43,7 @@ class FakeRemoteDataSource : RemoteDataSource {
         return result
     }
 
-    override suspend fun fetchRandomImagesByDogBreed(breed: String): DogBreedRandomImageResult {
+    override suspend fun fetchNewsArticleItemDetail(breed: String): NewsArticleItemDetailResult {
         return resultListRandomImages
     }
 }

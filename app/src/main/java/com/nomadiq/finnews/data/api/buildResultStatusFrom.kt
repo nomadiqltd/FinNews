@@ -1,13 +1,12 @@
-package com.nomadiq.finnews.data.repository
+package com.nomadiq.finnews.data.api
 
-import com.nomadiq.finnews.data.api.ResultStatus
 import retrofit2.Response
 
 /**
  *
  *  @author - Michael Akakpo
  *
- * Check the response from the [API] and return a [ResultStatus]
+ * Check the response from the API and return a [ResultStatus]
  * to provide a fixed predetermined set of possible outcomes on the status of the network request
  */
 fun <T> buildResultStatusFrom(response: Response<T>): ResultStatus<T> {

@@ -3,13 +3,14 @@ package com.nomadiq.finnews.data.repository
 import android.content.Context
 import com.nomadiq.finnews.data.api.ApiService
 import com.nomadiq.finnews.data.mapper.NewsArticleFeedListMapper
-import com.nomadiq.finnews.data.mapper.DogBreedRandomImageListMapper
+import com.nomadiq.finnews.data.mapper.NewsArticleItemDetailMapper
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.data.api.ResultStatus
-import com.nomadiq.finnews.data.dto.NewsArticleFeedApiResponse
-import com.nomadiq.finnews.data.model.DogBreedRandomImagesResponse
+import com.nomadiq.finnews.data.api.buildResultStatusFrom
+import com.nomadiq.finnews.data.model.articledetail.NewsArticleDetailApiResponse
+import com.nomadiq.finnews.data.model.article.NewsArticleFeedApiResponse
 import com.nomadiq.finnews.data.network.connectivity.ConnectivityMonitor
-import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
+import com.nomadiq.finnews.domain.mapper.NewsArticleItemDetailResult
 import javax.inject.Inject
 
 /**
@@ -37,8 +38,8 @@ class NewsArticleRemoteDataSourceImpl @Inject constructor(
         NewsArticleFeedListMapper()
     }
 
-    private val dogRandomImageListMapper: DogBreedRandomImageListMapper by lazy {
-        DogBreedRandomImageListMapper()
+    private val dogRandomImageListMapper: NewsArticleItemDetailMapper by lazy {
+        NewsArticleItemDetailMapper()
     }
 
     override suspend fun fetchNewsArticleFeed(): NewsArticleFeedListResult {
@@ -46,8 +47,8 @@ class NewsArticleRemoteDataSourceImpl @Inject constructor(
         return newsArticleFeedListMapper.map(result)
     }
 
-    override suspend fun fetchRandomImagesByDogBreed(breed: String): DogBreedRandomImageResult {
-        val result = fetchRandomImagesByDogBreedResult(breed = breed)
+    override suspend fun fetchNewsArticleItemDetail(breed: String): NewsArticleItemDetailResult {
+        val result = fetchNewsArticleItemDetailResult(apiUrl = breed)
         return dogRandomImageListMapper.map(result)
     }
 
@@ -56,8 +57,8 @@ class NewsArticleRemoteDataSourceImpl @Inject constructor(
         return buildResultStatusFrom(response)
     }
 
-    private suspend fun fetchRandomImagesByDogBreedResult(breed: String): ResultStatus<DogBreedRandomImagesResponse> {
-        val response = apiService.fetchRandomImagesByDogBreed(breed = breed)
+    private suspend fun fetchNewsArticleItemDetailResult(apiUrl: String): ResultStatus<NewsArticleDetailApiResponse> {
+        val response = apiService.fetchNewsArticleItemDetail(apiUrl = apiUrl)
         return buildResultStatusFrom(response)
     }
 }

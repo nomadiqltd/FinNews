@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.nomadiq.finnews.R
-import com.nomadiq.finnews.domain.model.ArticleFeedItem
+import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
 import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.presentation.ui.component.ArticleFeedItemCard
 import com.nomadiq.finnews.presentation.ui.component.DefaultSnackBarHost
@@ -41,7 +41,7 @@ import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
 /**
  *  @author Michael Akakpo
  *
- *  Composable representing the list of [ArticleFeedItem] items within the Lazy column
+ *  Composable representing the list of [NewsArticleFeedItem] items within the Lazy column
  *
  */
 
@@ -51,17 +51,15 @@ import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
 @Composable
 fun FinNewsMainFeedScreen(
     modifier: Modifier = Modifier,
-    onItemClick: (DogBreed) -> Unit = {},
+    onItemClick: (NewsArticleFeedItem) -> Unit = {},
     uiState: NewsArticleFeedUiState = NewsArticleFeedUiState(
         items = listOf(),
     ),
-    navController: NavHostController = rememberNavController(), // TODO - Refactor into NavController
     @StringRes title: Int = R.string.toolbar_title_default
 ) {
     MainFeedScaffoldState(
         modifier = Modifier,
         title = title,
-        navController = navController,
         uiState = uiState,
         onItemClick = onItemClick,
     )
@@ -71,9 +69,8 @@ fun FinNewsMainFeedScreen(
 private fun MainFeedScaffoldState(
     modifier: Modifier = Modifier,
     title: Int,
-    navController: NavHostController,
     uiState: NewsArticleFeedUiState,
-    onItemClick: (DogBreed) -> Unit = {},
+    onItemClick: (NewsArticleFeedItem) -> Unit = {},
 ) {
     FinNewsTheme {
         Scaffold(
@@ -81,8 +78,6 @@ private fun MainFeedScaffoldState(
             topBar = {
                 NewsTopAppBar(
                     title = title,
-                    canNavigateBack = navController.previousBackStackEntry != null,
-                    navigateUp = { navController.navigateUp() }
                 )
             }
         ) { paddingValues ->
@@ -98,7 +93,7 @@ private fun MainScaffoldContentView(
         items = listOf(),
     ),
     paddingValues: PaddingValues,
-    onItemClick: (DogBreed) -> Unit = {},
+    onItemClick: (NewsArticleFeedItem) -> Unit = {},
 ) {
     Column(
         modifier = modifier
@@ -108,7 +103,7 @@ private fun MainScaffoldContentView(
         OnLoadingState(uiState)
 
         // Article Item Feed
-        NewsArticleFeed(uiState.items)
+        NewsArticleFeed(uiState.items, onItemClick)
     }
 }
 
@@ -117,8 +112,8 @@ private fun MainScaffoldContentView(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun NewsArticleFeed(
-    items: List<ArticleFeedItem> = listOf(),
-    onItemClick: (ArticleFeedItem) -> Unit = {}
+    items: List<NewsArticleFeedItem> = listOf(),
+    onItemClick: (NewsArticleFeedItem) -> Unit = {}
 ) {
     val state: LazyListState = rememberLazyListState()
 
@@ -135,7 +130,9 @@ private fun NewsArticleFeed(
                 ArticleFeedItemCard(
                     title = item.title,
                     subtitle = item.subtitle,
-                    imgUrl = item.imgUrl
+                    imgUrl = item.imgUrl,
+                    item = item,
+                    onItemClick = onItemClick
                 )
             }
         }

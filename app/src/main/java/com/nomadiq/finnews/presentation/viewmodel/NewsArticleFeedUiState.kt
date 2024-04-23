@@ -1,6 +1,6 @@
 package com.nomadiq.finnews.presentation.viewmodel
 
-import com.nomadiq.finnews.domain.model.ArticleFeedItem
+import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
 
 /**
  *  @author Michael Akakpo
@@ -9,7 +9,7 @@ import com.nomadiq.finnews.domain.model.ArticleFeedItem
  *
  */
 data class NewsArticleFeedUiState(
-    val items: List<ArticleFeedItem>,
+    val items: List<NewsArticleFeedItem>,
     val isLoading: Boolean = false,
     val errorMessage: String? = null
 ) {

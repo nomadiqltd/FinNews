@@ -2,8 +2,9 @@ package com.nomadiq.finnews.data.api
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.nomadiq.finnews.data.dto.NewsArticleFeedApiResponse
-import com.nomadiq.finnews.data.model.DogBreedRandomImagesResponse
+import com.nomadiq.finnews.BuildConfig.API_KEY
+import com.nomadiq.finnews.data.model.articledetail.NewsArticleDetailApiResponse
+import com.nomadiq.finnews.data.model.article.NewsArticleFeedApiResponse
 import com.nomadiq.finnews.data.network.connectivity.ConnectivityMonitor
 import retrofit2.Response
 
@@ -31,7 +32,6 @@ class ApiService(
         apiClient.createService(NewsFeedApi::class.java)
     }
 
-
     companion object {
         @SuppressLint("StaticFieldLeak")
         private var instance: ApiService? = null
@@ -53,7 +53,10 @@ class ApiService(
         return newsFeedApi.fetchNewsArticleFeed()
     }
 
-    suspend fun fetchRandomImagesByDogBreed(breed: String): Response<DogBreedRandomImagesResponse> {
-        return newsFeedApi.fetchRandomImagesByDogBreed(breed)
+    suspend fun fetchNewsArticleItemDetail(apiUrl: String): Response<NewsArticleDetailApiResponse> {
+      //  val apiUrl = "https://content.guardianapis.com/technology/2014/feb/18/doge-such-questions-very-answered"
+        return newsFeedApi.fetchNewsArticleItemDetail(apiUrl = "$apiUrl?api-key=$API_KEY&show-fields=body,headline,thumbnail")
     }
+
+
 }

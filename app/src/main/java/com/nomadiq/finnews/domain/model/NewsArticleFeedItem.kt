@@ -6,11 +6,11 @@ import com.squareup.moshi.Json
 /**
  * @author Michael Akakpo
  *
- * Dog Breed Entity class for [ArticleFeedItem], to be used in domain and presentation layers
+ * Dog Breed Entity class for [NewsArticleFeedItem], to be used in domain and presentation layers
  *
  */
 
-data class ArticleFeedItem(
+data class NewsArticleFeedItem(
     @Json(name = "headline")
     val title: String = "",
     @Json(name = "webPublicationDate")

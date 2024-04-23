@@ -1,7 +1,7 @@
 package com.nomadiq.finnews.data.repository
 
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
-import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
+import com.nomadiq.finnews.domain.mapper.NewsArticleItemDetailResult
 import com.nomadiq.finnews.domain.repository.NewsArticleFeedRepository
 import javax.inject.Inject
 
@@ -20,6 +20,6 @@ class NewsArticleFeedRepositoryImpl @Inject constructor(
     override suspend fun fetchNewsArticleFeed(): NewsArticleFeedListResult =
         datasource.fetchNewsArticleFeed()
 
-    override suspend fun fetchRandomImagesByDogBreed(breed: String): DogBreedRandomImageResult =
-        datasource.fetchRandomImagesByDogBreed(breed = breed)
+    override suspend fun fetchNewsArticleItemDetail(apiUrl: String): NewsArticleItemDetailResult =
+        datasource.fetchNewsArticleItemDetail(apiUrl = apiUrl)
 }

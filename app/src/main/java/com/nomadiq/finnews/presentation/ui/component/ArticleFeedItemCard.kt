@@ -5,6 +5,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,6 +35,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import com.nomadiq.finnews.domain.model.DogBreed
+import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsShapes
 
 
@@ -88,7 +91,7 @@ private fun ArticleItemTitle(
         minLines = 1,
         maxLines = 3,
         overflow = TextOverflow.Ellipsis,
-        style = MaterialTheme.typography.labelLarge,
+        style = MaterialTheme.typography.bodyMedium,
         text = title,
     )
 }
@@ -163,13 +166,16 @@ fun ArticleFeedItemCard(
     modifier: Modifier = Modifier,
     title: String = "",
     subtitle: String = "",
-    imgUrl: String = ""
+    imgUrl: String = "",
+    item: NewsArticleFeedItem = NewsArticleFeedItem(),
+    onItemClick: (NewsArticleFeedItem) -> Unit = {}
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clip(MaterialTheme.shapes.large),
+            .clip(MaterialTheme.shapes.large)
+            .clickable(onClick = { onItemClick(item) }),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant
         )

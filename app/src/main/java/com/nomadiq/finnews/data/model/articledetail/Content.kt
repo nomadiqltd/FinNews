@@ -1,4 +1,4 @@
-package com.nomadiq.finnews.data.articledetail
+package com.nomadiq.finnews.data.model.articledetail
 
 data class Content(
     val apiUrl: String = "",

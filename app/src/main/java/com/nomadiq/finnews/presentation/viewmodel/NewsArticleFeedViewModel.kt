@@ -5,8 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nomadiq.finnews.domain.usecase.GetNewsArticleFeedUseCase
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
-import com.nomadiq.finnews.domain.model.ArticleFeedItem
-import com.nomadiq.finnews.domain.model.DogBreed
+import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +14,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.Locale
 import javax.inject.Inject
 
 /**
@@ -23,7 +21,7 @@ import javax.inject.Inject
  *
  * [NewsArticleFeedViewModel]
  *
- * Defines UI State information about the list of [DogBreed]
+ * Defines UI State information about the list of [NewsArticleFeedItem]
  * retrieved from the API and make it accessible to Compose and other UI components
  *
  */
@@ -34,7 +32,7 @@ class NewsArticleFeedViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    // Define UIState variable for [DogBreed] data to map to the equivalent UI Screens and components
+    // Define UIState variable for [NewsArticleFeedItem] data to map to the equivalent UI Screens and components
     private val _uiState =
         MutableStateFlow(
             NewsArticleFeedUiState(
@@ -44,56 +42,12 @@ class NewsArticleFeedViewModel @Inject constructor(
     val uiState: StateFlow<NewsArticleFeedUiState> = _uiState.asStateFlow()
 
     init {
-        displayDogBreedList()
+        displayNewsArticleFeedList()
     }
 
-    private fun defaultArticleList() = listOf(
-        ArticleFeedItem(
-            title = "News",
-            subtitle = "subtitle 1",
-            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
-        ),
-        ArticleFeedItem(
-            title = "News",
-            subtitle = "subtitle 2",
-            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
-        ),
-        ArticleFeedItem(
-            title = "News",
-            subtitle = "",
-            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
-        ),
-        ArticleFeedItem(
-            title = "News",
-            subtitle = "",
-            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
-        ),
-        ArticleFeedItem(
-            title = "News",
-            subtitle = "",
-            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
-        ),
-        ArticleFeedItem(
-            title = "News",
-            subtitle = "",
-            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
-        ),
-        ArticleFeedItem(
-            title = "News",
-            subtitle = "",
-            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
-        ),
-        ArticleFeedItem(
-            title = "News",
-            subtitle = "",
-            imgUrl = "https://media.guim.co.uk/b4b8ba7d544a93d10982353d581717bfdf7888ee/1_472_5303_3183/500.jpg"
-        ),
-    )
-
-
-    // Function to fetch List of [DogBreed] - save success response and update uiState
-    private fun displayDogBreedList() {
-        Timber.d("displayDogBreedList: launch In")
+    // Function to fetch List of [NewsArticleFeedItem] - save success response and update uiState
+    private fun displayNewsArticleFeedList() {
+        Timber.d("displayNewsArticleFeedList")
         _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             getNewsArticleFeedUseCase.invoke().collect { result ->
@@ -127,7 +81,7 @@ class NewsArticleFeedViewModel @Inject constructor(
         _uiState.update { currentState ->
             currentState.copy(
                 items = result.newsArticleFeedList.map {
-                    ArticleFeedItem(
+                    NewsArticleFeedItem(
                         title = it.title,
                         subtitle = it.subtitle,
                         imgUrl = it.imgUrl,
@@ -138,11 +92,6 @@ class NewsArticleFeedViewModel @Inject constructor(
         }
     }
 
-    private fun String.capitalize(it: DogBreed) = it.name.replaceFirstChar {
-        if (it.isLowerCase()) it.titlecase(
-            Locale.ROOT
-        ) else it.toString()
-    }
 
     private fun logDogBreedListResult(errorMessage: String) {
         _uiState.update {

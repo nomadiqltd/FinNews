@@ -1,9 +1,9 @@
 package com.nomadiq.finnews.data.mapper
 
 import com.nomadiq.finnews.data.api.ResultStatus
-import com.nomadiq.finnews.data.dto.NewsArticleFeedApiResponse
+import com.nomadiq.finnews.data.model.article.NewsArticleFeedApiResponse
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
-import com.nomadiq.finnews.domain.model.ArticleFeedItem
+import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
 
 
 /**
@@ -30,13 +30,13 @@ class NewsArticleFeedListMapper :
         }
     }
 
-    private fun createDataFromResponseResult(data: NewsArticleFeedApiResponse): List<ArticleFeedItem> {
-        val list = mutableListOf<ArticleFeedItem>()
+    private fun createDataFromResponseResult(data: NewsArticleFeedApiResponse): List<NewsArticleFeedItem> {
+        val list = mutableListOf<NewsArticleFeedItem>()
         val results = data.response.results
         results.forEach { item ->
             list.addAll(
                 listOf(
-                    ArticleFeedItem(
+                    NewsArticleFeedItem(
                         title = item.fields.headline,
                         subtitle = item.webPublicationDate,
                         imgUrl = item.fields.thumbnail,

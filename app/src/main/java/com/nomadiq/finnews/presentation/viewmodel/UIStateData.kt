@@ -15,8 +15,6 @@ package com.nomadiq.finnews.presentation.viewmodel
 /** A sealed class representing preset [UIState] types to facilitate error management **/
 interface UiState<T> {
     data class Data<T>(val data: T) : UiState<T>
-    class IsLoading<T> : UiState<T>
-    class Empty<T> : UiState<T>
     data class Error<T>(val error: String) : UiState<T>
     data class NetworkError<T>(val message: String?) : UiState<T>
 }

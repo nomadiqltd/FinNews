@@ -1,7 +1,8 @@
-package com.nomadiq.finnews.data.model
+package com.nomadiq.finnews.data.model.article
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+
 
 /**
  * @author Michael Akakpo
@@ -10,7 +11,6 @@ import com.squareup.moshi.JsonClass
  */
 
 @JsonClass(generateAdapter = true)
-data class DogBreedApiResponse(
-    @Json(name = "message") val message: Map<String, List<String>>,
-    val status: String,
+data class NewsArticleFeedApiResponse(
+    @Json(name = "response") val response: Response = Response()
 )

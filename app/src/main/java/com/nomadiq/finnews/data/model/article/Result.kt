@@ -1,4 +1,4 @@
-package com.nomadiq.finnews.data.dto
+package com.nomadiq.finnews.data.model.article
 
 import com.squareup.moshi.JsonClass
 

@@ -38,7 +38,6 @@ class ApiClient(
         HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
 
     private val client = OkHttpClient.Builder()
-        .addInterceptor(logger)
         .addInterceptor(NetworkConnectivityInterceptor(connectivityMonitor))
         .build()
 
@@ -55,6 +54,7 @@ class ApiClient(
     private val defaultClientBuilder: OkHttpClient.Builder by lazy {
         OkHttpClient()
             .newBuilder()
+            .addInterceptor(logger)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(NetworkConnectivityInterceptor(connectivityMonitor))

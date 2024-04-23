@@ -21,9 +21,9 @@ class GetNewsArticleFeedUseCase @Inject constructor(
 
     suspend operator fun invoke(): Flow<NewsArticleFeedListResult> {
         return if (connectivityMonitor.isConnected()) {
-            val dogBreedListResult = newsArticleFeedRepository.fetchNewsArticleFeed()
+            val newsArticleFeedListResult = newsArticleFeedRepository.fetchNewsArticleFeed()
             flow {
-                emit(dogBreedListResult)
+                emit(newsArticleFeedListResult)
             }
         } else {
             flowOf(NewsArticleFeedListResult.NetworkError)

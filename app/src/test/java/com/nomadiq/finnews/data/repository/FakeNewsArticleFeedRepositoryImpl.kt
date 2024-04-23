@@ -1,9 +1,8 @@
 package com.nomadiq.finnews.data.repository
 
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
-import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
-import com.nomadiq.finnews.domain.model.DogBreed
-import com.nomadiq.finnews.domain.model.DogBreedImageDetail
+import com.nomadiq.finnews.domain.mapper.NewsArticleItemDetailResult
+import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
 import com.nomadiq.finnews.domain.repository.NewsArticleFeedRepository
 
 /**
@@ -29,18 +28,18 @@ class FakeNewsArticleFeedRepositoryImpl : NewsArticleFeedRepository {
 
         // Default result set for list of random Dog images based on a particular breed
         private val resultListRandomImages =
-            DogBreedRandomImageResult.Data(
+            NewsArticleItemDetailResult.Data(
                 listOf(
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_251.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_4396.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-basset/n02088238_13222.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-blood/n02088466_7004.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-blood/n02088466_7800.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_1541.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_2464.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_716.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-walker/n02089867_1430.jpg"),
-                    DogBreedImageDetail("https://images.dog.ceo/breeds/hound-walker/n02089867_1790.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_251.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_4396.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-basset/n02088238_13222.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-blood/n02088466_7004.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-blood/n02088466_7800.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_1541.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_2464.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_716.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-walker/n02089867_1430.jpg"),
+                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-walker/n02089867_1790.jpg"),
                 )
             )
     }
@@ -57,7 +56,7 @@ class FakeNewsArticleFeedRepositoryImpl : NewsArticleFeedRepository {
         return resultList
     }
 
-    override suspend fun fetchRandomImagesByDogBreed(breed: String): DogBreedRandomImageResult {
+    override suspend fun fetchNewsArticleItemDetail(breed: String): NewsArticleItemDetailResult {
         return resultListRandomImages
     }
 }
