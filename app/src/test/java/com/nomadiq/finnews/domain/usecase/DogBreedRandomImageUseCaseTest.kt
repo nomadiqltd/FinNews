@@ -2,7 +2,7 @@ package com.nomadiq.finnews.domain.usecase
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
-import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
+import com.nomadiq.finnews.domain.mapper.NewsArticleItemDetailResult
 import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
 import com.nomadiq.finnews.domain.repository.NewsArticleFeedRepository
 import io.kotest.matchers.shouldBe
@@ -34,7 +34,7 @@ class DogBreedRandomImageUseCaseTest {
 
     private val dataRepository = mockk<NewsArticleFeedRepository>()
 
-    private lateinit var usecase: GetDogBreedRandomImageUseCase
+    private lateinit var usecase: GetNewsArticleItemDetailUseCase
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule() // for the livedata
@@ -47,7 +47,7 @@ class DogBreedRandomImageUseCaseTest {
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        usecase = GetDogBreedRandomImageUseCase(newsArticleFeedRepository = dataRepository)
+        usecase = GetNewsArticleItemDetailUseCase(newsArticleFeedRepository = dataRepository)
     }
 
     @Test
@@ -55,7 +55,7 @@ class DogBreedRandomImageUseCaseTest {
         // given
         val breed = BREED
         val result =
-            DogBreedRandomImageResult.Data(
+            NewsArticleItemDetailResult.Data(
                 listOf(
                     NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_251.jpg"),
                     NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_4396.jpg"),
@@ -66,13 +66,13 @@ class DogBreedRandomImageUseCaseTest {
             )
 
         // when
-        coEvery { dataRepository.fetchRandomImagesByDogBreed(breed) } returns (result)
+        coEvery { dataRepository.fetchNewsArticleItemDetail(breed) } returns (result)
         coEvery { usecase.invoke(breed) } returns flow {
             emit(result)
 
             // then
             result shouldBe 5
-            assertTrue(this is DogBreedRandomImageResult)
+            assertTrue(this is NewsArticleItemDetailResult)
         }
     }
 
@@ -80,15 +80,15 @@ class DogBreedRandomImageUseCaseTest {
     fun `initialize then fetch dog breeds usecase failed Empty list`() = runTest {
         // given
         val breed = BREED
-        val result = DogBreedRandomImageResult.Empty
+        val result = NewsArticleItemDetailResult.Empty
 
         // when
-        coEvery { dataRepository.fetchRandomImagesByDogBreed(breed) } returns (result)
+        coEvery { dataRepository.fetchNewsArticleItemDetail(breed) } returns (result)
         coEvery { usecase.invoke(BREED) } returns flow {
             emit(result)
 
             // then
-            assertThat(this is DogBreedRandomImageResult)
+            assertThat(this is NewsArticleItemDetailResult)
         }
     }
 
@@ -96,14 +96,14 @@ class DogBreedRandomImageUseCaseTest {
     fun `initialize then fetch dog breeds usecase failed Error`() = runTest {
         // given
         val breed = BREED
-        val result = DogBreedRandomImageResult.Error("")
+        val result = NewsArticleItemDetailResult.Error("")
 
-        coEvery { dataRepository.fetchRandomImagesByDogBreed(breed) } returns (result)
+        coEvery { dataRepository.fetchNewsArticleItemDetail(breed) } returns (result)
         coEvery { usecase.invoke(breed) } returns flow {
             emit(result)
 
             // then
-            assertTrue(this is DogBreedRandomImageResult)
+            assertTrue(this is NewsArticleItemDetailResult)
         }
     }
 }

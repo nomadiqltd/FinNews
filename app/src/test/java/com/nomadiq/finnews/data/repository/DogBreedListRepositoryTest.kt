@@ -3,7 +3,7 @@ package com.nomadiq.finnews.data.repository
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
-import com.nomadiq.finnews.domain.mapper.DogBreedRandomImageResult
+import com.nomadiq.finnews.domain.mapper.NewsArticleItemDetailResult
 import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
 import io.mockk.MockKAnnotations
@@ -76,7 +76,7 @@ class DogBreedListRepositoryTest {
         // given
         val breed = BREED
         val resultListRandomImages =
-            DogBreedRandomImageResult.Data(
+            NewsArticleItemDetailResult.Data(
                 listOf(
                     NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_251.jpg"),
                     NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_4396.jpg"),
@@ -86,11 +86,11 @@ class DogBreedListRepositoryTest {
 
         // when
         coEvery {
-            datasource.fetchRandomImagesByDogBreed(breed = breed)
+            datasource.fetchNewsArticleItemDetail(breed = breed)
         } returns (resultListRandomImages)
 
         coEvery {
-            dataRepository.fetchRandomImagesByDogBreed(breed = breed)
+            dataRepository.fetchNewsArticleItemDetail(breed = breed)
         } returns (resultListRandomImages)
 
         // then
