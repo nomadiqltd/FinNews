@@ -48,8 +48,10 @@ fun FinNewsNavigationGraph(
                     navController.navigateToArticleItemDetailScreen(article.apiUrl)
                 },
                 onItemBookmarked = {
+                    // TODO() - Check where is best to call Bookmark function
                 },
                 onItemShared = {
+                    // TODO() -Check where is best to call Share function
                 }
             )
         }

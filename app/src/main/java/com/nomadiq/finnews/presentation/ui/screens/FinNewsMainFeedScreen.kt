@@ -64,8 +64,8 @@ fun FinNewsMainFeedScreen(
         title = title,
         uiState = uiState,
         onItemClick = onItemClick,
-        onItemBookmarked = onItemClick,
-        onItemShared = onItemClick,
+        onItemBookmarked = onItemBookmarked,
+        onItemShared = onItemShared,
     )
 }
 
@@ -118,7 +118,7 @@ private fun MainScaffoldContentView(
         OnLoadingState(uiState)
 
         // Article Item Feed
-        NewsArticleFeed(uiState.items, onItemClick)
+        NewsArticleFeed(uiState.items, onItemClick, onItemBookmarked, onItemShared)
     }
 }
 

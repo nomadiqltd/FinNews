@@ -52,7 +52,7 @@ private fun ArticleItemShareCTA(
         imageVector = Icons.Filled.Share,
         modifier = modifier
             .size(size = 32.dp)
-            .clickable { TODO() /* - look into best place to run onEvent action */ },
+            .clickable { /* TODO() - look into best place to run onEvent action */ },
         contentDescription = "verified"
     )
 }
@@ -69,7 +69,7 @@ private fun ArticleItemBookmarkCTA(
         imageVector = Icons.Filled.FavoriteBorder,
         modifier = modifier
             .size(size = 32.dp)
-            .clickable { },
+            .clickable { /* TODO() - look into best place to run onEvent action */ },
         contentDescription = "verified"
     )
 }
