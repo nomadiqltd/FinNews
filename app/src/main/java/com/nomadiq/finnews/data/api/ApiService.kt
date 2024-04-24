@@ -54,9 +54,6 @@ class ApiService(
     }
 
     suspend fun fetchNewsArticleItemDetail(apiUrl: String): Response<NewsArticleDetailApiResponse> {
-      //  val apiUrl = "https://content.guardianapis.com/technology/2014/feb/18/doge-such-questions-very-answered"
         return newsFeedApi.fetchNewsArticleItemDetail(apiUrl = "$apiUrl?api-key=$API_KEY&show-fields=body,headline,thumbnail")
     }
-
-
 }

@@ -48,7 +48,7 @@ class NewsArticleItemDetailViewModel @Inject constructor(
     private fun displayNewsArticleItemDetail(apiUrl: String) {
         _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
-            getNewsArticleItemDetailUseCase.invoke(decodeURL(apiUrl)).collect { result ->
+            getNewsArticleItemDetailUseCase.invoke(validateURL(apiUrl)).collect { result ->
                 when (result) {
                     is NewsArticleItemDetailResult.Data -> {
                         Timber.tag("NewsFeedItemDetail ")

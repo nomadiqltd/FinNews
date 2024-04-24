@@ -44,11 +44,15 @@ import com.nomadiq.finnews.presentation.ui.theme.FinNewsShapes
 @Preview("ArticleItemShareCTA (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-private fun ArticleItemShareCTA(modifier: Modifier = Modifier) {
+private fun ArticleItemShareCTA(
+    modifier: Modifier = Modifier,
+    onItemShared: (NewsArticleFeedItem) -> Unit = {},
+) {
     Image(
         imageVector = Icons.Filled.Share,
         modifier = modifier
-            .size(size = 32.dp),
+            .size(size = 32.dp)
+            .clickable { TODO() /* - look into best place to run onEvent action */ },
         contentDescription = "verified"
     )
 }
@@ -58,11 +62,14 @@ private fun ArticleItemShareCTA(modifier: Modifier = Modifier) {
 @Preview("ArticleItemBookmarkCTA (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-private fun ArticleItemBookmarkCTA(modifier: Modifier = Modifier) {
+private fun ArticleItemBookmarkCTA(
+    modifier: Modifier = Modifier, onItemBookmarked: (NewsArticleFeedItem) -> Unit = {},
+) {
     Image(
         imageVector = Icons.Filled.FavoriteBorder,
         modifier = modifier
-            .size(size = 32.dp),
+            .size(size = 32.dp)
+            .clickable { },
         contentDescription = "verified"
     )
 }
@@ -101,7 +108,12 @@ private fun ArticleItemTitle(
 @Preview("ArticleItemDateStamp (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun ArticleItemDateStamp(modifier: Modifier = Modifier, subtitle: String = "TODAY * 2 Min read") {
+fun ArticleItemDateStamp(
+    modifier: Modifier = Modifier,
+    subtitle: String = "TODAY * 2 Min read",
+    onItemBookmarked: (NewsArticleFeedItem) -> Unit = {},
+    onItemShared: (NewsArticleFeedItem) -> Unit = {},
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
@@ -127,13 +139,19 @@ fun ArticleItemDescriptionFooter(
     modifier: Modifier = Modifier,
     title: String = "",
     subtitle: String = "",
-    imgUrl: String = ""
+    imgUrl: String = "",
+    onItemBookmarked: (NewsArticleFeedItem) -> Unit = {},
+    onItemShared: (NewsArticleFeedItem) -> Unit = {},
 ) {
     Column(
     ) {
         ArticleItemTitle(title = title)
         Spacer(modifier = Modifier.padding(8.dp))
-        ArticleItemDateStamp(subtitle = subtitle)
+        ArticleItemDateStamp(
+            subtitle = subtitle,
+            onItemShared = onItemShared,
+            onItemBookmarked = onItemBookmarked
+        )
     }
 }
 
@@ -168,7 +186,9 @@ fun ArticleFeedItemCard(
     subtitle: String = "",
     imgUrl: String = "",
     item: NewsArticleFeedItem = NewsArticleFeedItem(),
-    onItemClick: (NewsArticleFeedItem) -> Unit = {}
+    onItemClick: (NewsArticleFeedItem) -> Unit = {},
+    onItemBookmarked: (NewsArticleFeedItem) -> Unit = {},
+    onItemShared: (NewsArticleFeedItem) -> Unit = {},
 ) {
     Card(
         modifier = Modifier
@@ -185,7 +205,12 @@ fun ArticleFeedItemCard(
             imgUrl = imgUrl
         )
         Spacer(modifier = Modifier.padding(8.dp))
-        ArticleItemDescriptionFooter(title = title, subtitle = subtitle)
+        ArticleItemDescriptionFooter(
+            title = title,
+            subtitle = subtitle,
+            onItemBookmarked = onItemBookmarked,
+            onItemShared = onItemShared
+        )
         Spacer(modifier = Modifier.padding(16.dp))
     }
 }

@@ -1,6 +1,7 @@
 package com.nomadiq.finnews.presentation.ui.screens
 
 import android.content.res.Configuration
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -48,6 +49,8 @@ import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
 @Composable
 fun NewsArticleItemDetailScreen(
     uiState: NewsArticleItemUiState,
+    canNavigateBack: Boolean = false,
+    onNavigateUp: () -> Unit = {},
     @StringRes title: Int = R.string.toolbar_title_default
 ) {
     FinNewsTheme {
@@ -55,8 +58,8 @@ fun NewsArticleItemDetailScreen(
             topBar = {
                 NewsTopAppBar(
                     title = title,
-                  //  canNavigateBack = navController.previousBackStackEntry != null,
-                  //  navigateUp = { navController.navigateUp() }
+                    canNavigateBack = canNavigateBack,
+                    navigateUp = { onNavigateUp() }
                 )
             }
         ) { paddingValues ->

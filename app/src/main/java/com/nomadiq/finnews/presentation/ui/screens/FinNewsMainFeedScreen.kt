@@ -52,6 +52,8 @@ import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
 fun FinNewsMainFeedScreen(
     modifier: Modifier = Modifier,
     onItemClick: (NewsArticleFeedItem) -> Unit = {},
+    onItemBookmarked: (NewsArticleFeedItem) -> Unit = {},
+    onItemShared: (NewsArticleFeedItem) -> Unit = {},
     uiState: NewsArticleFeedUiState = NewsArticleFeedUiState(
         items = listOf(),
     ),
@@ -62,6 +64,8 @@ fun FinNewsMainFeedScreen(
         title = title,
         uiState = uiState,
         onItemClick = onItemClick,
+        onItemBookmarked = onItemClick,
+        onItemShared = onItemClick,
     )
 }
 
@@ -71,6 +75,8 @@ private fun MainFeedScaffoldState(
     title: Int,
     uiState: NewsArticleFeedUiState,
     onItemClick: (NewsArticleFeedItem) -> Unit = {},
+    onItemBookmarked: (NewsArticleFeedItem) -> Unit = {},
+    onItemShared: (NewsArticleFeedItem) -> Unit = {},
 ) {
     FinNewsTheme {
         Scaffold(
@@ -81,7 +87,14 @@ private fun MainFeedScaffoldState(
                 )
             }
         ) { paddingValues ->
-            MainScaffoldContentView(modifier, uiState, paddingValues, onItemClick)
+            MainScaffoldContentView(
+                modifier,
+                uiState,
+                paddingValues,
+                onItemClick,
+                onItemBookmarked,
+                onItemShared
+            )
         }
     }
 }
@@ -94,6 +107,8 @@ private fun MainScaffoldContentView(
     ),
     paddingValues: PaddingValues,
     onItemClick: (NewsArticleFeedItem) -> Unit = {},
+    onItemBookmarked: (NewsArticleFeedItem) -> Unit = {},
+    onItemShared: (NewsArticleFeedItem) -> Unit = {},
 ) {
     Column(
         modifier = modifier
@@ -113,7 +128,9 @@ private fun MainScaffoldContentView(
 @Composable
 private fun NewsArticleFeed(
     items: List<NewsArticleFeedItem> = listOf(),
-    onItemClick: (NewsArticleFeedItem) -> Unit = {}
+    onItemClick: (NewsArticleFeedItem) -> Unit = {},
+    onItemBookmarked: (NewsArticleFeedItem) -> Unit = {},
+    onItemShared: (NewsArticleFeedItem) -> Unit = {},
 ) {
     val state: LazyListState = rememberLazyListState()
 
@@ -132,7 +149,9 @@ private fun NewsArticleFeed(
                     subtitle = item.subtitle,
                     imgUrl = item.imgUrl,
                     item = item,
-                    onItemClick = onItemClick
+                    onItemClick = onItemClick,
+                    onItemBookmarked = onItemBookmarked,
+                    onItemShared = onItemShared,
                 )
             }
         }

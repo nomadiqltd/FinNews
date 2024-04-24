@@ -28,11 +28,11 @@ import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
  *
  */
 
-@Preview(name = "FinNewsToolbarTitle (light)")
-@Preview("FinNewsToolbarTitle (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "NewsToolbarTitle (light)")
+@Preview("NewsToolbarTitle (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-private fun FinNewsToolbarTitle(
+private fun NewsToolbarTitle(
     modifier: Modifier = Modifier,
     @StringRes title: Int = R.string.toolbar_title_default
 ) {
@@ -44,8 +44,8 @@ private fun FinNewsToolbarTitle(
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(name = "FinNewsTopAppBar (light)")
-@Preview("FinNewsTopAppBar (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "NewsTopAppBar (light)")
+@Preview("NewsTopAppBar (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun NewsTopAppBar(
@@ -57,7 +57,7 @@ fun NewsTopAppBar(
     FinNewsTheme {
         CenterAlignedTopAppBar(
             title = {
-                FinNewsToolbarTitle(modifier = modifier, title = title)
+                NewsToolbarTitle(modifier = modifier, title = title)
             },
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                 containerColor = MaterialTheme.colorScheme.surface
