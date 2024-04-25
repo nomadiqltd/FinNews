@@ -1,7 +1,7 @@
 package com.nomadiq.finnews.presentation.ui.screens
 
 import android.content.res.Configuration
-import android.widget.Toast
+import android.text.util.Linkify
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,7 +12,8 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -26,18 +27,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.text.HtmlCompat
 import coil.compose.rememberAsyncImagePainter
+import com.google.android.material.textview.MaterialTextView
 import com.nomadiq.finnews.R
 import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
 import com.nomadiq.finnews.presentation.ui.component.NewsTopAppBar
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
 import com.nomadiq.finnews.presentation.viewmodel.NewsArticleItemUiState
-import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
 
 /**
  * @author - Michael Akakpo
@@ -67,13 +69,18 @@ fun NewsArticleItemDetailScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(paddingValues),
+                    .padding(paddingValues)
+                    .verticalScroll(rememberScrollState()),
                 content = {
+
+                    // Loading State
+                    OnLoadingState(uiState)
+
                     ArticleItemDetailImage(imgUrl = uiState.item.imgUrl)
                     Spacer(modifier = Modifier.padding(8.dp))
                     ArticleItemDetailTitle(title = uiState.item.title)
                     Spacer(modifier = Modifier.padding(8.dp))
-                    ArticleItemDetailBody(title = uiState.item.body)
+                    ArticleItemDetailBody(body = uiState.item.body)
                 }
             )
         }
@@ -96,11 +103,21 @@ fun ArticleItemDetailTitle(modifier: Modifier = Modifier, title: String = "Sky N
 @Preview("ArticleItemDetailBody (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun ArticleItemDetailBody(modifier: Modifier = Modifier, title: String = "Loreum ipsum") {
-    Text(
-        modifier = Modifier.padding(start = 16.dp, end = 0.dp, bottom = 8.dp),
-        style = MaterialTheme.typography.bodyMedium,
-        text = title,
+fun ArticleItemDetailBody(modifier: Modifier = Modifier, body: String = "Loreum ipsum") {
+
+    AndroidView(
+        modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+        factory = {
+            MaterialTextView(it).apply {
+                // links
+                autoLinkMask = Linkify.WEB_URLS
+                linksClickable = true
+                // setting the color to use for highlighting the links
+                setLinkTextColor(Color.Blue.toArgb())
+                setTextColor(Color.LightGray.toArgb())
+            }
+        },
+        update = { it.text = HtmlCompat.fromHtml(body, 0) }
     )
 }
 

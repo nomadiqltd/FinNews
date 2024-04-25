@@ -42,18 +42,17 @@ class NewsArticleFeedViewModel @Inject constructor(
     val uiState: StateFlow<NewsArticleFeedUiState> = _uiState.asStateFlow()
 
     init {
-        displayNewsArticleFeedList()
+        onDisplayNewsArticleFeedList()
     }
 
     // Function to fetch List of [NewsArticleFeedItem] - save success response and update uiState
-    private fun displayNewsArticleFeedList() {
+    private fun onDisplayNewsArticleFeedList() {
         Timber.d("displayNewsArticleFeedList")
         _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             getNewsArticleFeedUseCase.invoke().collect { result ->
                 when (result) {
                     is NewsArticleFeedListResult.Data -> {
-                        delay(4000)
                         Log.d(
                             "displayDogBreedList() ",
                             " SUCCESS ==> ${result.newsArticleFeedList.size} "

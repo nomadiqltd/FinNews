@@ -11,7 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.nomadiq.finnews.presentation.ui.screens.NewsArticleItemDetailScreen
-import com.nomadiq.finnews.presentation.ui.screens.FinNewsMainFeedScreen
+import com.nomadiq.finnews.presentation.ui.screens.NewsMainFeedScreen
 import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedViewModel
 import com.nomadiq.finnews.presentation.viewmodel.NewsArticleItemDetailViewModel
 import com.nomadiq.finnews.presentation.viewmodel.sanitiseURL
@@ -42,7 +42,7 @@ fun FinNewsNavigationGraph(
         ) {
             val viewModel = hiltViewModel<NewsArticleFeedViewModel>()
             val uiState by viewModel.uiState.collectAsState()
-            FinNewsMainFeedScreen(
+            NewsMainFeedScreen(
                 uiState = uiState,
                 onItemClick = { article ->
                     navController.navigateToArticleItemDetailScreen(article.apiUrl)

@@ -2,7 +2,6 @@ package com.nomadiq.finnews.domain.repository
 
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.mapper.NewsArticleItemDetailResult
-import com.nomadiq.finnews.domain.model.DogBreed
 
 /**
  * @author Michael Akakpo

@@ -7,7 +7,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.nomadiq.finnews.presentation.ui.screens.FinNewsMainFeedScreen
+import com.nomadiq.finnews.presentation.ui.screens.NewsMainFeedScreen
 import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
 import kotlinx.coroutines.test.runTest
 
@@ -46,7 +46,7 @@ class NewsArticleFeedListScreenTest {
     fun setup() {
         composeTestRule.setContent {
             navController = TestNavHostController(LocalContext.current)
-            FinNewsMainFeedScreen(
+            NewsMainFeedScreen(
                 onItemClick = {},
                 uiState = uiState,
                 navController = navController,

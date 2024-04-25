@@ -5,7 +5,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nomadiq.finnews.domain.mapper.NewsArticleItemDetailResult
-import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
 import com.nomadiq.finnews.domain.usecase.GetNewsArticleItemDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,8 +21,7 @@ import javax.inject.Inject
  *
  * [NewsArticleItemDetailViewModel]
  *
- * Defines UI State information about the details of the items of the list of [DogBreed].
- * This uiState displays the list of random images retrieved from a particular [DogBreed]
+ * Defines UI State information about the details of the individual news article items [NewsArticleFeedItem]
  *
  */
 
@@ -52,7 +50,7 @@ class NewsArticleItemDetailViewModel @Inject constructor(
                 when (result) {
                     is NewsArticleItemDetailResult.Data -> {
                         Timber.tag("NewsFeedItemDetail ")
-                            .d("%s ", " SUCCESS ==> " + result.item.imgUrl)
+                            .d("%s ", " SUCCESS ==> " + "opening article ${result.item.imgUrl}")
                         Log.d("NewsFeedItemDetail ", " SUCCESS ==> " + result.item.imgUrl)
                         updateData(result)
                     }
@@ -64,13 +62,13 @@ class NewsArticleItemDetailViewModel @Inject constructor(
                         )
                     }
 
-                    is NewsArticleItemDetailResult.NetworkError -> {}
+                    is NewsArticleItemDetailResult.NetworkError -> {
+                    }
                 }
             }
             _uiState.update { currentState -> currentState.copy(isLoading = false) }
         }
     }
-
 
     private fun updateData(result: NewsArticleItemDetailResult.Data) {
         _uiState.update { currentState ->

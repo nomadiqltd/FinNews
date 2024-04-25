@@ -25,19 +25,14 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.invalidateGroupsWithKey
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
-import com.nomadiq.finnews.presentation.ui.theme.FinNewsShapes
 
 
 @Preview(name = "ArticleItemShareCTA (light)")

@@ -27,11 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.nomadiq.finnews.R
 import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
-import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.presentation.ui.component.ArticleFeedItemCard
 import com.nomadiq.finnews.presentation.ui.component.DefaultSnackBarHost
 import com.nomadiq.finnews.presentation.ui.component.NewsTopAppBar
@@ -49,7 +46,7 @@ import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
 @Preview("FinNewsMainFeedScreen (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun FinNewsMainFeedScreen(
+fun NewsMainFeedScreen(
     modifier: Modifier = Modifier,
     onItemClick: (NewsArticleFeedItem) -> Unit = {},
     onItemBookmarked: (NewsArticleFeedItem) -> Unit = {},
