@@ -2,6 +2,7 @@ package com.nomadiq.finnews.presentation.ui.component
 
 import android.content.res.Configuration
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -43,6 +44,7 @@ private fun NewsToolbarTitle(
     )
 }
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(name = "NewsTopAppBar (light)")
 @Preview("NewsTopAppBar (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
@@ -52,6 +54,7 @@ fun NewsTopAppBar(
     modifier: Modifier = Modifier,
     canNavigateBack: Boolean = false,
     navigateUp: () -> Unit = {},
+    onAction: @Composable RowScope.() -> Unit = {},
     @StringRes title: Int = R.string.toolbar_title_default
 ) {
     FinNewsTheme {
@@ -64,6 +67,7 @@ fun NewsTopAppBar(
             ),
             modifier = modifier
                 .fillMaxWidth(),
+            actions = onAction,
             navigationIcon = {
                 if (canNavigateBack) {
                     IconButton(onClick = navigateUp) {

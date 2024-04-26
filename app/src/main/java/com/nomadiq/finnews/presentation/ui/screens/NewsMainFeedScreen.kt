@@ -14,7 +14,11 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -33,7 +37,9 @@ import com.nomadiq.finnews.presentation.ui.component.ArticleFeedItemCard
 import com.nomadiq.finnews.presentation.ui.component.DefaultSnackBarHost
 import com.nomadiq.finnews.presentation.ui.component.NewsTopAppBar
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
+import com.nomadiq.finnews.presentation.viewmodel.ErrorType
 import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
+import com.nomadiq.finnews.presentation.viewmodel.NewsArticleItemUiState
 
 /**
  *  @author Michael Akakpo
@@ -81,6 +87,9 @@ private fun MainFeedScaffoldState(
             topBar = {
                 NewsTopAppBar(
                     title = title,
+                    onAction = {
+                        SearchIconButton(onClick = { /* TODO - Run Search via Viewmodel */ })
+                    },
                 )
             }
         ) { paddingValues ->
@@ -113,6 +122,9 @@ private fun MainScaffoldContentView(
     ) {
         // Loading State
         OnLoadingState(uiState)
+
+        // Error State
+        OnErrorState(uiState)
 
         // Article Item Feed
         NewsArticleFeed(uiState.items, onItemClick, onItemBookmarked, onItemShared)
@@ -168,5 +180,48 @@ fun OnLoadingState(uiState: NewsArticleFeedUiState) {
         ) {
             CircularProgressIndicator()
         }
+    }
+}
+
+
+@Composable
+fun SearchIconButton(onClick: () -> Unit) {
+    IconButton(
+        onClick = onClick,
+        modifier = Modifier.padding(end = 16.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Default.Search,
+            contentDescription = "Search",
+        )
+    }
+}
+
+@Composable
+fun OnErrorState(uiState: NewsArticleFeedUiState) {
+    when (uiState.errorState) {
+        ErrorType.NETWORK_ERROR -> {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Red),
+            ) {
+                /* TODO - display error message */
+            }
+        }
+
+        ErrorType.GENERAL_ERROR -> {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Magenta),
+            ) {
+                /* TODO - Error message */
+            }
+        }
+
+        else -> {}
     }
 }

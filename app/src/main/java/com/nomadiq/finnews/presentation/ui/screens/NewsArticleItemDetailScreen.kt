@@ -14,7 +14,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -39,6 +43,7 @@ import com.nomadiq.finnews.R
 import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
 import com.nomadiq.finnews.presentation.ui.component.NewsTopAppBar
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
+import com.nomadiq.finnews.presentation.viewmodel.ErrorType
 import com.nomadiq.finnews.presentation.viewmodel.NewsArticleItemUiState
 
 /**
@@ -61,7 +66,7 @@ fun NewsArticleItemDetailScreen(
                 NewsTopAppBar(
                     title = title,
                     canNavigateBack = canNavigateBack,
-                    navigateUp = { onNavigateUp() }
+                    navigateUp = { onNavigateUp() },
                 )
             }
         ) { paddingValues ->
