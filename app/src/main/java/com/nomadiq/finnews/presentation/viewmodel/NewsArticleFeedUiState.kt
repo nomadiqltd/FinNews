@@ -11,6 +11,7 @@ import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
 data class NewsArticleFeedUiState(
     val items: List<NewsArticleFeedItem>,
     val isLoading: Boolean = false,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
+    val errorState: ErrorType? = null
 ) {
 }

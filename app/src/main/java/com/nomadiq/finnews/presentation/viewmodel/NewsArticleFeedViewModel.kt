@@ -1,5 +1,6 @@
 package com.nomadiq.finnews.presentation.viewmodel
 
+import android.net.Network
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -53,21 +54,20 @@ class NewsArticleFeedViewModel @Inject constructor(
             getNewsArticleFeedUseCase.invoke().collect { result ->
                 when (result) {
                     is NewsArticleFeedListResult.Data -> {
-                        Log.d(
-                            "displayDogBreedList() ",
-                            " SUCCESS ==> ${result.newsArticleFeedList.size} "
-                        )
                         updateData(result)
                     }
 
                     is NewsArticleFeedListResult.Error -> {
                         Log.d("displayDogBreedList()", " ERROR ==> ${result.error} ")
-                        logDogBreedListResult("Unknown error occurred")
+                        logDogBreedListResult(errorMessage = "Error => ${result.error}")
                     }
 
                     is NewsArticleFeedListResult.NetworkError -> {
                         Log.d("displayDogBreedList()", "NETWORK ERROR ==> Network Error")
-                        logDogBreedListResult("Network error occurred")
+                        logDogBreedListResult(
+                            errorMessage = "Network error occurred",
+                            isNetwork = true
+                        )
                     }
                 }
                 // Stop loading regardless of branch entered
@@ -91,11 +91,11 @@ class NewsArticleFeedViewModel @Inject constructor(
         }
     }
 
-
-    private fun logDogBreedListResult(errorMessage: String) {
+    private fun logDogBreedListResult(errorMessage: String, isNetwork: Boolean = false) {
         _uiState.update {
             it.copy(
-                errorMessage = errorMessage
+                errorMessage = errorMessage,
+                errorState = if (isNetwork) ErrorType.NETWORK_ERROR else ErrorType.GENERAL_ERROR
             )
         }
     }
