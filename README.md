@@ -1,6 +1,6 @@
 # FinNews
 
-This is a Jetpack Compose app using Material 3 design elements. This Android app sample allows the user to display a list of articles, view the details and has visaully decorative actions such as: Search, Favourite and to Bookmark the articles (not implemented).
+FinNews is a Jetpack Compose app using Material 3 design elements. This Android app sample allows is the leading FinTech and finance news app which allows the user to display a list of articles, view the details and has visaully decorative actions such as: Search, Favourite and to Bookmark the articles (not implemented).
 
 # Prerequisites: 
 
