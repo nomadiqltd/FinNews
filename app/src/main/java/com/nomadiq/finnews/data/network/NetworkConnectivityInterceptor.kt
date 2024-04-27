@@ -13,7 +13,6 @@ class NetworkConnectivityInterceptor(
             return chain.proceed(chain.request())
         } else {
             Log.d("NetworkConnectivityInterceptor ", " ::  ==> Poor internet connectivity, check your connection ")
-            // throw NetworkConnectivityException()
             TODO()
         }
     }

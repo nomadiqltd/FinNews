@@ -9,7 +9,7 @@ import javax.inject.Inject
  * @author Michael Akakpo
  *
  * This [NewsArticleFeedRepository] utilises the remote data source (and potentially others)
- * to aggregate requested data from the [Dog Api].
+ * to aggregate requested data from the [Guardian Api].
  *
  */
 class NewsArticleFeedRepositoryImpl @Inject constructor(

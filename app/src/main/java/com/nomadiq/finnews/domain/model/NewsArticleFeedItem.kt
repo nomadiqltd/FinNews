@@ -6,7 +6,7 @@ import com.squareup.moshi.Json
 /**
  * @author Michael Akakpo
  *
- * Dog Breed Entity class for [NewsArticleFeedItem], to be used in domain and presentation layers
+ * Entity class for [NewsArticleFeedItem], to be used in domain and presentation layers
  *
  */
 

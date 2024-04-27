@@ -4,7 +4,6 @@ import com.nomadiq.finnews.data.api.ResultStatus
 import com.nomadiq.finnews.data.model.articledetail.NewsArticleDetailApiResponse
 import com.nomadiq.finnews.domain.mapper.NewsArticleItemDetailResult
 import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
-import timber.log.Timber
 
 
 /**

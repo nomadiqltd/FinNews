@@ -17,7 +17,7 @@ import javax.inject.Inject
  * @author Michael Akakpo
  *
  * This data source fetches data remotely,
- * processes the result and allows retrieval and mapping of the API data from the [dog ceo api]
+ * processes the result and allows retrieval and mapping of the API data from the [api]
  *
  */
 class NewsArticleRemoteDataSourceImpl @Inject constructor(
@@ -38,7 +38,7 @@ class NewsArticleRemoteDataSourceImpl @Inject constructor(
         NewsArticleFeedListMapper()
     }
 
-    private val dogRandomImageListMapper: NewsArticleItemDetailMapper by lazy {
+    private val newsArticleItemDetailMapper: NewsArticleItemDetailMapper by lazy {
         NewsArticleItemDetailMapper()
     }
 
@@ -47,9 +47,9 @@ class NewsArticleRemoteDataSourceImpl @Inject constructor(
         return newsArticleFeedListMapper.map(result)
     }
 
-    override suspend fun fetchNewsArticleItemDetail(breed: String): NewsArticleItemDetailResult {
-        val result = fetchNewsArticleItemDetailResult(apiUrl = breed)
-        return dogRandomImageListMapper.map(result)
+    override suspend fun fetchNewsArticleItemDetail(apiUrl: String): NewsArticleItemDetailResult {
+        val result = fetchNewsArticleItemDetailResult(apiUrl = apiUrl)
+        return newsArticleItemDetailMapper.map(result)
     }
 
     private suspend fun fetchNewsArticleFeedResult(): ResultStatus<NewsArticleFeedApiResponse> {

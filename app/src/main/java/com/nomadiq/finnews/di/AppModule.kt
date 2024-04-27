@@ -2,8 +2,8 @@ package com.nomadiq.finnews.di
 
 import android.content.Context
 import com.nomadiq.finnews.di.NetworkModule.provideConnectivityMonitor
-import com.nomadiq.finnews.di.NetworkModule.provideDogBreedRemoteDataSource
-import com.nomadiq.finnews.di.NetworkModule.provideDogBreedRepository
+import com.nomadiq.finnews.di.NetworkModule.provideNewsArticleRemoteDataSource
+import com.nomadiq.finnews.di.NetworkModule.provideNewsArticleFeedRepository
 import com.nomadiq.finnews.domain.usecase.GetNewsArticleFeedUseCase
 import com.nomadiq.finnews.domain.usecase.GetNewsArticleItemDetailUseCase
 import dagger.Module
@@ -22,11 +22,11 @@ object AppModule {
     fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 
     @Provides
-    fun provideGetDogBreedListUseCase(@ApplicationContext context: Context): GetNewsArticleFeedUseCase =
+    fun provideGetNewsArticleFeedUseCase(@ApplicationContext context: Context): GetNewsArticleFeedUseCase =
         GetNewsArticleFeedUseCase(
             connectivityMonitor = provideConnectivityMonitor(context),
-            newsArticleFeedRepository = provideDogBreedRepository(
-                dogBreedDataSource = provideDogBreedRemoteDataSource(
+            newsArticleFeedRepository = provideNewsArticleFeedRepository(
+                remoteDataSource = provideNewsArticleRemoteDataSource(
                     applicationContext = context,
                     connectivityMonitor = provideConnectivityMonitor(context)
                 )
@@ -34,11 +34,11 @@ object AppModule {
         )
 
     @Provides
-    fun provideGetDogBreedRandomImageUseCase(@ApplicationContext context: Context): GetNewsArticleItemDetailUseCase =
+    fun provideGetNewsArticleItemDetailUseCase(@ApplicationContext context: Context): GetNewsArticleItemDetailUseCase =
         GetNewsArticleItemDetailUseCase(
             connectivityMonitor = provideConnectivityMonitor(context),
-            newsArticleFeedRepository = provideDogBreedRepository(
-                dogBreedDataSource = provideDogBreedRemoteDataSource(
+            newsArticleFeedRepository = provideNewsArticleFeedRepository(
+                remoteDataSource = provideNewsArticleRemoteDataSource(
                     applicationContext = context,
                     connectivityMonitor = provideConnectivityMonitor(context)
                 )

@@ -41,7 +41,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideDogBreedRemoteDataSource(
+    fun provideNewsArticleRemoteDataSource(
         @ApplicationContext applicationContext: Context,
         connectivityMonitor: ConnectivityMonitor,
     ): RemoteDataSource =
@@ -57,6 +57,6 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideDogBreedRepository(dogBreedDataSource: RemoteDataSource): NewsArticleFeedRepository =
-        NewsArticleFeedRepositoryImpl(dogBreedDataSource)
+    fun provideNewsArticleFeedRepository(remoteDataSource: RemoteDataSource): NewsArticleFeedRepository =
+        NewsArticleFeedRepositoryImpl(remoteDataSource)
 }
