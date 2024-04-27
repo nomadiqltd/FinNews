@@ -49,7 +49,6 @@ class NewsArticleFeedListScreenTest {
             NewsMainFeedScreen(
                 onItemClick = {},
                 uiState = uiState,
-                navController = navController,
             )
         }
     }
