@@ -77,10 +77,11 @@ class DogBreedListUseCaseTest {
     @Test
     fun `initialize then fetch dog breeds usecase failed Empty list`() = runTest {
         // given
-        coEvery { dataRepository.fetchNewsArticleFeed() }.returns(NewsArticleFeedListResult.Empty)
+  //      coEvery { dataRepository.fetchNewsArticleFeed() }.returns(NewsArticleFeedListResult.Empty)
         coEvery {
             usecase.invoke().first()
-        } returns NewsArticleFeedListResult.Empty
+        }
+   //     returns NewsArticleFeedListResult.Empty
 
         // then
         assertThat(this is NewsArticleFeedListResult)

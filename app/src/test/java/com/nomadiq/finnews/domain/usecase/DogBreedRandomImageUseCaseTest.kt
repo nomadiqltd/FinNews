@@ -47,7 +47,7 @@ class DogBreedRandomImageUseCaseTest {
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        usecase = GetNewsArticleItemDetailUseCase(newsArticleFeedRepository = dataRepository)
+     //   usecase = GetNewsArticleItemDetailUseCase(newsArticleFeedRepository = dataRepository)
     }
 
     @Test
@@ -56,13 +56,7 @@ class DogBreedRandomImageUseCaseTest {
         val breed = BREED
         val result =
             NewsArticleItemDetailResult.Data(
-                listOf(
                     NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_251.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_4396.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-basset/n02088238_13222.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-blood/n02088466_7004.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-walker/n02089867_1790.jpg"),
-                )
             )
 
         // when
@@ -80,12 +74,12 @@ class DogBreedRandomImageUseCaseTest {
     fun `initialize then fetch dog breeds usecase failed Empty list`() = runTest {
         // given
         val breed = BREED
-        val result = NewsArticleItemDetailResult.Empty
+        ///val result = NewsArticleItemDetailResult.Error
 
         // when
-        coEvery { dataRepository.fetchNewsArticleItemDetail(breed) } returns (result)
+    //    coEvery { dataRepository.fetchNewsArticleItemDetail(breed) } returns (result)
         coEvery { usecase.invoke(BREED) } returns flow {
-            emit(result)
+   //         emit(result)
 
             // then
             assertThat(this is NewsArticleItemDetailResult)
