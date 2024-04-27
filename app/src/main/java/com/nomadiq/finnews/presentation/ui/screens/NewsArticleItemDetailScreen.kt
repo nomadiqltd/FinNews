@@ -12,13 +12,10 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -42,8 +39,10 @@ import com.google.android.material.textview.MaterialTextView
 import com.nomadiq.finnews.R
 import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
 import com.nomadiq.finnews.presentation.ui.component.NewsTopAppBar
+import com.nomadiq.finnews.presentation.ui.component.error.ErrorMessageDisplayView
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
 import com.nomadiq.finnews.presentation.viewmodel.ErrorType
+import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
 import com.nomadiq.finnews.presentation.viewmodel.NewsArticleItemUiState
 
 /**
@@ -80,6 +79,9 @@ fun NewsArticleItemDetailScreen(
 
                     // Loading State
                     OnLoadingState(uiState)
+
+                    // Error State
+                    OnErrorState(uiState)
 
                     ArticleItemDetailImage(imgUrl = uiState.item.imgUrl)
                     Spacer(modifier = Modifier.padding(8.dp))
@@ -157,10 +159,38 @@ fun OnLoadingState(uiState: NewsArticleItemUiState) {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Yellow),
+                .fillMaxSize(),
         ) {
             CircularProgressIndicator()
         }
+    }
+}
+
+@Composable
+fun OnErrorState(uiState: NewsArticleItemUiState) {
+    when (uiState.errorState) {
+        ErrorType.NETWORK_ERROR -> {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .wrapContentSize()
+                    .background(Color.Magenta),
+            ) {
+                ErrorMessageDisplayView(message = uiState.errorMessage.toString())
+            }
+        }
+
+        ErrorType.GENERAL_ERROR -> {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Blue),
+            ) {
+                ErrorMessageDisplayView(message = uiState.errorMessage.toString())
+            }
+        }
+
+        else -> {}
     }
 }

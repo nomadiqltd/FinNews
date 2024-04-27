@@ -10,5 +10,7 @@ import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
  */
 data class NewsArticleItemUiState(
     val item: NewsArticleItemDetail = NewsArticleItemDetail(),
-    val isLoading: Boolean = true
+    val isLoading: Boolean = true,
+    val errorMessage: String? = null,
+    val errorState: ErrorType? = null,
 )

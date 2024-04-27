@@ -49,24 +49,22 @@ class NewsArticleItemDetailViewModel @Inject constructor(
             getNewsArticleItemDetailUseCase.invoke(validateURL(apiUrl)).collect { result ->
                 when (result) {
                     is NewsArticleItemDetailResult.Data -> {
-                        Timber.tag("NewsFeedItemDetail ")
-                            .d("%s ", " SUCCESS ==> " + "opening article ${result.item.imgUrl}")
-                        Log.d("NewsFeedItemDetail ", " SUCCESS ==> " + result.item.imgUrl)
                         updateData(result)
                     }
 
                     is NewsArticleItemDetailResult.Error -> {
-                        Log.d(
-                            "NewsFeedItemDetail ",
-                            " ERROR ==> ${result.error} "
-                        )
+                        logNewsArticleItemDetailResult(errorMessage = "NewsArticleItemDetailResult.Error => ${result.error}")
                     }
 
                     is NewsArticleItemDetailResult.NetworkError -> {
+                        logNewsArticleItemDetailResult(
+                            errorMessage = "Connectivity issues, please check your connection",
+                            isNetwork = true
+                        )
                     }
                 }
+                _uiState.update { currentState -> currentState.copy(isLoading = false) }
             }
-            _uiState.update { currentState -> currentState.copy(isLoading = false) }
         }
     }
 
@@ -78,6 +76,15 @@ class NewsArticleItemDetailViewModel @Inject constructor(
                     imgUrl = result.item.imgUrl,
                     body = result.item.body
                 ),
+            )
+        }
+    }
+
+    private fun logNewsArticleItemDetailResult(errorMessage: String, isNetwork: Boolean = false) {
+        _uiState.update {
+            it.copy(
+                errorMessage = errorMessage,
+                errorState = if (isNetwork) ErrorType.NETWORK_ERROR else ErrorType.GENERAL_ERROR
             )
         }
     }

@@ -12,6 +12,6 @@ data class NewsArticleFeedUiState(
     val items: List<NewsArticleFeedItem>,
     val isLoading: Boolean = false,
     val errorMessage: String? = null,
-    val errorState: ErrorType? = null
+    val errorState: ErrorType? = null,
 ) {
 }

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -35,11 +36,11 @@ import com.nomadiq.finnews.R
 import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
 import com.nomadiq.finnews.presentation.ui.component.ArticleFeedItemCard
 import com.nomadiq.finnews.presentation.ui.component.DefaultSnackBarHost
+import com.nomadiq.finnews.presentation.ui.component.error.ErrorMessageDisplayView
 import com.nomadiq.finnews.presentation.ui.component.NewsTopAppBar
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
 import com.nomadiq.finnews.presentation.viewmodel.ErrorType
 import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
-import com.nomadiq.finnews.presentation.viewmodel.NewsArticleItemUiState
 
 /**
  *  @author Michael Akakpo
@@ -176,7 +177,6 @@ fun OnLoadingState(uiState: NewsArticleFeedUiState) {
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Yellow),
         ) {
             CircularProgressIndicator()
         }
@@ -204,10 +204,10 @@ fun OnErrorState(uiState: NewsArticleFeedUiState) {
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Red),
+                    .wrapContentSize()
+                    .background(Color.Magenta),
             ) {
-                /* TODO - display error message */
+                ErrorMessageDisplayView(message = uiState.errorMessage.toString())
             }
         }
 
@@ -216,9 +216,9 @@ fun OnErrorState(uiState: NewsArticleFeedUiState) {
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.Magenta),
+                    .background(Color.Blue),
             ) {
-                /* TODO - Error message */
+                ErrorMessageDisplayView(message = uiState.errorMessage.toString())
             }
         }
 

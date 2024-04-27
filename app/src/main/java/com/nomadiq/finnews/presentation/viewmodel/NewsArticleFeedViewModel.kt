@@ -1,6 +1,5 @@
 package com.nomadiq.finnews.presentation.viewmodel
 
-import android.net.Network
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +7,6 @@ import com.nomadiq.finnews.domain.usecase.GetNewsArticleFeedUseCase
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -58,14 +56,12 @@ class NewsArticleFeedViewModel @Inject constructor(
                     }
 
                     is NewsArticleFeedListResult.Error -> {
-                        Log.d("displayDogBreedList()", " ERROR ==> ${result.error} ")
-                        logDogBreedListResult(errorMessage = "Error => ${result.error}")
+                        logNewsArticleFeedResult(errorMessage = "NewsArticleFeedListResult.Error => ${result.error}")
                     }
 
                     is NewsArticleFeedListResult.NetworkError -> {
-                        Log.d("displayDogBreedList()", "NETWORK ERROR ==> Network Error")
-                        logDogBreedListResult(
-                            errorMessage = "Network error occurred",
+                        logNewsArticleFeedResult(
+                            errorMessage = "Connectivity issues, please check your connection",
                             isNetwork = true
                         )
                     }
@@ -91,7 +87,7 @@ class NewsArticleFeedViewModel @Inject constructor(
         }
     }
 
-    private fun logDogBreedListResult(errorMessage: String, isNetwork: Boolean = false) {
+    private fun logNewsArticleFeedResult(errorMessage: String, isNetwork: Boolean = false) {
         _uiState.update {
             it.copy(
                 errorMessage = errorMessage,
