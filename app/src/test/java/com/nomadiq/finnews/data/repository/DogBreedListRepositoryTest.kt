@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.mapper.NewsArticleItemDetailResult
-import com.nomadiq.finnews.domain.model.DogBreed
+import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
 import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -52,9 +52,9 @@ class DogBreedListRepositoryTest {
         val result =
             NewsArticleFeedListResult.Data(
                 listOf(
-                    DogBreed("affenpinscher"),
-                    DogBreed("african"),
-                    DogBreed("airedal"),
+                    NewsArticleFeedItem("affenpinscher"),
+                    NewsArticleFeedItem("african"),
+                    NewsArticleFeedItem("airedal"),
                 )
             )
 
@@ -77,20 +77,16 @@ class DogBreedListRepositoryTest {
         val breed = BREED
         val resultListRandomImages =
             NewsArticleItemDetailResult.Data(
-                listOf(
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_251.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_4396.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-basset/n02088238_13222.jpg"),
-                )
+                NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-basset/n02088238_13222.jpg"),
             )
 
         // when
         coEvery {
-            datasource.fetchNewsArticleItemDetail(breed = breed)
+            datasource.fetchNewsArticleItemDetail(breed)
         } returns (resultListRandomImages)
 
         coEvery {
-            dataRepository.fetchNewsArticleItemDetail(breed = breed)
+            dataRepository.fetchNewsArticleItemDetail(breed)
         } returns (resultListRandomImages)
 
         // then

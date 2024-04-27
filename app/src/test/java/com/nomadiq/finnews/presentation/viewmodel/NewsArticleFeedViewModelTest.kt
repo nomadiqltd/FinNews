@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
 import com.nomadiq.finnews.data.repository.FakeNewsArticleFeedRepositoryImpl
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
-import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.domain.usecase.GetNewsArticleFeedUseCase
 import io.kotest.matchers.shouldBe
 import io.mockk.MockKAnnotations
@@ -17,7 +16,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import utils.CoroutineTestRule
-import utils.TestConstants.EMPTY_ERROR
 import utils.TestConstants.UNKNOWN_ERROR
 
 @ExperimentalCoroutinesApi

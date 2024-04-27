@@ -3,7 +3,6 @@ package com.nomadiq.finnews.domain.usecase
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
-import com.nomadiq.finnews.domain.model.DogBreed
 import com.nomadiq.finnews.domain.repository.NewsArticleFeedRepository
 import io.kotest.matchers.shouldBe
 import io.mockk.MockKAnnotations
@@ -51,7 +50,7 @@ class DogBreedListUseCaseTest {
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        usecase = GetNewsArticleFeedUseCase(newsArticleFeedRepository = dataRepository)
+      //  usecase = GetNewsArticleFeedUseCase("")
     }
 
     @Test
@@ -60,12 +59,6 @@ class DogBreedListUseCaseTest {
         val result =
             NewsArticleFeedListResult.Data(
                 listOf(
-                    DogBreed("affenpinscher"),
-                    DogBreed("african"),
-                    DogBreed("airedal"),
-                    DogBreed("akita"),
-                    DogBreed("akita"),
-                    DogBreed("akita"),
                 )
             )
 

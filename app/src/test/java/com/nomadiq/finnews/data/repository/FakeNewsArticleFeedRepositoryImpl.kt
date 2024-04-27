@@ -29,18 +29,7 @@ class FakeNewsArticleFeedRepositoryImpl : NewsArticleFeedRepository {
         // Default result set for list of random Dog images based on a particular breed
         private val resultListRandomImages =
             NewsArticleItemDetailResult.Data(
-                listOf(
                     NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_251.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_4396.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-basset/n02088238_13222.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-blood/n02088466_7004.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-blood/n02088466_7800.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_1541.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_2464.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-ibizan/n02091244_716.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-walker/n02089867_1430.jpg"),
-                    NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-walker/n02089867_1790.jpg"),
-                )
             )
     }
 
