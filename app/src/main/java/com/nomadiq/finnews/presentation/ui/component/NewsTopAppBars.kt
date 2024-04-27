@@ -17,6 +17,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nomadiq.finnews.R
@@ -35,12 +36,15 @@ import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
 @Composable
 private fun NewsToolbarTitle(
     modifier: Modifier = Modifier,
-    @StringRes title: Int = R.string.toolbar_title_default
+    @StringRes defaultTitle: Int = R.string.toolbar_title_default,
+    title: String = ""
 ) {
     Text(
         modifier = Modifier.padding(start = 16.dp, end = 16.dp),
         style = MaterialTheme.typography.titleLarge,
-        text = stringResource(id = title),
+        text = title ?: stringResource(id = defaultTitle),
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
     )
 }
 
@@ -55,7 +59,8 @@ fun NewsTopAppBar(
     canNavigateBack: Boolean = false,
     navigateUp: () -> Unit = {},
     onAction: @Composable RowScope.() -> Unit = {},
-    @StringRes title: Int = R.string.toolbar_title_default
+    @StringRes defaultTitle: Int = R.string.toolbar_title_default,
+    title: String = ""
 ) {
     FinNewsTheme {
         CenterAlignedTopAppBar(
@@ -73,7 +78,7 @@ fun NewsTopAppBar(
                     IconButton(onClick = navigateUp) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(title)
+                            contentDescription = title
                         )
                     }
                 }

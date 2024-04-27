@@ -14,7 +14,7 @@ import com.nomadiq.finnews.presentation.ui.screens.NewsArticleItemDetailScreen
 import com.nomadiq.finnews.presentation.ui.screens.NewsMainFeedScreen
 import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedViewModel
 import com.nomadiq.finnews.presentation.viewmodel.NewsArticleItemDetailViewModel
-import com.nomadiq.finnews.presentation.viewmodel.sanitiseURL
+import com.nomadiq.finnews.presentation.utils.sanitiseURL
 
 /**
  *  @author Michael Akakpo
@@ -48,10 +48,10 @@ fun FinNewsNavigationGraph(
                     navController.navigateToArticleItemDetailScreen(article.apiUrl)
                 },
                 onItemBookmarked = {
-                    // TODO() - Check where is best to call Bookmark function
+                    /* TODO() - call Bookmark function */
                 },
                 onItemShared = {
-                    // TODO() -Check where is best to call Share function
+                    /* TODO() - call Share function */
                 }
             )
         }
@@ -72,9 +72,11 @@ fun FinNewsNavigationGraph(
     }
 }
 
+// Navigate to a specific screen (argument free)
 fun NavHostController.navigateTo(route: String) =
     this.navigate(route) { launchSingleTop = true }
 
+// View Single item / article detail
 private fun NavHostController.navigateToArticleItemDetailScreen(apiUrl: String) {
     this.navigateTo(
         route = "${NewsArticleItemDetailScreen.route}/${sanitiseURL(apiUrl)}"

@@ -1,19 +1,19 @@
 package com.nomadiq.finnews.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nomadiq.finnews.domain.mapper.NewsArticleItemDetailResult
 import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
 import com.nomadiq.finnews.domain.usecase.GetNewsArticleItemDetailUseCase
+import com.nomadiq.finnews.presentation.utils.ErrorType
+import com.nomadiq.finnews.presentation.utils.validateURL
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 /**

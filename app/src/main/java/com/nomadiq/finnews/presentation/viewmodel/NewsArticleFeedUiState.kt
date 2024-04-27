@@ -1,6 +1,7 @@
 package com.nomadiq.finnews.presentation.viewmodel
 
 import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
+import com.nomadiq.finnews.presentation.utils.ErrorType
 
 /**
  *  @author Michael Akakpo

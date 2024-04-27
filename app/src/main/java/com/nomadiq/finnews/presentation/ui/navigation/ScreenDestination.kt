@@ -8,6 +8,7 @@ import androidx.navigation.navArgument
  * @author - Michael Akakpo
  *
  * Predefined set of values that represent all the possible screens destinations in the app nav graph
+ *
  */
 
 
@@ -23,14 +24,14 @@ sealed interface ScreenDestination {
  * Main News Article Feed screen
  */
 data object NewsArticleFeedListScreen : ScreenDestination {
-    override val route = "home_screen"
+    override val route = "home_screen_news_feed"
 }
 
 /**
  * News Article Item Detail screen. View a single article item detail screen through deeplink (either implicit or explicit)
  */
 data object NewsArticleItemDetailScreen : ScreenDestination {
-    override val route = "article"
+    override val route = "article_item"
     private const val ARTICLE_URL = "id"
     val routeWithArgs = "${route}/{${ARTICLE_URL}}"
 

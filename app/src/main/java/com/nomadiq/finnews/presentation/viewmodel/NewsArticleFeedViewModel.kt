@@ -1,11 +1,11 @@
 package com.nomadiq.finnews.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nomadiq.finnews.domain.usecase.GetNewsArticleFeedUseCase
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
+import com.nomadiq.finnews.presentation.utils.ErrorType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -11,4 +11,4 @@ import dagger.hilt.android.HiltAndroidApp
  *
  */
 @HiltAndroidApp
-class DogBreedApplication : Application()
+class FinNewsApplication : Application()

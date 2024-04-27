@@ -1,4 +1,4 @@
-package com.nomadiq.finnews.presentation.viewmodel
+package com.nomadiq.finnews.presentation.utils
 
 /**
  *

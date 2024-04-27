@@ -36,13 +36,11 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.text.HtmlCompat
 import coil.compose.rememberAsyncImagePainter
 import com.google.android.material.textview.MaterialTextView
-import com.nomadiq.finnews.R
 import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
 import com.nomadiq.finnews.presentation.ui.component.NewsTopAppBar
 import com.nomadiq.finnews.presentation.ui.component.error.ErrorMessageDisplayView
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
-import com.nomadiq.finnews.presentation.viewmodel.ErrorType
-import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
+import com.nomadiq.finnews.presentation.utils.ErrorType
 import com.nomadiq.finnews.presentation.viewmodel.NewsArticleItemUiState
 
 /**
@@ -57,13 +55,12 @@ fun NewsArticleItemDetailScreen(
     uiState: NewsArticleItemUiState,
     canNavigateBack: Boolean = false,
     onNavigateUp: () -> Unit = {},
-    @StringRes title: Int = R.string.toolbar_title_default
 ) {
     FinNewsTheme {
         Scaffold(
             topBar = {
                 NewsTopAppBar(
-                    title = title,
+                    title = uiState.item.title,
                     canNavigateBack = canNavigateBack,
                     navigateUp = { onNavigateUp() },
                 )
@@ -98,7 +95,7 @@ fun NewsArticleItemDetailScreen(
 @Preview("ArticleItemTitle (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun ArticleItemDetailTitle(modifier: Modifier = Modifier, title: String = "Sky News") {
+private fun ArticleItemDetailTitle(modifier: Modifier = Modifier, title: String = "Sky News") {
     Text(
         modifier = Modifier.padding(start = 16.dp, end = 0.dp, bottom = 8.dp),
         style = MaterialTheme.typography.titleLarge,
@@ -110,7 +107,7 @@ fun ArticleItemDetailTitle(modifier: Modifier = Modifier, title: String = "Sky N
 @Preview("ArticleItemDetailBody (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun ArticleItemDetailBody(modifier: Modifier = Modifier, body: String = "Loreum ipsum") {
+private fun ArticleItemDetailBody(modifier: Modifier = Modifier, body: String = "Loreum ipsum") {
 
     AndroidView(
         modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
@@ -152,7 +149,7 @@ private fun ArticleItemDetailImage(
 }
 
 @Composable
-fun OnLoadingState(uiState: NewsArticleItemUiState) {
+private fun OnLoadingState(uiState: NewsArticleItemUiState) {
     var loading by rememberSaveable { mutableStateOf(false) }
     loading = uiState.isLoading
     if (loading) {
@@ -167,7 +164,7 @@ fun OnLoadingState(uiState: NewsArticleItemUiState) {
 }
 
 @Composable
-fun OnErrorState(uiState: NewsArticleItemUiState) {
+private fun OnErrorState(uiState: NewsArticleItemUiState) {
     when (uiState.errorState) {
         ErrorType.NETWORK_ERROR -> {
             Box(
