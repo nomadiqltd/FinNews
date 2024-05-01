@@ -19,7 +19,7 @@ Latest App version : **1.0.0**
 <img src="https://github.com/nomadiqltd/FinNews/assets/14942202/dba9814a-1227-4376-a90c-200626b0e948" width="30%" /> |
 <img src="https://github.com/nomadiqltd/FinNews/assets/14942202/83f743c6-42fa-42d8-854a-3a2d408da19a" width="30%" />
 
-## **Running the App:**
+# Running the App
 
 Follow these steps to run the app:
 
@@ -28,15 +28,18 @@ Follow these steps to run the app:
    ```bash
    git clone https://github.com/nomadiqltd/FinNews.git
 
-- On Github, check out the 'main' branch.
-- Request a new Guardian News API key from [here](https://open-platform.theguardian.com/documentation/).
-- Navigate to the **_build.gradle_** file within the **_app_** module (not the build.gradle at the root of the directory).
-- Replace the current Guardian News Api key inside the _buildTypes{}_ closure (within the _build.gradle_ file) with your new Guarduan News Api Key.
-- ```bash
-  val apiKey = "\"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\""
-- Select _Build_ -> _Rebuild Project_ and then select _Run_ after the project successfully builds.
+2. - On Github, check out the 'main' branch.
 
-2. # Architecture
+3. - Request a new Guardian News API key from [here](https://open-platform.theguardian.com/documentation/).
+
+4. - Navigate to the **_build.gradle_** file within the **_app_** module (not the build.gradle at the root of the directory).
+
+- Replace the current Guardian News Api key inside the _buildTypes{}_ closure (within the _build.gradle_ file) with your new Guarduan News Api Key.
+  ```bash
+  val apiKey = "\"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\""
+5. - Select _Build_ -> _Rebuild Project_ and then select _Run_ after the project successfully builds.
+
+# Architecture
 The chosen architecture is MVVM (Model View ViewModel) with a Clean-ish approach. 
 
 The main 3 layers are: 
@@ -97,7 +100,7 @@ Coil
 Coverage can always be improved. Included a small sample of various test types to cover all three layers. Mainly unit, integrated, instrumented tests.
 - @Composables, ViewModels, Usecases, Repositories have automated tests.
 
-3. # **Known Improvements:**
+# **Known Improvements:**
 
 - The toolbar navigation works well with smaller less complex back stack, but in a larger app then this could require a different approach with third parties depending on the use case etc
 - Offline support - use of a snackbar to inform the user there is poor or no internet connectivity.
