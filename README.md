@@ -1,13 +1,13 @@
 # FinNews
 
-FinNews is a Jetpack Compose app using Material 3 design elements. This Android app sample allows is the leading FinTech and finance news app which allows the user to display a list of articles, view the details and has visaully decorative actions such as: Search, Favourite and to Bookmark the articles (not implemented).
+FinNews is a Jetpack Compose app using Material 3 design elements. This Android app sample is the leading FinTech and finance news app which allows the user to display a list of articles, view the details and has visually decorative actions such as: Search, Favourite and Bookmark.
 
 # Prerequisites: 
 
 Before running the app, ensure you have the following installed on your system:
 
-- [Android Studio](https://developer.android.com/studio) - [**Minimum Android SDK Version:** 24 | **Target Android SDK Version:** 34]
-- [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) - [**JDK Version:** 17]
+- [Android Studio](https://developer.android.com/studio) - [Minimum Android SDK Version: **24** | Target Android SDK Version: **34**]
+- [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) - [JDK Version: **17**]
 
 **Build System**
 - Gradle
@@ -29,9 +29,9 @@ Follow these steps to run the app:
    git clone https://github.com/nomadiqltd/FinNews.git
 
 - On Github, check out the 'main' branch.
-- Request an Api key from [here](https://open-platform.theguardian.com/documentation/).
-- Navigate to the **_build.gradle_** file within the **_/app_** module (not the build.gradle at the root of the directory).
-- Replace the current api key inside the _buildTypes{}_ closure (within the _build.gradle_ the file) with the new Api Key from the Guardian News Api.
+- Request a new Guardian News API key from [here](https://open-platform.theguardian.com/documentation/).
+- Navigate to the **_build.gradle_** file within the **_app_** module (not the build.gradle at the root of the directory).
+- Replace the current Guardian News Api key inside the _buildTypes{}_ closure (within the _build.gradle_ file) with your new Guarduan News Api Key.
 - ```bash
   val apiKey = "\"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\""
 - Select _Build_ -> _Rebuild Project_ and then select _Run_ after the project successfully builds.
@@ -100,8 +100,8 @@ Coverage can always be improved. Included a small sample of various test types t
 3. # **Known Improvements:**
 
 - The toolbar navigation works well with smaller less complex back stack, but in a larger app then this could require a different approach with third parties depending on the use case etc
-- Offline support - use of a snackbar to inform userr there is poor or no connectivity.
-- Persist the Articles so the user always has access even when offline.
+- Offline support - use of a snackbar to inform the user there is poor or no internet connectivity.
+- Persist the Articles to local storage so the user always has access even when offline.
 
 # **Out of Scope**
 - Offline mode
