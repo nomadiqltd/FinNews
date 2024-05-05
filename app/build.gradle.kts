@@ -29,7 +29,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            val apiKey = "\"b77f75d9-492b-4d80-bab3-088e00fd5f7b\""
+            val apiKey = "\"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\""
             val baseURL = "https://content.guardianapis.com/"
             buildConfigField("String", "BASE_URL", "\"$baseURL\"")
             buildConfigField("String", "API_KEY", apiKey)
@@ -37,7 +37,7 @@ android {
 
         debug {
             isMinifyEnabled = false
-            val apiKey = "\"b77f75d9-492b-4d80-bab3-088e00fd5f7b\""
+            val apiKey = "\"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\""
             val baseURL = "https://content.guardianapis.com/"
             buildConfigField("String", "BASE_URL", "\"$baseURL\"")
             buildConfigField("String", "API_KEY", apiKey)
@@ -74,7 +74,7 @@ android {
 
 dependencies {
     // Ktx Core Kotlin
-    implementation("androidx.core:core-ktx:1.13.0")
+    implementation("androidx.core:core-ktx:1.13.1")
 
     // Lifecycle components
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
@@ -83,9 +83,9 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.9.0")
 
     // Compose Bom / UI
-    implementation(platform("androidx.compose:compose-bom:2024.04.01"))
-    implementation("androidx.compose.ui:ui-android:1.6.6")
-    implementation("androidx.compose.ui:ui-graphics-android:1.6.6")
+    implementation(platform("androidx.compose:compose-bom:2024.05.00"))
+    implementation("androidx.compose.ui:ui-android:1.6.7")
+    implementation("androidx.compose.ui:ui-graphics-android:1.6.7")
 
     // Image Loading
     implementation("io.coil-kt:coil-compose:2.6.0")
@@ -94,7 +94,7 @@ dependencies {
     // Optional - Integration with ViewModels
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     // Optional - Integration with LiveData
-    implementation("androidx.compose.runtime:runtime-livedata:1.6.6")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 
     // Navigation with Compose
@@ -118,7 +118,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     // Data Mapping Serialisation
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
 
     // Coroutines / Asynchronous operations / Flows
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
@@ -127,7 +127,7 @@ dependencies {
     // Dependency Injection (Hilt)
     implementation("com.google.dagger:hilt-android:2.51")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("com.google.android.material:material:1.12.0")
     kapt("com.google.dagger:hilt-compiler:2.51")
 
     // Hilt - For instrumentation tests
@@ -139,8 +139,8 @@ dependencies {
     kaptTest("com.google.dagger:hilt-compiler:2.51")
 
     // Compose preview
-    implementation("androidx.compose.ui:ui-tooling-preview-android:1.6.6")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.6.6")
+    implementation("androidx.compose.ui:ui-tooling-preview-android:1.6.7")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.6.7")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     // For Coroutines testing
@@ -156,10 +156,6 @@ dependencies {
     testImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
 
-    // For Kotest
-    testImplementation("io.kotest:kotest-assertions-core:5.4.2")
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-
     // Mockito
     testImplementation("org.mockito:mockito-core:5.2.0")
 
@@ -167,11 +163,8 @@ dependencies {
     testImplementation("com.google.truth:truth:1.4.2")
     testImplementation("com.google.truth:truth:1.4.2")
 
-    // Hamcrest Assertions
-    testImplementation("org.hamcrest:hamcrest:2.2")
-
     // For Mockk
-    testImplementation("io.mockk:mockk:1.13.4")
+    testImplementation("io.mockk:mockk:1.13.5")
 
     // Espresso
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -183,7 +176,7 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
 
     // Testing Compose
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.04.01"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.05.00"))
 
     // Timber - Logging
     implementation("com.jakewharton.timber:timber:5.0.1")
