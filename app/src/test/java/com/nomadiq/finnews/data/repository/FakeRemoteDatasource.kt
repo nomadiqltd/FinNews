@@ -35,11 +35,11 @@ class FakeRemoteDataSource : RemoteDataSource {
         return if (generateError) {
             NewsArticleFeedListResult.Error(requestError)
         } else {
-            loadDogBreedListData()
+            loadNewsArticleFeedListData()
         }
     }
 
-    private fun loadDogBreedListData(): NewsArticleFeedListResult {
+    private fun loadNewsArticleFeedListData(): NewsArticleFeedListResult {
         return result
     }
 
