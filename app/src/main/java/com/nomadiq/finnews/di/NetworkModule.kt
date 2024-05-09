@@ -13,6 +13,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
@@ -58,5 +59,5 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideNewsArticleFeedRepository(remoteDataSource: RemoteDataSource): NewsArticleFeedRepository =
-        NewsArticleFeedRepositoryImpl(remoteDataSource)
+        NewsArticleFeedRepositoryImpl(remoteDataSource, Dispatchers.IO)
 }

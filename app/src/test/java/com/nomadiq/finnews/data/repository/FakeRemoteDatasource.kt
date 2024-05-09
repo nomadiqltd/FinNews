@@ -1,49 +1,57 @@
 package com.nomadiq.finnews.data.repository
 
+import androidx.annotation.VisibleForTesting
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.mapper.NewsArticleItemDetailResult
 import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
+import com.nomadiq.finnews.utils.TestConstants
+import com.nomadiq.finnews.utils.listOfArticles
 
 /**
  *  @author Michael Akakpo
  *
- *  Fake Success source implementation to simplify testing other components that depend on it
+ *  Fake Remote data source implementation to simplify testing other components that depend on it
  *
  */
 
 class FakeRemoteDataSource : RemoteDataSource {
+
     companion object {
 
-        var generateError = false
-        private const val requestError = "errorCode = 404, DogBreed list data not found"
+        // Trigger fake error result
+        private var hasErrorTriggered = false
 
-        val result =
-            NewsArticleFeedListResult.Data(
-                listOf(
-
-                )
+        // Default result set for list of articles
+        private val resultListOfArticles =
+            NewsArticleFeedListResult.Success(
+                itemsList = listOfArticles
             )
 
-        // Default result set for list of random Dog images based on a particular breed
-        private val resultListRandomImages =
-            NewsArticleItemDetailResult.Data(
+        // Default result set for opened article detail
+        private val resultArticleDetail =
+            NewsArticleItemDetailResult.Success(
                 NewsArticleItemDetail()
             )
     }
 
     override suspend fun fetchNewsArticleFeed(): NewsArticleFeedListResult {
-        return if (generateError) {
-            NewsArticleFeedListResult.Error(requestError)
+        return if (hasErrorTriggered) {
+            NewsArticleFeedListResult.Error(TestConstants.UNKNOWN_ERROR)
         } else {
             loadNewsArticleFeedListData()
         }
     }
 
     private fun loadNewsArticleFeedListData(): NewsArticleFeedListResult {
-        return result
+        return resultListOfArticles
     }
 
-    override suspend fun fetchNewsArticleItemDetail(breed: String): NewsArticleItemDetailResult {
-        return resultListRandomImages
+    override suspend fun fetchNewsArticleItemDetail(apiUrl: String): NewsArticleItemDetailResult {
+        return resultArticleDetail
+    }
+
+    @VisibleForTesting
+    internal fun onErrorTriggered(value: Boolean) {
+        hasErrorTriggered = value
     }
 }

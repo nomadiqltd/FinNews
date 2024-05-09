@@ -5,8 +5,8 @@ import com.nomadiq.finnews.data.api.ApiService
 import com.nomadiq.finnews.data.mapper.NewsArticleFeedListMapper
 import com.nomadiq.finnews.data.mapper.NewsArticleItemDetailMapper
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
-import com.nomadiq.finnews.data.api.ResultStatus
-import com.nomadiq.finnews.data.api.buildResultStatusFrom
+import com.nomadiq.finnews.data.api.NetworkResult
+import com.nomadiq.finnews.data.api.buildNetworkResult
 import com.nomadiq.finnews.data.model.articledetail.NewsArticleDetailApiResponse
 import com.nomadiq.finnews.data.model.article.NewsArticleFeedApiResponse
 import com.nomadiq.finnews.data.network.connectivity.ConnectivityMonitor
@@ -52,13 +52,13 @@ class NewsArticleRemoteDataSourceImpl @Inject constructor(
         return newsArticleItemDetailMapper.map(result)
     }
 
-    private suspend fun fetchNewsArticleFeedResult(): ResultStatus<NewsArticleFeedApiResponse> {
+    private suspend fun fetchNewsArticleFeedResult(): NetworkResult<NewsArticleFeedApiResponse> {
         val response = apiService.fetchNewsArticleFeed()
-        return buildResultStatusFrom(response)
+        return buildNetworkResult(response)
     }
 
-    private suspend fun fetchNewsArticleItemDetailResult(apiUrl: String): ResultStatus<NewsArticleDetailApiResponse> {
+    private suspend fun fetchNewsArticleItemDetailResult(apiUrl: String): NetworkResult<NewsArticleDetailApiResponse> {
         val response = apiService.fetchNewsArticleItemDetail(apiUrl = apiUrl)
-        return buildResultStatusFrom(response)
+        return buildNetworkResult(response)
     }
 }
