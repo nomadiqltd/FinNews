@@ -162,7 +162,7 @@ class NewsArticleRepositoryTest {
     @Test
     fun `open news article item detail network error`() = runTest(testDispatcher) {
         //  Given
-        val expectedResult = NewsArticleItemDetailResult.Error(NETWORK_ERROR_MESSAGE)
+        val expectedResult = NewsArticleItemDetailResult.NetworkError(NETWORK_ERROR_MESSAGE)
 
         coEvery { datasource.fetchNewsArticleItemDetail(API_URL) } returns expectedResult
 
