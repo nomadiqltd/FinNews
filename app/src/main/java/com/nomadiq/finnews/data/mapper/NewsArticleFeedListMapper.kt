@@ -1,6 +1,6 @@
 package com.nomadiq.finnews.data.mapper
 
-import com.nomadiq.finnews.data.api.ResultStatus
+import com.nomadiq.finnews.data.api.NetworkResult
 import com.nomadiq.finnews.data.model.article.NewsArticleFeedApiResponse
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
@@ -9,24 +9,24 @@ import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
 /**
  * @author Michael Akakpo
  *
- * This Mapper converts the initial [ResultStatus] from the API request into a lightweight domain friendly [NewsArticleFeedListResult]
+ * This Mapper converts the initial [NetworkResult] from the API request into a lightweight domain friendly [NewsArticleFeedListResult]
  * which in turn will be used within the ViewModel to allow a prefixed set of outcomes from the result.
  *
  */
 
 class NewsArticleFeedListMapper :
-    Mapper<ResultStatus<NewsArticleFeedApiResponse>, NewsArticleFeedListResult> {
+    Mapper<NetworkResult<NewsArticleFeedApiResponse>, NewsArticleFeedListResult> {
 
-    override fun map(value: ResultStatus<NewsArticleFeedApiResponse>): NewsArticleFeedListResult {
+    override fun map(value: NetworkResult<NewsArticleFeedApiResponse>): NewsArticleFeedListResult {
         return when (value) {
-            is ResultStatus.Success -> NewsArticleFeedListResult.Data(
+            is NetworkResult.Success -> NewsArticleFeedListResult.Success(
                 createDataFromResponseResult(
                     value.result
                 )
             )
 
-            is ResultStatus.Error -> NewsArticleFeedListResult.Error(value.error)
-            is ResultStatus.NetworkError -> NewsArticleFeedListResult.NetworkError
+            is NetworkResult.Error -> NewsArticleFeedListResult.Error(value.error)
+            is NetworkResult.NetworkError -> NewsArticleFeedListResult.NetworkError()
         }
     }
 

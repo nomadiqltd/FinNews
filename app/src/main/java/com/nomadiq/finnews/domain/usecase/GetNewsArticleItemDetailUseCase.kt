@@ -26,7 +26,7 @@ class GetNewsArticleItemDetailUseCase @Inject constructor(
                 newsArticleFeedRepository.fetchNewsArticleItemDetail(apiUrl = apiUrl)
             flow { emit(getNewsArticleItemDetailResult) }
         } else {
-            flowOf(NewsArticleItemDetailResult.NetworkError)
+            flowOf(NewsArticleItemDetailResult.NetworkError())
         }
     }
 }

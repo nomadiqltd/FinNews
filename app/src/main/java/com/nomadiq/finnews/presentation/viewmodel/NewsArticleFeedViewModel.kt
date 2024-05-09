@@ -30,6 +30,9 @@ class NewsArticleFeedViewModel @Inject constructor(
     private val getNewsArticleFeedUseCase: GetNewsArticleFeedUseCase
 ) :
     ViewModel() {
+    companion object {
+        const val NETWORK_ERROR_MESSAGE = "Connectivity issues, please check your connection"
+    }
 
     // Define UIState variable for [NewsArticleFeedItem] data to map to the equivalent UI Screens and components
     private val _uiState =
@@ -51,7 +54,7 @@ class NewsArticleFeedViewModel @Inject constructor(
         viewModelScope.launch {
             getNewsArticleFeedUseCase.invoke().collect { result ->
                 when (result) {
-                    is NewsArticleFeedListResult.Data -> {
+                    is NewsArticleFeedListResult.Success -> {
                         updateData(result)
                     }
 
@@ -61,7 +64,7 @@ class NewsArticleFeedViewModel @Inject constructor(
 
                     is NewsArticleFeedListResult.NetworkError -> {
                         logNewsArticleFeedResult(
-                            errorMessage = "Connectivity issues, please check your connection",
+                            errorMessage = NETWORK_ERROR_MESSAGE,
                             isNetwork = true
                         )
                     }
@@ -72,10 +75,10 @@ class NewsArticleFeedViewModel @Inject constructor(
         }
     }
 
-    private fun updateData(result: NewsArticleFeedListResult.Data) {
+    private fun updateData(result: NewsArticleFeedListResult.Success) {
         _uiState.update { currentState ->
             currentState.copy(
-                items = result.newsArticleFeedList.map {
+                items = result.itemsList.map {
                     NewsArticleFeedItem(
                         title = it.title,
                         subtitle = it.subtitle,

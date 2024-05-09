@@ -48,7 +48,7 @@ class NewsArticleItemDetailViewModel @Inject constructor(
         viewModelScope.launch {
             getNewsArticleItemDetailUseCase.invoke(validateURL(apiUrl)).collect { result ->
                 when (result) {
-                    is NewsArticleItemDetailResult.Data -> {
+                    is NewsArticleItemDetailResult.Success -> {
                         updateData(result)
                     }
 
@@ -68,7 +68,7 @@ class NewsArticleItemDetailViewModel @Inject constructor(
         }
     }
 
-    private fun updateData(result: NewsArticleItemDetailResult.Data) {
+    private fun updateData(result: NewsArticleItemDetailResult.Success) {
         _uiState.update { currentState ->
             currentState.copy(
                 item = NewsArticleItemDetail(

@@ -11,13 +11,13 @@ import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
  **/
 
 sealed class NewsArticleFeedListResult {
-    data class Data(
-        val newsArticleFeedList: List<NewsArticleFeedItem>
+    data class Success(
+        val itemsList: List<NewsArticleFeedItem>
     ) : NewsArticleFeedListResult()
 
     data class Error(
         val error: String
     ) : NewsArticleFeedListResult()
 
-    data object NetworkError : NewsArticleFeedListResult()
+    data class NetworkError(val message: String = "") : NewsArticleFeedListResult()
 }

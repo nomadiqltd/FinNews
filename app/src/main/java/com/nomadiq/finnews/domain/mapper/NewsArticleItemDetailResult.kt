@@ -11,7 +11,7 @@ import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
  **/
 
 sealed class NewsArticleItemDetailResult {
-    data class Data(
+    data class Success(
         val item: NewsArticleItemDetail
     ) : NewsArticleItemDetailResult()
 
@@ -19,5 +19,5 @@ sealed class NewsArticleItemDetailResult {
         val error: String
     ) : NewsArticleItemDetailResult()
 
-    data object NetworkError : NewsArticleItemDetailResult()
+    data class NetworkError(val message: String = "") : NewsArticleItemDetailResult()
 }

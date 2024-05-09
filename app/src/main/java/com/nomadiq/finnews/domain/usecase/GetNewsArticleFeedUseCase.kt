@@ -26,7 +26,7 @@ class GetNewsArticleFeedUseCase @Inject constructor(
                 emit(newsArticleFeedListResult)
             }
         } else {
-            flowOf(NewsArticleFeedListResult.NetworkError)
+            flowOf(NewsArticleFeedListResult.NetworkError())
         }
     }
 }

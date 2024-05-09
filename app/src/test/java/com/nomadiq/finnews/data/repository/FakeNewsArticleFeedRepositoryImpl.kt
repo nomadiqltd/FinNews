@@ -22,18 +22,18 @@ class FakeNewsArticleFeedRepositoryImpl : NewsArticleFeedRepository {
 
         // Default result set for list of Dogs
         private val newsArticleFeedListResult =
-            NewsArticleFeedListResult.Data(
+            NewsArticleFeedListResult.Success(
                 listOf(
                     NewsArticleFeedItem("Article 1", "16th Apr, 2024 - 4 min read", "ghg", ""),
-                    NewsArticleFeedItem("Article 2", "16th Apr, 2024 - 4 min read", "", ""),
-                    NewsArticleFeedItem("Article 3", "16th Apr, 2024 - 4 min read", "", ""),
-                    NewsArticleFeedItem("Article 4", "16th Apr, 2024 - 4 min read", "", "")
+                    NewsArticleFeedItem("Article 2", "17th Apr, 2024 - 4 min read", "", ""),
+                    NewsArticleFeedItem("Article 3", "18th Apr, 2024 - 4 min read", "", ""),
+                    NewsArticleFeedItem("Article 4", "19th Apr, 2024 - 4 min read", "", "")
                 )
             )
 
         // Default result set for list of random Dog images based on a particular breed
         private val newsArticleItemDetailResult =
-            NewsArticleItemDetailResult.Data(
+            NewsArticleItemDetailResult.Success(
                 NewsArticleItemDetail("https://images.dog.ceo/breeds/hound-afghan/n02088094_251.jpg"),
             )
     }
@@ -50,7 +50,7 @@ class FakeNewsArticleFeedRepositoryImpl : NewsArticleFeedRepository {
         return newsArticleFeedListResult
     }
 
-    override suspend fun fetchNewsArticleItemDetail(breed: String): NewsArticleItemDetailResult {
+    override suspend fun fetchNewsArticleItemDetail(apiUrl: String): NewsArticleItemDetailResult {
         return newsArticleItemDetailResult
     }
 }
