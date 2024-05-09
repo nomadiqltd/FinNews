@@ -5,6 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.mapper.NewsArticleItemDetailResult
+import com.nomadiq.finnews.utils.CoroutineTestRule
 import com.nomadiq.finnews.utils.TestConstants.API_URL
 import com.nomadiq.finnews.utils.TestConstants.BODY
 import com.nomadiq.finnews.utils.TestConstants.IMG_URL
@@ -27,7 +28,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import utils.CoroutineTestRule
 
 /**
  *  @author Michael Akakpo

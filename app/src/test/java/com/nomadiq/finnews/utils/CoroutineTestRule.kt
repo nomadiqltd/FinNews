@@ -1,4 +1,4 @@
-package utils
+package com.nomadiq.finnews.utils
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
