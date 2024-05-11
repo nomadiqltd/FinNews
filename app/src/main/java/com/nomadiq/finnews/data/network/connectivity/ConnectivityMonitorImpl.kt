@@ -4,6 +4,13 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 
+/**
+ *
+ * @author - Michael Akakpo
+ *
+ * Check connectivity manager for internet connectivity
+ *
+ * */
 class ConnectivityMonitorImpl(private val context: Context) : ConnectivityMonitor {
     override fun isConnected(): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager

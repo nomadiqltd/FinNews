@@ -1,10 +1,17 @@
 package com.nomadiq.finnews.data.network
 
-import android.util.Log
 import com.nomadiq.finnews.data.network.connectivity.ConnectivityMonitor
 import okhttp3.Interceptor
 import okhttp3.Response
+import timber.log.Timber
 
+/**
+ *
+ * @author - Michael Akakpo
+ *
+ * Interceptor used to log and check for connectivity issues
+ *
+ * */
 class NetworkConnectivityInterceptor(
     private val connectivityMonitor: ConnectivityMonitor
 ) : Interceptor {
@@ -12,8 +19,9 @@ class NetworkConnectivityInterceptor(
         if (connectivityMonitor.isConnected()) {
             return chain.proceed(chain.request())
         } else {
-            Log.d("NetworkConnectivityInterceptor ", " ::  ==> Poor internet connectivity, check your connection ")
-            TODO()
+            Timber.tag("NetworkConnectivityInterceptor ")
+                .d(" ::  ==> Poor internet connectivity, check your connection ")
         }
+        TODO("Provide the return value")
     }
 }

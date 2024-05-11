@@ -72,10 +72,9 @@ class NewsArticleRepositoryTest {
 
         // When
         val result = repository.fetchNewsArticleFeed()
-
-        // Then
         coVerify { datasource.fetchNewsArticleFeed() }
 
+        // Then
         assertThat(result).isEqualTo(expectedResult)
         assertThat(expectedResult.itemsList.size).isEqualTo(2)
         assertThat(expectedResult.itemsList.first().title).isEqualTo(TITLE)
