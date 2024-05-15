@@ -9,6 +9,7 @@ import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.repository.NewsArticleFeedRepository
 import com.nomadiq.finnews.utils.CoroutineTestRule
 import com.nomadiq.finnews.utils.TestConstants
+import com.nomadiq.finnews.utils.TestConstants.NETWORK_ERROR_MESSAGE
 import com.nomadiq.finnews.utils.TestConstants.UNKNOWN_ERROR
 import com.nomadiq.finnews.utils.listOfArticles
 import io.mockk.MockKAnnotations
@@ -99,7 +100,7 @@ class GetNewsArticleFeedUseCaseTest {
     fun `initialize then fetch news articles usecase failed network Error`() = runTest(testDispatcher) {
         //  Given
         val expectedResult = NewsArticleFeedListResult.NetworkError(
-            TestConstants.NETWORK_ERROR_MESSAGE
+            NETWORK_ERROR_MESSAGE
         )
         coEvery { repository.fetchNewsArticleFeed() }.returns(expectedResult)
 

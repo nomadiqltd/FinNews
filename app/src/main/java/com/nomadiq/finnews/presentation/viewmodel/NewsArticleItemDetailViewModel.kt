@@ -1,5 +1,6 @@
 package com.nomadiq.finnews.presentation.viewmodel
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -39,11 +40,12 @@ class NewsArticleItemDetailViewModel @Inject constructor(
         checkNotNull(savedStateHandle.getStateFlow(key = "id", initialValue = "")).value
 
     init {
-        displayNewsArticleItemDetail(apiUrl)
+        onDisplayNewsArticleItemDetail(apiUrl)
     }
 
     // Function to fetch List of [NewsArticleItemDetail] - save success response and update uiState
-    private fun displayNewsArticleItemDetail(apiUrl: String) {
+    @VisibleForTesting
+    fun onDisplayNewsArticleItemDetail(apiUrl: String): StateFlow<NewsArticleItemUiState> {
         _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             getNewsArticleItemDetailUseCase.invoke(validateURL(apiUrl)).collect { result ->
@@ -53,7 +55,7 @@ class NewsArticleItemDetailViewModel @Inject constructor(
                     }
 
                     is NewsArticleItemDetailResult.Error -> {
-                        logNewsArticleItemDetailResult(errorMessage = "NewsArticleItemDetailResult.Error => ${result.error}")
+                        logNewsArticleItemDetailResult(errorMessage = result.error)
                     }
 
                     is NewsArticleItemDetailResult.NetworkError -> {
@@ -66,6 +68,7 @@ class NewsArticleItemDetailViewModel @Inject constructor(
                 _uiState.update { currentState -> currentState.copy(isLoading = false) }
             }
         }
+        return _uiState.asStateFlow()
     }
 
     private fun updateData(result: NewsArticleItemDetailResult.Success) {
@@ -74,15 +77,16 @@ class NewsArticleItemDetailViewModel @Inject constructor(
                 item = NewsArticleItemDetail(
                     title = result.item.title,
                     imgUrl = result.item.imgUrl,
-                    body = result.item.body
+                    body = result.item.body,
+                    date = result.item.date,
                 ),
             )
         }
     }
 
     private fun logNewsArticleItemDetailResult(errorMessage: String, isNetwork: Boolean = false) {
-        _uiState.update {
-            it.copy(
+        _uiState.update { currentState ->
+            currentState.copy(
                 errorMessage = errorMessage,
                 errorState = if (isNetwork) ErrorType.NETWORK_ERROR else ErrorType.GENERAL_ERROR
             )

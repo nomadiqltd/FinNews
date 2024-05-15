@@ -1,5 +1,6 @@
 package com.nomadiq.finnews.presentation.viewmodel
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nomadiq.finnews.domain.usecase.GetNewsArticleFeedUseCase
@@ -47,8 +48,9 @@ class NewsArticleFeedViewModel @Inject constructor(
         onDisplayNewsArticleFeedList()
     }
 
-    // Function to fetch List of [NewsArticleFeedItem] - save success response and update uiState
-    private fun onDisplayNewsArticleFeedList() {
+    // Function to fetch List of [NewsArticleFeedItem] - handle response and update uiState accordingly
+    @VisibleForTesting
+    fun onDisplayNewsArticleFeedList() : StateFlow<NewsArticleFeedUiState> {
         Timber.d("displayNewsArticleFeedList")
         _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
@@ -59,7 +61,7 @@ class NewsArticleFeedViewModel @Inject constructor(
                     }
 
                     is NewsArticleFeedListResult.Error -> {
-                        logNewsArticleFeedResult(errorMessage = "NewsArticleFeedListResult.Error => ${result.error}")
+                        logNewsArticleFeedResult(errorMessage = result.error)
                     }
 
                     is NewsArticleFeedListResult.NetworkError -> {
@@ -73,6 +75,7 @@ class NewsArticleFeedViewModel @Inject constructor(
                 _uiState.update { it.copy(isLoading = false) }
             }
         }
+        return _uiState.asStateFlow()
     }
 
     private fun updateData(result: NewsArticleFeedListResult.Success) {

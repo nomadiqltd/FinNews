@@ -118,7 +118,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     // Data Mapping Serialisation
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
     // Coroutines / Asynchronous operations / Flows
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
@@ -128,6 +128,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.51")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     implementation("com.google.android.material:material:1.12.0")
+    implementation("androidx.test.ext:junit-ktx:1.1.5")
     kapt("com.google.dagger:hilt-compiler:2.51")
 
     // Hilt - For instrumentation tests
@@ -169,6 +170,9 @@ dependencies {
 
     // Junit Testing
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+
+    // Robolectric
+    implementation("org.robolectric:robolectric:4.11.1")
 
     // Testing Compose
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.05.00"))
