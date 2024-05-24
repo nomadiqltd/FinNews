@@ -156,7 +156,6 @@ private fun NewsArticleFeed(
                 ArticleFeedItemCard(
                     title = item.title,
                     subtitle = displaySimpleTimeStamp(item.subtitle),
-                 //   subtitle = item.subtitle,
                     imgUrl = item.imgUrl,
                     item = item,
                     onItemClick = onItemClick,
