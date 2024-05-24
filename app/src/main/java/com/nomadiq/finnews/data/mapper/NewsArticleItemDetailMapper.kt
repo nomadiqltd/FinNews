@@ -25,6 +25,7 @@ class NewsArticleItemDetailMapper :
                     value.result
                 )
             )
+
             is NetworkResult.Error -> NewsArticleItemDetailResult.Error(value.error)
             is NetworkResult.NetworkError -> NewsArticleItemDetailResult.NetworkError()
         }

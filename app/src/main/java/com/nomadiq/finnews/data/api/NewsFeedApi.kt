@@ -14,8 +14,8 @@ import retrofit2.http.Url
  *
  */
 interface NewsFeedApi {
-    @GET()
-    suspend fun fetchNewsArticleItemDetail(@Url() apiUrl: String): Response<NewsArticleDetailApiResponse>
+    @GET
+    suspend fun fetchNewsArticleItemDetail(@Url apiUrl: String): Response<NewsArticleDetailApiResponse>
 
     @GET("search?show-fields=headline,thumbnail&page-size=25&api-key=$API_KEY&q=finance")
     suspend fun fetchNewsArticleFeed(): Response<NewsArticleFeedApiResponse>

@@ -29,7 +29,7 @@ class ApiClient(
     /**
      *  @logger - Debugging and logging request information
      *  @client - Call factory for Http calls through Retrofit
-     *  @Moshi - The binding between JSON Responses and their respective object counterparts
+     *  @Moshi - Maps the incoming JSON Responses and to their respective response data objects
      *  @Retrofit - Make Http Calls to Guardian News Api
      *
      * */
@@ -37,13 +37,11 @@ class ApiClient(
     private val logger =
         HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
 
-    private val client = OkHttpClient.Builder()
-        .addInterceptor(NetworkConnectivityInterceptor(connectivityMonitor))
-        .build()
+    private val client =
+        OkHttpClient.Builder()
+            .apply { addInterceptor(NetworkConnectivityInterceptor(connectivityMonitor)) }.build()
 
-    private val moshi: Moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
+    private val moshi: Moshi = Moshi.Builder().apply { add(KotlinJsonAdapterFactory()) }.build()
 
     // OkHttp Builder
     private val clientBuilder: OkHttpClient.Builder by lazy {
@@ -52,24 +50,25 @@ class ApiClient(
 
     // Back up Client Builder for testing
     private val defaultClientBuilder: OkHttpClient.Builder by lazy {
-        OkHttpClient()
-            .newBuilder()
-            .addInterceptor(logger)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(NetworkConnectivityInterceptor(connectivityMonitor))
+        OkHttpClient().newBuilder().apply {
+            addInterceptor(logger)
+            readTimeout(30, TimeUnit.SECONDS)
+            writeTimeout(30, TimeUnit.SECONDS)
+            addInterceptor(NetworkConnectivityInterceptor(connectivityMonitor))
+        }
     }
 
     // Retrofit Builder
     private val retrofitBuilder: Retrofit.Builder by lazy {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .client(client)
+        Retrofit.Builder().apply {
+            baseUrl(BASE_URL)
+            addConverterFactory(MoshiConverterFactory.create(moshi))
+            client(client)
+        }
     }
 
-    fun <S> createService(serviceClass: Class<S>): S {
-        val usedCallFactory = this.callFactory ?: clientBuilder.build()
-        return retrofitBuilder.callFactory(usedCallFactory).build().create(serviceClass)
+    fun <Service> createServiceFor(service: Class<Service>): Service {
+        val callFactory = this.callFactory ?: clientBuilder.build()
+        return retrofitBuilder.callFactory(callFactory).build().create(service)
     }
 }

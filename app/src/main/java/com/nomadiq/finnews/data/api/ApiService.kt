@@ -23,13 +23,11 @@ class ApiService(
 
     private val apiClient = ApiClient(
         connectivityMonitor = connectivityMonitor,
-    ).apply {
-        // logger = { it -> Timber.d(it) }
-    }
+    )
 
     // News Feed API
     private val newsFeedApi: NewsFeedApi by lazy {
-        apiClient.createService(NewsFeedApi::class.java)
+        apiClient.createServiceFor(NewsFeedApi::class.java)
     }
 
     companion object {
@@ -49,11 +47,9 @@ class ApiService(
         }
     }
 
-    suspend fun fetchNewsArticleFeed(): Response<NewsArticleFeedApiResponse> {
-        return newsFeedApi.fetchNewsArticleFeed()
-    }
+    suspend fun fetchNewsArticleFeed(): Response<NewsArticleFeedApiResponse> =
+        newsFeedApi.fetchNewsArticleFeed()
 
-    suspend fun fetchNewsArticleItemDetail(apiUrl: String): Response<NewsArticleDetailApiResponse> {
-        return newsFeedApi.fetchNewsArticleItemDetail(apiUrl = "$apiUrl?api-key=$API_KEY&show-fields=body,headline,thumbnail")
-    }
+    suspend fun fetchNewsArticleItemDetail(apiUrl: String): Response<NewsArticleDetailApiResponse> =
+        newsFeedApi.fetchNewsArticleItemDetail(apiUrl = "$apiUrl?api-key=$API_KEY&show-fields=body,headline,thumbnail")
 }
