@@ -60,16 +60,16 @@ Below is a brief summary of the main dependencies below:
 
 # **Jetpack libraries**
 Compose
-- Declarative UI with composable functions as opposed to old school XML layouts
+- Declarative UI with composable functions as opposed to the older Android View system (old school XML layouts)
   
 Arch Core
 - Helper for other arch dependencies, including JUnit test rules
 
 Hilt
-- Dependency injection to allow the different components to best utlisie their dependencies
+- Dependency injection library to allow the various app components to best utlisie their dependencies and improve testability
 
 Navigation
-- Default navigation library
+- Default navigation library for Compose
 
 Kotlinx Coroutines
 - Asynchronous programming to obtain data from the network and leverage concurrency concepts for a more performant app
@@ -101,11 +101,9 @@ Coverage can always be improved. Included a small sample of various test types t
 - @Composables, ViewModels, Usecases, Repositories have automated tests.
 
 # **Known Improvements:**
-
-- The toolbar navigation works well with smaller less complex back stack, but in a larger app then this could require a different approach with third parties depending on the use case etc
-- Offline support - use of a snackbar to inform the user there is poor or no internet connectivity.
-- Persist the Articles to local storage so the user always has access even when offline.
+- Offline support - use of a snackbar to inform the user there is poor or no internet connectivity. Currently just a basic message.
 
 # **Out of Scope**
 - Offline mode
 - Minor testing in obfuscated mode / Proguard mode only
+- Persist the Articles to local storage so the user always has access even when offline
