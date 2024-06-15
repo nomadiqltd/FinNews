@@ -34,7 +34,8 @@ Follow these steps to run the app:
 
 4. - Navigate to the **_build.gradle_** file within the **_app_** module (not the build.gradle at the root of the directory).
 
-- Replace the current Guardian News Api key inside the _buildTypes{}_ closure (within the _build.gradle_ file) with your new Guarduan News Api Key.
+- Replace the current Guardian News Api key inside the _buildTypes{}_ closure (within the _build.gradle_ file) with your new Guardian News Api Key.
+- **Note**: If you do not replace the API Key, you may be presented with a blue screen containing a error message similar to: "errorCode : 401 ==> ".
   ```bash
   val apiKey = "\"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\""
 5. - Select _Build_ -> _Rebuild Project_ and then select _Run_ after the project successfully builds.
