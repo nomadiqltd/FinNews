@@ -77,25 +77,25 @@ dependencies {
     implementation("androidx.core:core-ktx:1.13.1")
 
     // Lifecycle components
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.2")
 
     // Activity for ComponentSelection UI
     implementation("androidx.activity:activity-compose:1.9.0")
 
     // Compose Bom / UI
-    implementation(platform("androidx.compose:compose-bom:2024.05.00"))
-    implementation("androidx.compose.ui:ui-android:1.6.7")
-    implementation("androidx.compose.ui:ui-graphics-android:1.6.7")
+    implementation(platform("androidx.compose:compose-bom:2024.06.00"))
+    implementation("androidx.compose.ui:ui-android:1.6.8")
+    implementation("androidx.compose.ui:ui-graphics-android:1.6.8")
 
     // Image Loading
     implementation("io.coil-kt:coil-compose:2.6.0")
     // Material 3 - theming
     implementation("androidx.compose.material3:material3:1.2.1")
     // Optional - Integration with ViewModels
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.2")
     // Optional - Integration with LiveData
-    implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.1")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.8")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.2")
 
     // Navigation with Compose
     implementation("androidx.navigation:navigation-compose:2.7.7")
@@ -140,8 +140,8 @@ dependencies {
     kaptTest("com.google.dagger:hilt-compiler:2.51.1")
 
     // Compose preview
-    implementation("androidx.compose.ui:ui-tooling-preview-android:1.6.7")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.6.7")
+    implementation("androidx.compose.ui:ui-tooling-preview-android:1.6.8")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.6.8")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     // For Coroutines testing
@@ -175,7 +175,7 @@ dependencies {
     implementation("org.robolectric:robolectric:4.12.2")
 
     // Testing Compose
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.05.00"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.06.00"))
 
     // Timber - Logging
     implementation("com.jakewharton.timber:timber:5.0.1")
