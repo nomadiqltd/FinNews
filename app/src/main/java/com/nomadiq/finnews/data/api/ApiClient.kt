@@ -1,7 +1,7 @@
 package com.nomadiq.finnews.data.api
 
 import com.nomadiq.finnews.BuildConfig.*
-import com.nomadiq.finnews.data.network.NetworkConnectivityInterceptor
+import com.nomadiq.finnews.data.network.connectivity.NetworkConnectivityInterceptor
 import com.nomadiq.finnews.data.network.connectivity.ConnectivityMonitor
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

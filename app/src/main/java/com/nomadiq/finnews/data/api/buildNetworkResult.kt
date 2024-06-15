@@ -1,5 +1,6 @@
 package com.nomadiq.finnews.data.api
 
+import com.nomadiq.finnews.data.api.NetworkResult.Success
 import retrofit2.Response
 
 /**
@@ -12,7 +13,7 @@ import retrofit2.Response
 fun <T> buildNetworkResult(response: Response<T>): NetworkResult<T> {
     if (response.isSuccessful) {
         response.body()?.let {
-            return NetworkResult.Success(it)
+            return Success(it)
         } ?: return NetworkResult.Error(response.errorBody().toString())
     } else {
         return NetworkResult.Error(
