@@ -96,6 +96,7 @@ class NewsArticleFeedMainScreenTest {
         // List of items in Cards
         listOfArticles.forEach { article ->
             composeTestRule.onNodeWithText(article.title).assertIsDisplayed()
+            // TODO - Format subtitle correctly to pass the assertion
             //  composeTestRule.onNodeWithText(displaySimpleTimeStamp(article.subtitle)).assertTextContains(article.subtitle)
             //  composeTestRule.onNodeWithContentDescription(article.title).assertContentDescriptionEquals(article.title)
         }
