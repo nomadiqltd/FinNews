@@ -22,6 +22,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -181,6 +183,9 @@ fun ArticleFeedItemCard(
 ) {
     Card(
         modifier = Modifier
+            .semantics {
+                contentDescription = title
+            }
             .fillMaxWidth()
             .padding(8.dp)
             .clip(MaterialTheme.shapes.large)

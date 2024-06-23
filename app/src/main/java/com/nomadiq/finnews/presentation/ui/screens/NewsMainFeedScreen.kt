@@ -29,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -86,6 +87,7 @@ private fun MainFeedScaffoldState(
         Scaffold(
             topBar = {
                 NewsTopAppBar(
+                    modifier = Modifier.testTag("NewsTopAppBarTag"),
                     title = stringResource(id = title),
                     onAction = {
                         SearchIconButton(onClick = { /* TODO - Run Search via Viewmodel */ })
@@ -177,7 +179,7 @@ private fun OnLoadingState(uiState: NewsArticleFeedUiState) {
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            CircularProgressIndicator()
+            CircularProgressIndicator(modifier = Modifier.testTag("CircularProgressIndicatorTag"))
         }
     }
 }

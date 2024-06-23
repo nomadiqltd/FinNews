@@ -1,20 +1,19 @@
-package com.nomadiq.finnews.utils
+package com.nomadiq.finnews.testutils
 
 import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
 import com.nomadiq.finnews.domain.model.NewsArticleItemDetail
-import com.nomadiq.finnews.utils.TestConstants.API_URL
-import com.nomadiq.finnews.utils.TestConstants.API_URL_TWO
-import com.nomadiq.finnews.utils.TestConstants.BODY
-import com.nomadiq.finnews.utils.TestConstants.IMG_URL
-import com.nomadiq.finnews.utils.TestConstants.IMG_URL_TWO
-import com.nomadiq.finnews.utils.TestConstants.SUBTITLE
-import com.nomadiq.finnews.utils.TestConstants.SUBTITLE_NOT_FORMATTED
-import com.nomadiq.finnews.utils.TestConstants.SUBTITLE_TWO
-import com.nomadiq.finnews.utils.TestConstants.TITLE
-import com.nomadiq.finnews.utils.TestConstants.TITLE_TWO
+import com.nomadiq.finnews.testutils.ComposeTestConstants.API_URL
+import com.nomadiq.finnews.testutils.ComposeTestConstants.API_URL_TWO
+import com.nomadiq.finnews.testutils.ComposeTestConstants.BODY
+import com.nomadiq.finnews.testutils.ComposeTestConstants.IMG_URL
+import com.nomadiq.finnews.testutils.ComposeTestConstants.IMG_URL_TWO
+import com.nomadiq.finnews.testutils.ComposeTestConstants.SUBTITLE
+import com.nomadiq.finnews.testutils.ComposeTestConstants.SUBTITLE_TWO
+import com.nomadiq.finnews.testutils.ComposeTestConstants.TITLE
+import com.nomadiq.finnews.testutils.ComposeTestConstants.TITLE_TWO
 
 // Constants for tests
-object TestConstants {
+object ComposeTestConstants {
     const val UNKNOWN_ERROR = "Unknown Error occurred"
     const val NETWORK_ERROR_MESSAGE = "Connectivity issues, please check your connection"
 
@@ -31,9 +30,6 @@ object TestConstants {
     const val SUBTITLE_TWO = "18th May, 2024 - 3 min read"
     const val IMG_URL_TWO = "https://testimgurl.jpg"
     const val API_URL_TWO = "https://wwww.guardian.content/articleone"
-
-    // Item attributes
-    const val SUBTITLE_NOT_FORMATTED = "2014-02-18T10:25:30Z"
 }
 
 // Item
@@ -57,20 +53,22 @@ val listOfArticles = listOf(
         subtitle = SUBTITLE_TWO,
         imgUrl = IMG_URL_TWO,
         apiUrl = API_URL_TWO,
-    )
-)
-
-// List of Articles (unformatted Subtitles)
-val listOfTestCards = listOf(
-    NewsArticleFeedItem(
-        title = TITLE,
-        subtitle = SUBTITLE_NOT_FORMATTED,
-        imgUrl = IMG_URL,
-        apiUrl = API_URL
     ),
     NewsArticleFeedItem(
         title = TITLE_TWO,
-        subtitle = SUBTITLE_NOT_FORMATTED,
+        subtitle = SUBTITLE_TWO,
+        imgUrl = IMG_URL_TWO,
+        apiUrl = API_URL_TWO,
+    ),
+    NewsArticleFeedItem(
+        title = TITLE_TWO,
+        subtitle = SUBTITLE_TWO,
+        imgUrl = IMG_URL_TWO,
+        apiUrl = API_URL_TWO,
+    ),
+    NewsArticleFeedItem(
+        title = TITLE_TWO,
+        subtitle = SUBTITLE_TWO,
         imgUrl = IMG_URL_TWO,
         apiUrl = API_URL_TWO,
     )
