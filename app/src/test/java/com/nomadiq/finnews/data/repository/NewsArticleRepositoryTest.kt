@@ -32,7 +32,7 @@ import org.junit.runner.RunWith
 /**
  *  @author Michael Akakpo
  *
- *  Unit tests for [DogBreedListRepository]
+ *  Unit tests for [NewsArticleFeedRepositoryImpl]
  *
  */
 

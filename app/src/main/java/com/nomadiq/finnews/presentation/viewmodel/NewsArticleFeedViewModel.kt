@@ -50,7 +50,7 @@ class NewsArticleFeedViewModel @Inject constructor(
 
     // Function to fetch List of [NewsArticleFeedItem] - handle response and update uiState accordingly
     @VisibleForTesting
-    fun onDisplayNewsArticleFeedList() : StateFlow<NewsArticleFeedUiState> {
+    fun onDisplayNewsArticleFeedList(): StateFlow<NewsArticleFeedUiState> {
         Timber.d("displayNewsArticleFeedList")
         _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
