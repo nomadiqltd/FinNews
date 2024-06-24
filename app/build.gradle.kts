@@ -29,8 +29,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            val apiKey = "\"b77f75d9-492b-4d80-bab3-088e00fd5f7b\""
-            //val apiKey = "\"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\""
+            val apiKey = "\"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\""
             val baseURL = "https://content.guardianapis.com/"
             buildConfigField("String", "BASE_URL", "\"$baseURL\"")
             buildConfigField("String", "API_KEY", apiKey)
@@ -38,8 +37,7 @@ android {
 
         debug {
             isMinifyEnabled = false
-            val apiKey = "\"b77f75d9-492b-4d80-bab3-088e00fd5f7b\""
-            // val apiKey = "\"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\""
+            val apiKey = "\"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\""
             val baseURL = "https://content.guardianapis.com/"
             buildConfigField("String", "BASE_URL", "\"$baseURL\"")
             buildConfigField("String", "API_KEY", apiKey)
@@ -195,10 +193,6 @@ dependencies {
     // Navigation with Compose
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("androidx.navigation:navigation-testing:2.7.7")
-
-    // Compose Tests
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.06.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test:1.6.8")
 
     // Timber - Logging
     implementation("com.jakewharton.timber:timber:5.0.1")
