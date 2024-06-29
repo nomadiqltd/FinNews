@@ -155,9 +155,9 @@ dependencies {
     androidTestImplementation("junit:junit:4.13.2")
 
     // JUnit Test Runner
-    implementation("androidx.test.ext:junit:1.1.5")
-    testImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    implementation("androidx.test.ext:junit:1.2.1")
+    testImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
 
     // Mockito
     testImplementation("org.mockito:mockito-core:5.12.0")
@@ -170,7 +170,7 @@ dependencies {
 
     // Robolectric
     testImplementation("org.robolectric:robolectric:4.12.2")
-    testImplementation("androidx.test:core:1.5.0")
+    testImplementation("androidx.test:core:1.6.1")
     androidTestImplementation("org.robolectric:robolectric:4.12.2")
 
     // Compose Test rules and transitive dependencies:
@@ -180,11 +180,11 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.8")
 
     // Instrumentation test runner
-    androidTestImplementation("androidx.test:runner:1.5.2")
-    androidTestImplementation("androidx.test:rules:1.5.0")
+    androidTestImplementation("androidx.test:runner:1.6.1")
+    androidTestImplementation("androidx.test:rules:1.6.1")
 
     // Optional -- UI testing with Espresso
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
     // Optional -- UI testing with Compose
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.6.8")
     // Optional -- UI testing with UI Automator
