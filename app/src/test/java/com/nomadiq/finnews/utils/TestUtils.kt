@@ -54,7 +54,7 @@ val listOfArticles = listOf(
     ),
     NewsArticleFeedItem(
         title = TITLE_TWO,
-        subtitle = SUBTITLE_TWO,
+        subtitle = SUBTITLE,
         imgUrl = IMG_URL_TWO,
         apiUrl = API_URL_TWO,
     )
