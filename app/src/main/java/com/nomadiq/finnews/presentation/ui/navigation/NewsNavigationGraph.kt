@@ -6,6 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -41,7 +42,7 @@ fun FinNewsNavigationGraph(
             route = NewsArticleFeedListScreen.route,
         ) {
             val viewModel = hiltViewModel<NewsArticleFeedViewModel>()
-            val uiState by viewModel.uiState.collectAsState()
+            val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             NewsMainFeedScreen(
                 uiState = uiState,
                 onItemClick = { article ->
@@ -60,7 +61,7 @@ fun FinNewsNavigationGraph(
             arguments = NewsArticleItemDetailScreen.arguments,
         ) {
             val newsArticleItemDetailViewModel = hiltViewModel<NewsArticleItemDetailViewModel>()
-            val uiState by newsArticleItemDetailViewModel.uiState.collectAsState()
+            val uiState by newsArticleItemDetailViewModel.uiState.collectAsStateWithLifecycle()
             NewsArticleItemDetailScreen(
                 uiState = uiState,
                 canNavigateBack = navController.previousBackStackEntry != null,
