@@ -7,10 +7,15 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nomadiq.finnews.presentation.ui.screens.NewsMainFeedScreen
+import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_CIRCULAR_PROGRESS_INDICATOR
+import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_NEWS_TOP_APP_BAR_VIEW
+import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_NEWS_TOP_APP_BAR_VIEW_TITLE
+import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_SEARCH_ICON
 import com.nomadiq.finnews.presentation.utils.ErrorType
 import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
 import com.nomadiq.finnews.utils.TestConstants
 import com.nomadiq.finnews.utils.listOfArticles
+import com.nomadiq.finnews.utils.listOfTestCards
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -40,7 +45,7 @@ class NewsArticleFeedMainScreenTest {
                 uiState = NewsArticleFeedUiState(listOf(), isLoading = true)
             )
         }
-        composeTestRule.onNodeWithTag("CircularProgressIndicatorTag").assertIsDisplayed()
+        composeTestRule.onNodeWithTag(testTag = TAG_CIRCULAR_PROGRESS_INDICATOR).assertIsDisplayed()
     }
 
 
@@ -73,5 +78,21 @@ class NewsArticleFeedMainScreenTest {
         }
 
         composeTestRule.onNodeWithText(TestConstants.UNKNOWN_ERROR).assertIsDisplayed()
+    }
+
+
+    @Test
+    fun `initialize and check toolbar loaded correctly on Main Screen`() {
+        composeTestRule.setContent {
+            NewsMainFeedScreen(
+                uiState = NewsArticleFeedUiState(
+                    listOfTestCards,
+                )
+            )
+        }
+
+        composeTestRule.onNodeWithTag(testTag = TAG_NEWS_TOP_APP_BAR_VIEW).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(testTag = TAG_NEWS_TOP_APP_BAR_VIEW_TITLE).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(testTag = TAG_SEARCH_ICON).assertIsDisplayed()
     }
 }

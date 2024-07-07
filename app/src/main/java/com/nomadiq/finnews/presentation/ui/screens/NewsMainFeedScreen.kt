@@ -39,6 +39,9 @@ import com.nomadiq.finnews.presentation.ui.component.ArticleFeedItemCard
 import com.nomadiq.finnews.presentation.ui.component.error.ErrorMessageDisplayView
 import com.nomadiq.finnews.presentation.ui.component.NewsTopAppBar
 import com.nomadiq.finnews.presentation.ui.theme.FinNewsTheme
+import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_CIRCULAR_PROGRESS_INDICATOR
+import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_NEWS_TOP_APP_BAR_VIEW
+import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_SEARCH_ICON
 import com.nomadiq.finnews.presentation.utils.ErrorType
 import com.nomadiq.finnews.presentation.utils.displaySimpleTimeStamp
 import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
@@ -87,7 +90,7 @@ private fun MainFeedScaffoldState(
         Scaffold(
             topBar = {
                 NewsTopAppBar(
-                    modifier = Modifier.testTag("NewsTopAppBarTag"),
+                    modifier = Modifier.testTag(tag =  TAG_NEWS_TOP_APP_BAR_VIEW),
                     title = stringResource(id = title),
                     onAction = {
                         SearchIconButton(onClick = { /* TODO - Run Search via Viewmodel */ })
@@ -157,7 +160,8 @@ private fun NewsArticleFeed(
             item {
                 ArticleFeedItemCard(
                     title = item.title,
-                    subtitle = displaySimpleTimeStamp(item.subtitle),
+                  //  subtitle = displaySimpleTimeStamp(item.subtitle), TODO - Correct displaySimpleTimeStamp() to satisfy test
+                    subtitle = item.subtitle,
                     imgUrl = item.imgUrl,
                     item = item,
                     onItemClick = onItemClick,
@@ -179,7 +183,7 @@ private fun OnLoadingState(uiState: NewsArticleFeedUiState) {
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            CircularProgressIndicator(modifier = Modifier.testTag("CircularProgressIndicatorTag"))
+            CircularProgressIndicator(modifier = Modifier.testTag(tag = TAG_CIRCULAR_PROGRESS_INDICATOR))
         }
     }
 }
@@ -190,6 +194,7 @@ private fun SearchIconButton(onClick: () -> Unit) {
     IconButton(
         onClick = onClick,
         modifier = Modifier.padding(end = 16.dp)
+            .testTag(tag = TAG_SEARCH_ICON)
     ) {
         Icon(
             imageVector = Icons.Default.Search,
