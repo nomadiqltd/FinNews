@@ -32,8 +32,7 @@ fun displaySimpleTimeStamp(currentDate: String): String {
         // Format the OffsetDateTime to a simple date string
         val simpleDate = offsetDateTime.format(formatter)
         // Just for visual to the subtitle
-        return simpleDate
-            //.plus(" - $randomMinRead min read")
+        return simpleDate.plus(" - $randomMinRead min read")
     } else {
         return currentDate
     }
