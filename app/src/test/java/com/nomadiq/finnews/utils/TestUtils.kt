@@ -75,3 +75,13 @@ val listOfTestCards = listOf(
         apiUrl = API_URL_TWO,
     )
 )
+
+// List of Articles (unformatted Subtitles)
+val listOfSingleCard = listOf(
+    NewsArticleFeedItem(
+        title = TITLE,
+        subtitle = SUBTITLE_NOT_FORMATTED,
+        imgUrl = IMG_URL,
+        apiUrl = API_URL
+    ),
+)
