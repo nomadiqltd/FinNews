@@ -7,6 +7,8 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nomadiq.finnews.presentation.ui.screens.NewsMainFeedScreen
+import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_ARTICLE_CARD_BOOKMARK
+import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_ARTICLE_CARD_SHARE
 import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_CIRCULAR_PROGRESS_INDICATOR
 import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_NEWS_TOP_APP_BAR_VIEW
 import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_NEWS_TOP_APP_BAR_VIEW_TITLE
@@ -14,7 +16,9 @@ import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_SEARCH_I
 import com.nomadiq.finnews.presentation.utils.ErrorType
 import com.nomadiq.finnews.presentation.viewmodel.NewsArticleFeedUiState
 import com.nomadiq.finnews.utils.TestConstants
+import com.nomadiq.finnews.utils.TestConstants.TITLE
 import com.nomadiq.finnews.utils.listOfArticles
+import com.nomadiq.finnews.utils.listOfSingleCard
 import com.nomadiq.finnews.utils.listOfTestCards
 import org.junit.Rule
 import org.junit.Test
@@ -37,7 +41,6 @@ class NewsArticleFeedMainScreenTest {
         )
     }
 
-    /** Loading states */
     @Test
     fun `initialize and check loading state is correct`() {
         composeTestRule.setContent {
@@ -95,4 +98,29 @@ class NewsArticleFeedMainScreenTest {
         composeTestRule.onNodeWithTag(testTag = TAG_NEWS_TOP_APP_BAR_VIEW_TITLE).assertIsDisplayed()
         composeTestRule.onNodeWithTag(testTag = TAG_SEARCH_ICON).assertIsDisplayed()
     }
+
+    @Test
+    fun `initialize and check success state loaded correctly on Main Screen`() {
+        composeTestRule.setContent {
+            NewsMainFeedScreen(
+                uiState = NewsArticleFeedUiState(
+                    listOfSingleCard,
+                )
+            )
+        }
+
+        // Toolbar
+        composeTestRule.onNodeWithTag(testTag = TAG_NEWS_TOP_APP_BAR_VIEW).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(testTag = TAG_NEWS_TOP_APP_BAR_VIEW_TITLE).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(testTag = TAG_SEARCH_ICON).assertIsDisplayed()
+
+        // Cards displayed
+        composeTestRule.onNodeWithText(text = TITLE).assertIsDisplayed()
+        // ArticleImageCard doesn't load as there is no placeholder item for testing
+
+        // CTAs
+        composeTestRule.onNodeWithTag(testTag = TAG_ARTICLE_CARD_SHARE).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(testTag = TAG_ARTICLE_CARD_BOOKMARK).assertIsDisplayed()
+    }
+
 }
