@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
@@ -29,6 +30,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.nomadiq.finnews.domain.model.NewsArticleFeedItem
+import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_ARTICLE_CARD_BOOKMARK
+import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_ARTICLE_CARD_IMAGE
+import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_ARTICLE_CARD_SHARE
 
 
 @Preview(name = "ArticleItemShareCTA (light)")
@@ -42,6 +46,7 @@ private fun ArticleItemShareCTA(
     Image(
         imageVector = Icons.Filled.Share,
         modifier = modifier
+            .testTag(tag = TAG_ARTICLE_CARD_SHARE)
             .size(size = 32.dp)
             .clickable { /* TODO() - look into best place to run onEvent action */ },
         contentDescription = "verified"
@@ -59,6 +64,7 @@ private fun ArticleItemBookmarkCTA(
     Image(
         imageVector = Icons.Filled.FavoriteBorder,
         modifier = modifier
+            .testTag(tag = TAG_ARTICLE_CARD_BOOKMARK)
             .size(size = 32.dp)
             .clickable { /* TODO() - look into best place to run onEvent action */ },
         contentDescription = "verified"
@@ -160,9 +166,12 @@ private fun ArticleFeedItemImage(
         ),
         contentDescription = "article image",
         contentScale = ContentScale.Crop,
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(ratio = 3f / 2f, matchHeightConstraintsFirst = true)
+            .testTag(
+                tag = TAG_ARTICLE_CARD_IMAGE
+            ),
     )
     Spacer(modifier = Modifier.padding(8.dp))
 }
