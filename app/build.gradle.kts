@@ -84,10 +84,10 @@ dependencies {
     implementation("androidx.core:core-ktx:1.13.1")
 
     // Lifecycle components
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
 
     // Activity for ComponentSelection UI
-    implementation("androidx.activity:activity-compose:1.9.0")
+    implementation("androidx.activity:activity-compose:1.9.1")
 
     // Compose Bom / UI
     implementation(platform("androidx.compose:compose-bom:2024.06.00"))
@@ -100,10 +100,10 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.2.1")
     implementation("com.google.android.material:material:1.12.0")
     // Optional - Integration with ViewModels
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
     // Optional - Integration with LiveData
     implementation("androidx.compose.runtime:runtime-livedata:1.6.8")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.3")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.4")
 
     // AppCompat libs
     implementation("androidx.appcompat:appcompat:1.7.0")
