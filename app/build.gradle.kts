@@ -143,8 +143,8 @@ dependencies {
     kaptTest("com.google.dagger:hilt-compiler:2.51.1")
 
     // Compose preview
-    implementation("androidx.compose.ui:ui-tooling-preview-android:1.6.8")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.6.8")
+    implementation("androidx.compose.ui:ui-tooling-preview-android:1.7.6")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.7.6")
 
     // For Coroutines testing
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
