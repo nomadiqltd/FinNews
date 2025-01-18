@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.nomadiq.finnews"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.nomadiq.finnews"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -191,8 +191,8 @@ dependencies {
     androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
 
     // Navigation with Compose
-    implementation("androidx.navigation:navigation-compose:2.7.7")
-    implementation("androidx.navigation:navigation-testing:2.7.7")
+    implementation("androidx.navigation:navigation-compose:2.8.5")
+    implementation("androidx.navigation:navigation-testing:2.8.5")
 
     // Timber - Logging
     implementation("com.jakewharton.timber:timber:5.0.1")
