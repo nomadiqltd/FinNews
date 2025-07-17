@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.nomadiq.finnews"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -81,32 +81,32 @@ android {
 
 dependencies {
     // Ktx Core Kotlin
-    implementation("androidx.core:core-ktx:1.15.0")
+    implementation("androidx.core:core-ktx:1.16.0")
 
     // Lifecycle components
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.2")
 
     // Activity for ComponentSelection UI
-    implementation("androidx.activity:activity-compose:1.10.0")
+    implementation("androidx.activity:activity-compose:1.10.1")
 
     // Compose Bom / UI
-    implementation(platform("androidx.compose:compose-bom:2025.01.00"))
-    implementation("androidx.compose.ui:ui-android:1.7.6")
-    implementation("androidx.compose.ui:ui-graphics-android:1.7.6")
+    implementation(platform("androidx.compose:compose-bom:2025.07.00"))
+    implementation("androidx.compose.ui:ui-android:1.8.3")
+    implementation("androidx.compose.ui:ui-graphics-android:1.8.3")
 
     // Image Loading
-    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("io.coil-kt:coil-compose:2.7.0")
     // Material 3 - theming
-    implementation("androidx.compose.material3:material3:1.3.1")
+    implementation("androidx.compose.material3:material3:1.3.2")
     implementation("com.google.android.material:material:1.12.0")
     // Optional - Integration with ViewModels
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.2")
     // Optional - Integration with LiveData
-    implementation("androidx.compose.runtime:runtime-livedata:1.7.6")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
+    implementation("androidx.compose.runtime:runtime-livedata:1.8.3")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.2")
 
     // AppCompat libs
-    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("androidx.appcompat:appcompat:1.7.1")
 
     // Networking Retrofit 2
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
@@ -123,7 +123,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     // Data Mapping Serialisation
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 
     // Coroutines / Asynchronous operations / Flows
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
@@ -143,8 +143,8 @@ dependencies {
     kaptTest("com.google.dagger:hilt-compiler:2.51.1")
 
     // Compose preview
-    implementation("androidx.compose.ui:ui-tooling-preview-android:1.7.6")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.7.6")
+    implementation("androidx.compose.ui:ui-tooling-preview-android:1.8.3")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.8.3")
 
     // For Coroutines testing
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
@@ -174,10 +174,10 @@ dependencies {
     androidTestImplementation("org.robolectric:robolectric:4.12.2")
 
     // Compose Test rules and transitive dependencies:
-    testImplementation("androidx.compose.ui:ui-test-junit4:1.7.6")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.6")
+    testImplementation("androidx.compose.ui:ui-test-junit4:1.8.3")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.8.3")
     // Needed for createComposeRule(), but not for createAndroidComposeRule<YourActivity>():
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.7.6")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.8.3")
 
     // Instrumentation test runner
     androidTestImplementation("androidx.test:runner:1.6.2")
@@ -186,13 +186,13 @@ dependencies {
     // Optional -- UI testing with Espresso
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
     // Optional -- UI testing with Compose
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.6")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.8.3")
     // Optional -- UI testing with UI Automator
     androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
 
     // Navigation with Compose
-    implementation("androidx.navigation:navigation-compose:2.8.5")
-    implementation("androidx.navigation:navigation-testing:2.8.5")
+    implementation("androidx.navigation:navigation-compose:2.9.2")
+    implementation("androidx.navigation:navigation-testing:2.9.2")
 
     // Timber - Logging
     implementation("com.jakewharton.timber:timber:5.0.1")
