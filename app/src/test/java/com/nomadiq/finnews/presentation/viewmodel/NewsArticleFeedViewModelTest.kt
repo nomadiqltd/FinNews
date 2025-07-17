@@ -33,7 +33,7 @@ import org.robolectric.annotation.Config
  */
 
 @RunWith(RobolectricTestRunner::class)
-@Config(application = FinNewsApplication::class, sdk = [32])
+@Config(application = FinNewsApplication::class, sdk = [34])
 class NewsArticleFeedViewModelTest {
 
     private lateinit var repository: NewsArticleFeedRepository

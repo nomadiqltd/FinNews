@@ -6,6 +6,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.nomadiq.finnews.presentation.base.FinNewsApplication
 import com.nomadiq.finnews.presentation.ui.screens.NewsMainFeedScreen
 import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_ARTICLE_CARD_BOOKMARK
 import com.nomadiq.finnews.presentation.utils.ComposeTags.Companion.TAG_ARTICLE_CARD_SHARE
@@ -23,9 +24,12 @@ import com.nomadiq.finnews.utils.listOfTestCards
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import kotlin.intArrayOf
 
 
 @RunWith(AndroidJUnit4::class)
+@Config(application = FinNewsApplication::class, sdk = [34])
 class NewsArticleFeedMainScreenTest {
 
     @get:Rule

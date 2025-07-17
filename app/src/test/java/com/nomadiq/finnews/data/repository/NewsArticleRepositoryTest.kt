@@ -5,6 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import com.nomadiq.finnews.domain.mapper.NewsArticleFeedListResult
 import com.nomadiq.finnews.domain.mapper.NewsArticleItemDetailResult
+import com.nomadiq.finnews.presentation.base.FinNewsApplication
 import com.nomadiq.finnews.utils.CoroutineTestRule
 import com.nomadiq.finnews.utils.TestConstants.API_URL
 import com.nomadiq.finnews.utils.TestConstants.BODY
@@ -28,6 +29,8 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import kotlin.intArrayOf
 
 /**
  *  @author Michael Akakpo
@@ -38,6 +41,7 @@ import org.junit.runner.RunWith
 
 
 @OptIn(ExperimentalCoroutinesApi::class)
+@Config(application = FinNewsApplication::class, sdk = [34])
 @RunWith(AndroidJUnit4::class)
 class NewsArticleRepositoryTest {
 
