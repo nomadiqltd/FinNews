@@ -3,21 +3,21 @@ import org.gradle.kotlin.dsl.composeCompiler
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose") // New plugin for Kotlin 2.0+
     id("com.google.dagger.hilt.android")
-    kotlin("kapt") version "1.9.24"
-    id("org.jetbrains.kotlin.plugin.compose") version "2.2.0" // this version matches your Kotlin version
+    kotlin("kapt")
 }
 
 android {
     namespace = "com.nomadiq.finnews"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.nomadiq.finnews"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -40,8 +40,7 @@ android {
 
         debug {
             isMinifyEnabled = false
-            val apiKey = "\"b77f75d9-492b-4d80-bab3-088e00fd5f7b\""
-           // val apiKey = "\"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\""
+            val apiKey = "\"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\""
             val baseURL = "https://content.guardianapis.com/"
             buildConfigField("String", "BASE_URL", "\"$baseURL\"")
             buildConfigField("String", "API_KEY", apiKey)
@@ -51,16 +50,18 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
+
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        }
     }
+
     buildFeatures {
         compose = true
         buildConfig = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
-    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -134,17 +135,17 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 
     // Dependency Injection (Hilt)
-    implementation("com.google.dagger:hilt-android:2.57")
+    implementation("com.google.dagger:hilt-android:2.55")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-    kapt("com.google.dagger:hilt-compiler:2.57")
+    kapt("com.google.dagger:hilt-compiler:2.55")
 
     // Hilt - For instrumentation tests
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.57")
-    kaptAndroidTest("com.google.dagger:hilt-compiler:2.57")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.55")
+    kaptAndroidTest("com.google.dagger:hilt-compiler:2.55")
 
     // Hilt - For local unit tests
-    testImplementation("com.google.dagger:hilt-android-testing:2.57")
-    kaptTest("com.google.dagger:hilt-compiler:2.57")
+    testImplementation("com.google.dagger:hilt-android-testing:2.55")
+    kaptTest("com.google.dagger:hilt-compiler:2.55")
 
     // Compose preview
     implementation("androidx.compose.ui:ui-tooling-preview-android:1.8.3")

@@ -49,7 +49,7 @@ class NewsArticleFeedMainScreenTest {
     fun `initialize and check loading state is correct`() {
         composeTestRule.setContent {
             NewsMainFeedScreen(
-                uiState = NewsArticleFeedUiState(listOf(), isLoading = true)
+                uiState = NewsArticleFeedUiState(uiState.items, isLoading = true)
             )
         }
         composeTestRule.onNodeWithTag(testTag = TAG_CIRCULAR_PROGRESS_INDICATOR).assertIsDisplayed()
